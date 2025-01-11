@@ -7,18 +7,22 @@ use Illuminate\Http\Request;
 class ReportsController extends Controller
 {
     public function statistics(){
-        return view('reports.statistics');
+        $pageTitle = 'Statistics';
+        return view('reports.statistics',compact('pageTitle'));
     }
 
     public function conversions(){
-        return view('reports.conversions');
+        $pageTitle = 'Conversions';
+        return view('reports.conversions',compact('pageTitle'));
     }
 
     public function postbacks(){
-        return view('reports.postbacks');
+        $pageTitle = 'Postbacks';
+        return view('reports.postbacks',compact('pageTitle'));
     }
 
     public function exported(){
-        return view('reports.exported');
+        $pageTitle = 'Exported Reports';
+        return view('reports.exported',compact('pageTitle'));
     }
 }

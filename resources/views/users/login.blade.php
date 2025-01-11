@@ -18,7 +18,7 @@
                     toastr.error("{{ session('error') }}");
                 @endif
             </script>
-            <h2 class="text-[25px] leading-[30px] md:text-[28px] md:leading-[30px] lg:text-[30px] lg:leading-[32px] font-[700] text-[#1A1A1A]"> Log in your account</h2>
+            <h2 class="text-[25px] leading-[30px] md:text-[28px] md:leading-[30px] lg:text-[30px] lg:leading-[32px] font-[700] text-[#1A1A1A]"> Log into your account</h2>
             <div class="mt-[30px] md:mt-[45px] lg:mt-[55px]">
                 <form method="post">
                     @csrf
@@ -78,7 +78,7 @@
                     <div class="w-[48%] h-[1px] bg-[#ccc]"></div>
                 </div>
                 <div class="mt-[50px] text-[14px] font-[500] text-[#898989]">
-                Don’t have a account? 
+                Don’t have an account? 
                     <a href="#" class="text-[#E36F3D] underline hover:text-[#000] hover:no-underline ">
                     Sign Up
                     </a>

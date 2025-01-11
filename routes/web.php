@@ -16,8 +16,8 @@ Route::middleware('auth')->group(function () {
    // Dashboard
    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
-   // Settings
-   Route::get('/settings', [DashboardController::class, 'setting'])->name('dashboard.setting');
+    // Settings
+    Route::match(['post','get'],'/settings', [DashboardController::class, 'setting'])->name('dashboard.setting');
 
    // Payments
    Route::get('/now-payments', [PaymentsController::class, 'index'])->name('payment.index');

@@ -7,18 +7,22 @@ use Illuminate\Http\Request;
 class AppsController extends Controller
 {
     public function index(){
-        return view('apps.index');
+        $pageTitle = 'Apps';
+        return view('apps.index',compact('pageTitle'));
     }
 
     public function add(){
-        return view('apps.add');
+        $pageTitle = 'Apps';
+        return view('apps.add',compact('pageTitle'));
     }
 
     public function testPostback(){
-        return view('apps.test-postback');
+        $pageTitle = 'Test Postbacks';
+        return view('apps.test-postback',compact('pageTitle'));
     }
 
     public function integration(){
-        return view('apps.integration');
+        $pageTitle = 'Integration';
+        return view('apps.integration',compact('pageTitle'));
     }
 }

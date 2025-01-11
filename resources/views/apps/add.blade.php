@@ -58,7 +58,9 @@
                     <div class="text-[12px] text-[#A1A1A1] leading-[15px]">Whenever a user completes an offer, we will make a call to this URL by sending all the information needed to help you to give the virtual currency to your users. Check the postback documentation in order to create your postback url. </div>
                 </div>
             </div>
-            <button type="submit">Save</button>
+            <div class="flex gap-[10px] md:gap-[20px]">
+                <button type="submit" class="w-[120px] bg-[#E36F3D] px-[10px] py-[11px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center">Save</button>
+            </div>
         </div>
     </form>
 </div>

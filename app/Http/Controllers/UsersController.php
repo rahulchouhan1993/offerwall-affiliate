@@ -14,16 +14,18 @@ class UsersController extends Controller
                 'email' => ['required', 'email'],
                 'password' => ['required'],
             ]);
-
-            $user = User::where('email', $credentials['email'])->first();
+            
+            $user = User::where('email', $credentials['email'])->where('role','affiliate')->first();
             if ($user && $user->status == 0) {
                 return redirect()->back()->with('error', 'Your account is inactive. Please contact support.');
             }
-     
-            if (Auth::attempt($credentials)) {
-                $request->session()->regenerate();
-                return redirect()->route('dashboard.index');
+            if($user){
+                if (Auth::attempt($credentials)) {
+                    $request->session()->regenerate();
+                    return redirect()->route('dashboard.index');
+                }
             }
+            
             return redirect()->back()->with('error', 'The provided credentials do not match our records.');
         }
        

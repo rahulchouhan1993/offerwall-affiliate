@@ -4,8 +4,7 @@
     </div>
     <div class="w-[100%] flex  items-center justify-between gap-[15px] font-[600] py-[15px] px-[7px] sm:px-[10px] md:py-[30px] md:px-[30px] lg:py-[30px] lg:px-[30px] head-w-cal">
         <div class="flex items-center  gap-[5px] md:gap-[10px] xl:gap-[15px]">
-            <button id="menuToggle" class="p-[0]"><i
-                    class="ri-menu-line  text-[#E36F3D] text-[20px] md:text-[25px]"></i></button>
+            <button id="menuToggle" class="p-[0]"><i class="ri-menu-line  text-[#E36F3D] text-[20px] md:text-[25px]"></i></button>
             <h2 class="text-[#1A1A1A] text-[16px] md:text-[17px]  lg:text-[18px]  font-[600]">{{ $pageTitle }}</h2>
         </div>
         <div class="">
@@ -23,17 +22,17 @@
 
                 <!-- Dropdown Menu -->
                 <div id="hs-dropdown-menu"
-                    class="px-[15px] py-[15px] hs-dropdown-menu transition-all duration-300 opacity-0 hidden bg-white rounded-lg absolute top-[40px] left-0 z-10 mt-2 shadow-[0_0px_13px_-3px_rgba(0,0,0,0.3)] rounded-[14px]"
+                    class="px-[8px] py-[8px] min-w-[150px] hs-dropdown-menu transition-all duration-300 opacity-0 hidden bg-white rounded-[8px] absolute top-[40px] right-0 z-10 mt-2 shadow-[0_0px_13px_-3px_rgba(0,0,0,0.3)]"
                     role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-toggle">
                     <div class="p-1 space-y-0.5">
             
 
                         <a class="flex items-center gap-x-3.5 py-[10px] px-[10px] text-[13px] text-[#4D4D4D] font-[600] hover:bg-[#f2f2f2] focus:outline-none focus:bg-[f2f2f2]"
-                            href="{{ route('dashboard.setting') }}">Settings</a>
+                            href="{{ route('dashboard.setting') }}"><i class="ri-settings-5-line"></i> Settings</a>
 
                         
                         <a class="flex items-center gap-x-3.5 py-[10px] px-[10px] text-[13px] text-[#F23765] font-[600] hover:bg-[#f2f2f2] focus:outline-none focus:bg-[f2f2f2]"
-                            href="{{ route('users.logout') }}">Sign Out</a>
+                            href="{{ route('users.logout') }}"><i class="ri-logout-box-r-line"></i> Sign Out</a>
 
                     </div>
                 </div>

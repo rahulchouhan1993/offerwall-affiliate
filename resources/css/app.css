@@ -52,7 +52,11 @@ input:checked + .slider:before{-webkit-transform:translateX(23px);-ms-transform:
 .greenbg{background: conic-gradient(from 126deg at 71% 37%, #88E528, #78CE1F);}
 /* Drop Down */
 
-
+.breakword {word-break: break-word;}
+.pagination a.btn-active {
+    background: #e36f3d;
+    color: #fff;
+}
 
 /* Responsvie */
 @media(max-width:1535px){

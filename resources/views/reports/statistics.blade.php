@@ -30,7 +30,7 @@
                 </div>
 
               
-                <div class="w-[100%] flex items-center flex-wrap justify-end lg:flex-nowrap gap-[10px]">
+                <div class="w-[100%] flex items-center flex-wrap justify-start lg:justify-end lg:flex-nowrap gap-[10px]">
                     <label class="min-w-[160px] w-[10%] text-[14px] font-[500] text-[#898989] ">Filter by:</label>
                     <div class="w-[100%] xl:w-[90%] flex flex-wrap lg:flex-nowrap  items-center gap-[5px] md:gap-[8px] lg:gap-[10px] xl:gap-[15px]">
                         <div class="w-[100%] lg:w-[65%] xl:w-[75%] flex flex-wrap xl:flex-nowrap items-center gap-[10px]">

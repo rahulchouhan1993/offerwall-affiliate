@@ -152,7 +152,7 @@
                             class="bg-[#F6F6F6] rounded-tl-[10px] text-[14px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap ">
                             Date</th>
                         <th
-                            class="bg-[#F6F6F6] text-[14px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap">
+                            class="w-[300px] min-w-[300px] whitespace-normal breakword bg-[#F6F6F6] text-[14px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left">
                             Offer</th>
                         <th
                             class="bg-[#F6F6F6] text-[14px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap">
@@ -170,22 +170,22 @@
                             class="bg-[#F6F6F6] text-[14px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap">
                             Name of goal</th>
                         <th
-                            class="bg-[#F6F6F6] text-[14px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap">
+                            class="w-[300px] min-w-[300px] whitespace-normal breakword bg-[#F6F6F6] text-[14px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left ">
                             Sub1</th>
                         <th
-                            class="bg-[#F6F6F6] text-[14px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap">
+                            class="w-[300px] min-w-[300px] whitespace-normal breakword bg-[#F6F6F6] text-[14px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left ">
                             Sub2</th>
                         <th
-                            class="bg-[#F6F6F6] text-[14px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap">
+                            class="w-[300px] min-w-[300px] whitespace-normal breakword bg-[#F6F6F6] text-[14px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left ">
                             Sub3</th>
                         <th
-                            class="bg-[#F6F6F6] text-[14px] font-[500] text-[#1A1A1A] text-center px-[10px] py-[13px] text-left whitespace-nowrap">
+                            class="bg-[#F6F6F6] text-[14px] font-[500] text-[#1A1A1A] text-center px-[10px] py-[13px] text-left ">
                             UserAgent</th>
                         <th
-                            class="bg-[#F6F6F6] text-[14px] font-[500] text-[#1A1A1A] text-center px-[10px] py-[13px] text-left whitespace-nowrap">
+                            class="w-[300px] min-w-[300px] whitespace-normal breakword bg-[#F6F6F6] text-[14px] font-[500] text-[#1A1A1A] text-center px-[10px] py-[13px] text-left">
                             Comment</th>
                         <th
-                            class="bg-[#F6F6F6] rounded-tr-[10px] text-[14px] text-center font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap">
+                            class="w-[300px] min-w-[300px] whitespace-normal breakword bg-[#F6F6F6] rounded-tr-[10px] text-[14px] text-center font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left">
                             ID</th>
                     </tr>
 
@@ -195,10 +195,10 @@
                             <div>2024-12-16</div>
                             <div>01:50:14</div></td>
                         <td
-                            class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
+                            class="w-[300px] min-w-[300px] whitespace-normal breakword text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left  ">
                             International - 1-Minute Fun Quist</td>
                         <td
-                            class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
+                            class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left  ">
                             India 92:204:253:72</td>
                         <td
                             class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
@@ -217,16 +217,16 @@
                             class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
                             Conversion</td>
                         <td
-                            class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
+                            class="w-[300px] min-w-[300px] whitespace-normal breakword text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left ">
                             Bac5AAAjrbefNAAAAAAAAAmmncvdg</td>
                         <td
-                            class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
+                            class="w-[300px] min-w-[300px] whitespace-normal breakword text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left ">
                             27_4811</td>
                         <td
-                            class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
+                            class="w-[300px] min-w-[300px] whitespace-normal breakword text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left ">
                             109.204.235.174</td>
                         <td
-                            class="text-[14px] font-[500] text-[#808080] text-center px-[10px] py-[10px] text-left whitespace-nowrap ">
+                            class="text-[14px] font-[500] text-[#808080] text-center px-[10px] py-[10px] text-left  ">
                             <button><svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <rect x="0.5" y="0.5" width="15" height="15" rx="7.5" stroke="#808080" />
@@ -236,11 +236,11 @@
                                 </svg>
                             </button></td>
                         <td
-                            class="text-[14px] font-[500] text-[#808080] text-center px-[10px] py-[10px] text-left whitespace-nowrap">
+                            class="w-[300px] min-w-[300px] whitespace-normal breakword text-[14px] font-[500] text-[#808080] text-center px-[10px] py-[10px] text-left ">
                             ---</td>
 
                         <td
-                            class="text-[14px] font-[500] text-[#808080] text-center px-[10px] py-[10px] text-left whitespace-nowrap">
+                            class="w-[300px] min-w-[300px] whitespace-normal breakword text-[14px] font-[500] text-[#808080] text-center px-[10px] py-[10px] text-left">
                             734628y48326529
                         </td>
                     </tr>

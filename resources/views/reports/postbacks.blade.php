@@ -1,5 +1,8 @@
 @extends('layouts.default')
 @section('content')
+@php
+   use Illuminate\Support\Facades\Http;
+@endphp
 <div class="bg-[#f2f2f2] p-[15px] lg:p-[35px]">
     <div class="bg-[#fff] p-[15px] md:p-[20px] rounded-[10px] mb-[20px]">
        <div class="flex items-center justify-between gap-[25px] w-[100%]  mb-[15px]">
@@ -54,19 +57,31 @@
                 </tr>
                 @if(!empty($allPostbacks['postbacks']))
                 @foreach ($allPostbacks['postbacks'] as $postBacks)
+                @php
+                  $url = env('AFFISE_API_END') . "offer/".$postBacks['offer_id'];
+                  $response = HTTP::withHeaders([
+                        'API-Key' => env('AFFISE_API_KEY'),
+                  ])->get($url);
+                  if ($response->successful()) {
+                     $offerDetail = $response->json();
+                     $offerName = $offerDetail['offer']['title'];
+                  }else{
+                     $offerName = 'N/A';
+                  }
+                @endphp
                 <tr>
                    <td class="w-[500px] min-w-[500px] text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-normal breakword">{{ $postBacks['postback_url'] }}</td>
                    <td class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">{{ $postBacks['conversion_id'] }}</td>
-                   <td class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">{{ $postBacks['offer_id'] }}</td>
+                   <td class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">{{ $offerName }}</td>
                    <td class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">{{ $postBacks['goal'] }}</td>
                    <td class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
-                      <div class="inline-flex bg-[#F3FEE7] border border-[#BCEE89] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#6EBF1A] text-center uppercase">{{ $postBacks['status'] }}</div>
+                      <div class="inline-flex bg-[#F3FEE7] border border-[#BCEE89] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#6EBF1A] text-center uppercase">Success</div>
                    </td>
                    <td class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">{{ $postBacks['payouts'] ?? 'N/A'; }}</td>
                    <td class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">-</td>
                    <td class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">{{ $postBacks['http_code'] ?? 'N/A'; }}</td>
                    <td class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">-</td>
-                   <td class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">{{ date('Y-m-d',strtotime($postBacks['date']['sec'])) }}</td>
+                   <td class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">{{ date('d M Y', $postBacks['date']['sec']) }}</td>
                    <td class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">{{ $postBacks['_id']['$id'] }}</td>
                 </tr>
                 @endforeach

@@ -279,51 +279,55 @@
                 @endif
              </table>
           </div>
-          <div class="pagination mt-[20px] flex gap-[10px] items-center justify-end">
-             @if($prevPage)
-             <a href="{{ route('report.conversions', ['page' => $prevPage, 'status' => $conversionsStatus]) }}" class="btn group inline-flex gap-[8px] items-center bg-[#FFF3ED] border border-[#FED5C3] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#E36F3D] text-center hover:bg-[#E36F3D] hover:text-[#fff]">
-                <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                   <path d="M5 1L1 5L5 9" stroke="#E36F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-[#fff]" />
-                </svg>
-                Previous
-             </a>
-             @endif
-             @php
-             $totalPages = ceil($totalCount / $perPage);
-             $range = 3; // Number of pages to display before and after the current page
-             $start = max($currentPage - $range, 1);
-             $end = min($currentPage + $range, $totalPages);
-             @endphp
-             @if($start > 1)
-             <a href="{{ route('report.conversions', ['page' => 1, 'status' => $conversionsStatus]) }}" class="btn inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#E36F3D] hover:text-[#fff]">
-             1
-             </a>
-             @if($start > 2)
-             <span class="text-[#808080] px-[5px]">...</span>
-             @endif
-             @endif
-             @for($i = $start; $i <= $end; $i++)
-             <a href="{{ route('report.conversions', ['page' => $i, 'status' => $conversionsStatus]) }}" class="{{ $i == $currentPage ? 'btn-active btn inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#E36F3D] hover:text-[#fff]' : 'btn inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#E36F3D] hover:text-[#fff]' }}">
-             {{ $i }}
-             </a>
-             @endfor
-             @if($end < $totalPages)
-             @if($end < $totalPages - 1)
-             <span class="text-[#808080] px-[5px]">...</span>
-             @endif
-             <a href="{{ route('report.conversions', ['page' => $totalPages, 'status' => $conversionsStatus]) }}" class="btn inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#E36F3D] hover:text-[#fff]">
-             {{ $totalPages }}
-             </a>
-             @endif
-             @if($nextPage)
-             <a href="{{ route('report.conversions', ['page' => $nextPage, 'status' => $conversionsStatus]) }}" class="btn group inline-flex gap-[5px] items-center bg-[#FFF3ED] border border-[#FED5C3] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#E36F3D] text-center hover:bg-[#E36F3D] hover:text-[#fff]">
-                Next
-                <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                   <path d="M1 1L5 5L1 9" stroke="#E36F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-[#fff]" />
-                </svg>
-             </a>
-             @endif
-          </div>
+          <div class="pagination mt-[20px] flex flex-wrap gap-[10px] items-center justify-end">
+            @if($prevPage)
+                <a href="{{ route('report.conversions', ['page' => $prevPage, 'status' => $conversionsStatus]) }}" class="btn group inline-flex gap-[8px] items-center bg-[#FFF3ED] border border-[#FED5C3] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#E36F3D] text-center hover:bg-[#E36F3D] hover:text-[#fff]">
+                    <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 1L1 5L5 9" stroke="#E36F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-[#fff]" />
+                    </svg> Previous
+                </a>
+            @endif
+        
+            @php
+                $totalPages = ceil($totalCount / $perPage);
+                $range = 3; // Number of pages to display before and after the current page
+                $start = max($currentPage - $range, 1);
+                $end = min($currentPage + $range, $totalPages);
+            @endphp
+        
+            @if($start > 1)
+                <a href="{{ route('report.conversions', ['page' => 1, 'status' => $conversionsStatus]) }}" class="btn inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#E36F3D] hover:text-[#fff]">
+                    1
+                </a>
+                @if($start > 2)
+                    <span class="text-[#808080] px-[5px]">...</span>
+                @endif
+            @endif
+        
+            @for($i = $start; $i <= $end; $i++)
+                <a href="{{ route('report.conversions', ['page' => $i, 'status' => $conversionsStatus]) }}" class="{{ $i == $currentPage ? 'btn-active btn inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#E36F3D] hover:text-[#fff]' : 'btn inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#E36F3D] hover:text-[#fff]' }}">
+                    {{ $i }}
+                </a>
+            @endfor
+        
+            @if($end < $totalPages)
+                @if($end < $totalPages - 1)
+                    <span class="text-[#808080] px-[5px]">...</span>
+                @endif
+                <a href="{{ route('report.conversions', ['page' => $totalPages, 'status' => $conversionsStatus]) }}" class="btn inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#E36F3D] hover:text-[#fff]">
+                    {{ $totalPages }}
+                </a>
+            @endif
+        
+            @if($nextPage)
+                <a href="{{ route('report.conversions', ['page' => $nextPage, 'status' => $conversionsStatus]) }}" class="btn group inline-flex gap-[5px] items-center bg-[#FFF3ED] border border-[#FED5C3] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#E36F3D] text-center hover:bg-[#E36F3D] hover:text-[#fff]">
+                    Next
+                    <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 1L5 5L1 9" stroke="#E36F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-[#fff]" />
+                    </svg>
+                </a>
+            @endif
+        </div>
        </div>
     </div>
  </div>

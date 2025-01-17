@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>OfferWall-Affiliate | {{ $pageTitle }}</title>
-
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <!-- Fonts -->
         <link rel="icon" type="image/x-icon" href="/images/favicon.png">
         <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"rel="stylesheet"/>
@@ -26,6 +26,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
+        <div class="loader-fcustm fixed inset-0 flex flex-col items-center justify-center bg-white bg-opacity-75 backdrop-blur-md z-50">
+            <div class="w-10 h-10 border-4 border-[#E36F3D] border-t-transparent rounded-full animate-spin"></div>
+            <p class="mt-4 text-lg font-semibold text-[#E36F3D]">Loading...</p>
+        </div>
         <script>
             @if (session('success'))
                 toastr.success("{{ session('success') }}");
@@ -52,13 +56,13 @@
                 });
             });
             $(document).ready(function() {
-                // Initialize Select2
+                $('.loader-fcustm').fadeOut(1000)
                 $('.sel2fld').select2({
                     placeholder: "Select an option",
                     allowClear: true // Adds a clear (X) button
                 });
             });
-
+            
             $(function() {
                 $('.dateRange').daterangepicker({
                     ranges: {

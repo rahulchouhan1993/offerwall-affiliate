@@ -12,33 +12,36 @@
                 <label
                    class="min-w-[160px] w-[100%] md:w-[10%] text-[14px] font-[500] text-[#898989] ">Group by:</label>
                 <select name="groupBy" class="sel2fld w-[100%] lg:w-[90%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
-                   <option value="hour">Hour</option>
-                   <option value="day">Date</option>
-                   <option value="month">Month</option>
-                   <option value="country">Country</option>
-                   <option value="browser">Browser</option>
-                   <option value="device">Device Brand</option>
-                   <option value="device_model">Device Model</option>
-                   <option value="os">Device OS</option>
-                   <option value="offer">Offer</option>
+                   <option value="hour" @if($recordGroupBy=='hour') selected @endif>Hour</option>
+                   <option value="day" @if($recordGroupBy=='day') selected @endif>Date</option>
+                   <option value="month" @if($recordGroupBy=='month') selected @endif>Month</option>
+                   <option value="country" @if($recordGroupBy=='country') selected @endif>Country</option>
+                   <option value="browser" @if($recordGroupBy=='browser') selected @endif>Browser</option>
+                   <option value="device" @if($recordGroupBy=='device') selected @endif>Device Brand</option>
+                   <option value="device_model" @if($recordGroupBy=='device_model') selected @endif>Device Model</option>
+                   <option value="os" @if($recordGroupBy=='os') selected @endif>Device OS</option>
+                   <option value="offer" @if($recordGroupBy=='offer') selected @endif>Offer</option>
                 </select>
              </div>
              <div class="w-[100%] flex flex-col lg:flex-row items-start lg:items-center justify-start gap-[10px]">
                 <label class="min-w-[160px] w-[10%] text-[14px] font-[500] text-[#898989] ">Range:</label>
-                <input name="range" class="dateRange w-[100%] lg:w-[90%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" type="text" />
+                <input name="range" class="dateRange w-[100%] lg:w-[90%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" type="text" value="{{ $completeDate }}" />
              </div>
              <div class="w-[100%] flex items-center flex-wrap justify-start lg:justify-end lg:flex-nowrap gap-[10px]">
                 <label class="min-w-[160px] w-[10%] text-[14px] font-[500] text-[#898989] ">Filter by:</label>
                 <div class="w-[100%] xl:w-[90%] flex flex-wrap lg:flex-nowrap  items-center gap-[5px] md:gap-[8px] lg:gap-[10px] xl:gap-[15px]">
                    <div class="w-[100%] lg:w-[65%] xl:w-[75%] flex flex-wrap xl:flex-nowrap items-center gap-[10px]">
-                      <select name="filterBy" class="sel2fld w-[100%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
-                         <option>Country</option>
-                         <option>Browser</option>
-                         <option>Device Brand</option>
-                         <option>Device Model</option>
-                         <option>Device OS</option>
-                         <option>Offer</option>
+                      <select name="filterBy" class="sel2fld filterByDrop w-[100%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
+                        <option value="">Select</option>
+                        <option value="country">Country</option>
+                        <option value="devices">Device</option>
+                        <option value="os">Operating System</option>
+                        <option value="offer">Offer</option>
                       </select>
+                      <select  class="search-input-filter w-[100%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
+                      </select>
+                      
+                      <a href="javascript:void(0);" class="addCustomFilter w-[140px] bg-[#E36F3D] px-[20px] py-[11px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center" >Add</a>
                    </div>
                    <div class="w-[100%] lg:w-[35%] xl:w-[24%] flex items-center justify-end  gap-[10px]">
                       <button
@@ -50,66 +53,8 @@
              </div>
              <div class="w-[100%] flex flex-col lg:flex-row items-start lg:items-center justify-start gap-[10px]">
                 <label class="min-w-[160px] w-[10%] text-[14px] font-[500] text-[#898989] ">Active filters:</label>
-                <div class="w-[90%] flex flex-wrap items-center gap-[10px]">
-                   <div
-                      class=" flex items-center gap-[20px] bg-[#F6F6F6] pl-[15px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
-                      Filter001
-                      <button
-                         class="w-[40px] h-[40px] flex items-center justify-center gap-[5px] bg-[#fff] border-l-[1px] border-l-[#E6E6E6]">
-                         <svg
-                            width="12" height="12" viewBox="0 0 12 12" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.4033 1.29822L0.999773 10.7018" stroke="#A1A1A1" stroke-width="1.5"
-                               stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M10.4033 10.7018L0.999772 1.29822" stroke="#A1A1A1" stroke-width="1.5"
-                               stroke-linecap="round" stroke-linejoin="round" />
-                         </svg>
-                      </button>
-                   </div>
-                   <div class="flex items-center gap-[20px] bg-[#F6F6F6] pl-[15px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
-                      Filter001
-                      <button
-                         class="w-[40px] h-[40px] flex items-center justify-center gap-[5px] bg-[#fff] border-l-[1px] border-l-[#E6E6E6]">
-                         <svg
-                            width="12" height="12" viewBox="0 0 12 12" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.4033 1.29822L0.999773 10.7018" stroke="#A1A1A1" stroke-width="1.5"
-                               stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M10.4033 10.7018L0.999772 1.29822" stroke="#A1A1A1" stroke-width="1.5"
-                               stroke-linecap="round" stroke-linejoin="round" />
-                         </svg>
-                      </button>
-                   </div>
-                   <div
-                      class="flex items-center gap-[20px] bg-[#F6F6F6] pl-[15px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
-                      Filter001
-                      <button
-                         class="w-[40px] h-[40px] flex items-center justify-center gap-[5px] bg-[#fff] border-l-[1px] border-l-[#E6E6E6]">
-                         <svg
-                            width="12" height="12" viewBox="0 0 12 12" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.4033 1.29822L0.999773 10.7018" stroke="#A1A1A1" stroke-width="1.5"
-                               stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M10.4033 10.7018L0.999772 1.29822" stroke="#A1A1A1" stroke-width="1.5"
-                               stroke-linecap="round" stroke-linejoin="round" />
-                         </svg>
-                      </button>
-                   </div>
-                   <div
-                      class="flex items-center gap-[20px] bg-[#F6F6F6] pl-[15px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
-                      Filter001
-                      <button
-                         class="w-[40px] h-[40px] flex items-center justify-center gap-[5px] bg-[#fff] border-l-[1px] border-l-[#E6E6E6]">
-                         <svg
-                            width="12" height="12" viewBox="0 0 12 12" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.4033 1.29822L0.999773 10.7018" stroke="#A1A1A1" stroke-width="1.5"
-                               stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M10.4033 10.7018L0.999772 1.29822" stroke="#A1A1A1" stroke-width="1.5"
-                               stroke-linecap="round" stroke-linejoin="round" />
-                         </svg>
-                      </button>
-                   </div>
+                <div class="w-[90%] flex flex-wrap items-center gap-[10px] allFilterInCommon">
+                   
                 </div>
              </div>
           </div>
@@ -117,15 +62,18 @@
        </form>
        <div class="my-[20px]">
           <canvas id="statisticsGraph"></canvas>
-       </div>
-       <div class="flex flex-col justify-between items-center gap-[5px] w-[100%] mt-[30px] ">
+       </div> 
+      @php 
+         $headingArray = ['hour' => 'Hour','day' => 'Day','month' => 'Month','country' => 'Country','browser' => 'Browsers','device' => 'Devices','device_model' => 'Device Model','os' => 'Operating System'];
+      @endphp
+      <div class="flex flex-col justify-between items-center gap-[5px] w-[100%] mt-[30px] ">
           <div class="w-[100%] overflow-x-scroll tableScroll">
              <table
                 class="w-[100%] border-collapse border-spacing-0 rounded-[10px] border-separate border border-[#E6E6E6]">
                 <tr>
                    <th
                       class="bg-[#F6F6F6] rounded-tl-[10px] text-[14px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap ">
-                      {{ $recordGroupBy ?? 'Hour' }}
+                      {{ $headingArray[$recordGroupBy] ?? 'Hour' }}
                    </th>
                    <th
                       class="bg-[#F6F6F6] text-[14px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap">
@@ -176,13 +124,22 @@
                       class="border-b-[1px] border-b-[#E6E6E6] text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
                        {{ $stats['actions']['confirmed']['count'] ?? 'N/A' }}
                    </td>
+                   @php 
+                     $confirmCount = $stats['actions']['confirmed']['count'] ?? 0; 
+                     $trafficCount = $stats['traffic']['uniq'] ?? 0;
+                     if($confirmCount==0 && $trafficCount==0){
+                        $percentage = 'N/A';
+                     }else{
+                        $percentage = number_format(($confirmCount / $trafficCount) * 100, 2).' %';
+                     }
+                  @endphp
                    <td
                       class="border-b-[1px] border-b-[#E6E6E6] text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
-                      {{ number_format(($stats['actions']['confirmed']['count'] / $stats['traffic']['uniq']) * 100, 2) }} %
+                      {{ $percentage }} 
                    </td>
                    <td
                       class="border-b-[1px] border-b-[#E6E6E6] text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
-                      $ {{ $stats['affiliate_epc'] }}
+                      $ {{ $stats['affiliate_epc'] ?? 'N/A' }}
                    </td>
                    <td
                       class="border-b-[1px] border-b-[#E6E6E6] text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
@@ -197,34 +154,7 @@
                 @endif
              </table>
           </div>
-          <div class="w-[100%] flex flex-col gap-[10px] md:gap-[0] md:flex-row justify-between mt-[30px]">
-             <h2 class="text-[14px] text-[#808080] font-[500]">Showing 1 to 4 of 4 entries</h2>
-             <div class="inline-flex gap-[8px]">
-                <a href="#"
-                   class="group inline-flex gap-[8px] items-center bg-[#FFF3ED] border border-[#FED5C3] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#E36F3D] text-center hover:bg-[#E36F3D] hover:text-[#fff]">
-                   <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M5 1L1 5L5 9" stroke="#E36F3D" stroke-width="1.5" stroke-linecap="round"
-                         stroke-linejoin="round" class="group-hover:stroke-[#fff] " />
-                   </svg>
-                   Previous
-                </a>
-                <a href="#"
-                   class="inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#E36F3D] hover:text-[#fff]">1</a>
-                <a href="#"
-                   class="inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#E36F3D] hover:text-[#fff]">2</a>
-                <a href="#"
-                   class="inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#E36F3D] hover:text-[#fff]">3</a>
-                <a href="#"
-                   class="group inline-flex gap-[5px] items-center bg-[#FFF3ED] border border-[#FED5C3] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#E36F3D] text-center hover:bg-[#E36F3D] hover:text-[#fff]">
-                   Next 
-                   <svg width="6" height="10" viewBox="0 0 6 10" fill="none"
-                      xmlns="http://www.w3.org/2000/svg">
-                      <path d="M1 1L5 5L1 9" stroke="#E36F3D" stroke-width="1.5" stroke-linecap="round"
-                         stroke-linejoin="round" class="group-hover:stroke-[#fff] " />
-                   </svg>
-                </a>
-             </div>
-          </div>
+          
        </div>
     </div>
  </div>
@@ -284,6 +214,34 @@
                 });
             })
             .catch(error => console.error('Error fetching chart data:', error));
-    });
+   });
+
+   
+
+   $(document).on('change','.filterByDrop',function(){
+      $('.loader-fcustm').show();
+      $.ajax({
+         headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         },
+         url: '{{ route("filterGroup") }}/'+$(this).val(), // URL to send request
+         type: 'GET', // HTTP method
+         success: function (response) {
+            $('.loader-fcustm').hide();
+            $('.search-input-filter').html(response);
+         },
+         error: function (xhr) {
+            $('#response').html('<p>An error occurred. Please try again.</p>');
+         }
+      });
+   });
+
+   $(document).on('click','.addCustomFilter',function(){
+      if($('.search-input-filter').val()!='' && $('.filterByDrop').val()!=''){
+         $('.allFilterInCommon').append('<input type="hidden" name="filterIn['+$('.filterByDrop').val()+'][]" value="'+$('.search-input-filter').val()+'"><div class=" flex items-center gap-[20px] bg-[#F6F6F6] pl-[15px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none"> '+$('.search-input-filter option:selected').text()+' <button class="w-[40px] h-[40px] flex items-center justify-center gap-[5px] bg-[#fff] border-l-[1px] border-l-[#E6E6E6]"> <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M10.4033 1.29822L0.999773 10.7018" stroke="#A1A1A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /> <path d="M10.4033 10.7018L0.999772 1.29822" stroke="#A1A1A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /> </svg> </button> </div>');
+         $('.search-input-filter').val('');
+      }
+   })
 </script>
+
 @stop

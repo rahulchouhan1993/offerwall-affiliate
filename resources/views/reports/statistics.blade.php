@@ -28,10 +28,10 @@
                 <label class="min-w-[160px] w-[10%] text-[14px] font-[500] text-[#898989] ">Range:</label>
                 <input name="range" class="dateRange w-[100%] lg:w-[90%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" type="text" value="{{ $completeDate }}" />
              </div>
-             <div class="w-[100%] flex items-center flex-wrap justify-start lg:justify-end lg:flex-nowrap gap-[10px]">
-                <label class="min-w-[160px] w-[10%] text-[14px] font-[500] text-[#898989] ">Filter by:</label>
-                <div class="w-[100%] xl:w-[90%] flex flex-wrap lg:flex-nowrap  items-center gap-[5px] md:gap-[8px] lg:gap-[10px] xl:gap-[15px]">
-                   <div class="w-[100%] lg:w-[65%] xl:w-[75%] flex flex-wrap xl:flex-nowrap items-center gap-[10px]">
+             <div class="w-[100%] flex flex-wrap lg:flex-nowrap items-start xl:items-center justify-between gap-[10px]">
+                <label class="min-w-[160px] w-[100%] lg:w-[10%] text-[14px] font-[500] text-[#898989] ">Filter by:</label>
+                <div class="w-[100%] xl:w-[85%] 2xl:w-[90%] flex justify-between flex-wrap xl:flex-nowrap  items-center gap-[5px] md:gap-[8px] lg:gap-[10px] xl:gap-[15px]">
+                   <div class="w-[100%] lg:w-[100%] xl:w-[60.5%]  2xl:w-[70.7%] flex flex-wrap xl:flex-nowrap items-center gap-[10px]">
                       <select name="filterBy" class="sel2fld filterByDrop w-[100%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
                         <option value="">Select</option>
                         <option value="country">Country</option>
@@ -42,13 +42,15 @@
                       <select  class="search-input-filter w-[100%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" name="filterByValue">
                       </select>
                       
-                      <a href="javascript:void(0);" class="addCustomFilter w-[140px] bg-[#E36F3D] px-[20px] py-[11px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center" >Add</a>
+                      
                    </div>
-                   <div class="w-[100%] lg:w-[35%] xl:w-[24%] flex items-center justify-end  gap-[10px]">
+                   <div class="w-[100%] lg:w-[100%] xl:w-[24%] 2xl:w-[24%] flex items-center justify-end  gap-[10px]">
+
+                   <a href="javascript:void(0);" class="addCustomFilter w-[90px] xl:w-[120px] bg-[#E36F3D] px-[20px] py-[11px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center" >Add</a>
                       <button
-                         class="w-[140px] bg-[#E36F3D] px-[20px] py-[11px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center" type="submit">Apply</button>
+                         class="w-[140px] bg-[#E36F3D] px-[20px] py-[11px] w-[90px] xl:w-[120px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center" type="submit">Apply</button>
                       <a href="{{ route('report.statistics') }}"
-                         class="w-[140px] bg-[#FFF3ED] px-[20px] py-[11px] w-[100px] border border-[#FFF3ED] rounded-[4px] text-[14px] font-[500] text-[#E36F3D] text-center" >Clear</a>
+                         class="w-[140px] bg-[#FFF3ED] px-[20px] py-[11px] w-[90px] xl:w-[120px] border border-[#FFF3ED] rounded-[4px] text-[14px] font-[500] text-[#E36F3D] text-center" >Clear</a>
                    </div>
                 </div>
              </div>

@@ -17,16 +17,29 @@ class ReportsController extends Controller
             $seperateDate[0] = date('Y-m-d',strtotime($seperateDate[0]));
             $seperateDate[1] = date('Y-m-d',strtotime($seperateDate[1]));
         }
-        $perPage = 100;
+        
+        $perPage = 500;
         $allStatistics = [];
         $recordGroupBy = $request->groupBy ?? 'hour';
+        $filterBy = $request->filterBy ?? 'hour';
+        $filterByCountry = $request['filterIn']['country'][0] ?? '';
+        $filterByDevice = $request['filterIn']['devices'][0] ?? '';
+        $filterByOs = $request['filterIn']['os'][0] ?? '';
+        $filterByOffer = $request['filterIn']['offer'][0] ?? '';
         $startDate = $seperateDate[0] ?? date('Y-m-d');
         $endDate = $seperateDate[1] ?? date('Y-m-d');
+        $filterByText =  $request['filterInValue'];
+        $filterByValue =  $request['filterIn'];
+        
         if(!empty($recordGroupBy) && !empty($startDate) && !empty($endDate)){
             $queryString = http_build_query([
                 'filter[date_from]' => $startDate ?? '2020-01-01',
                 'filter[date_to]' => $endDate ?? date('Y-m-d'),
                 'filter[partner]' => 27,
+                'filter[country]' => $filterByCountry,
+                //'filter[device]' => $filterByDevice,
+                'filter[os]' => $filterByOs,
+                'filter[offer]' => $filterByOffer,
                 'page' => $request->page ?? '1',
                 'limit' => $perPage,
             ]);
@@ -40,31 +53,65 @@ class ReportsController extends Controller
             }
         }
         
-        return view('reports.statistics',compact('pageTitle','allStatistics','recordGroupBy','completeDate'));
+        return view('reports.statistics',compact('pageTitle','allStatistics','recordGroupBy','completeDate','filterByCountry','filterByDevice','filterByOs','filterByOffer','filterBy','filterByText','filterByValue'));
     }
 
-    public function conversions(){
+    public function conversions(Request $request){
         $pageTitle = 'Conversions';
+        $allCountry = Country::get();
+        $filterOptions = [
+            'startDate' => '',
+            'endDate' => '',
+            'completeDate' => $request->range ?? '',
+            'country' => $request->country ?? '',
+            'offer' => $request->offer ?? '',
+            'os' => $request->os ?? '',
+            'goal' => $request->goal ?? '',
+            'smartLink' => $request->smartlink ?? '',
+            'status' => $request->status ?? '',
+        ];
+        if($request->isMethod('GET') && !empty($request->range)){
+            $completeDate = $request->range;
+            $seperateDate = explode('-',$request->range);
+            $filterOptions['startDate'] = date('Y-m-d',strtotime($seperateDate[0]));
+            $filterOptions['endDate'] = date('Y-m-d',strtotime($seperateDate[1]));
+        }
+       
         $perPage = 25;
         $allConversions = [];
         $currentPage = NULL;
         $totalCount = NULL;
         $prevPage = NULL;
         $nextPage = NULL;
-        $conversionsStatus = $request->status ?? '';
-        $queryString = http_build_query([
-            'date_from' => $request->startDate ?? '2020-01-01',
-            'date_to' => $request->endDate ?? date('Y-m-d'),
+
+        $params = [
+            'date_from' => $filterOptions['startDate'],
+            'date_to' => $filterOptions['endDate'],
             'partner[]' => 27,
-            'status' => $request->status ?? '',
-            'page' => $request->page ?? '1',
+            'offer[]' => $filterOptions['offer'],
+            'os' => $filterOptions['os'],
+            'goal' => $filterOptions['goal'],
+            'smart_id' => $filterOptions['smartLink'],
+            'page' => isset($request->page) ? $request->page : '1',
             'limit' => $perPage,
-        ]);
+        ];
+        
+        if (!empty($filterOptions['country'])) {
+            $params['country[]'] = $filterOptions['country'];
+        }
+        
+        if (!empty($filterOptions['status'])) {
+            $params['status[]'] = $filterOptions['status'];
+        }
+        
+        // Build the query string
+        $queryString = http_build_query($params);
+
         $url = env('AFFISE_API_END') . "stats/conversions?".$queryString;
         $response = HTTP::withHeaders([
             'API-Key' => env('AFFISE_API_KEY'),
         ])->get($url);
-        
+       
         if ($response->successful()) {
             $allConversions = $response->json();
             $pagination = $allConversions['pagination'] ?? []; 
@@ -73,26 +120,67 @@ class ReportsController extends Controller
             $prevPage = $pagination['prev_page'] ?? null;
             $nextPage = $pagination['next_page'] ?? null;
         }
-        return view('reports.conversions',compact('pageTitle','allConversions','currentPage','totalCount','prevPage','nextPage','perPage','conversionsStatus'));
+
+        $url = env('AFFISE_API_END') . "offers";
+        $response = HTTP::withHeaders([
+            'API-Key' => env('AFFISE_API_KEY'),
+        ])->get($url);
+        
+        if ($response->successful()) {
+            $allOffers = $response->json();
+        }
+        $urlForPagination = $request->all();
+        $conversionsStatus = '';
+        return view('reports.conversions',compact('pageTitle','allConversions','currentPage','totalCount','prevPage','nextPage','perPage','allCountry','allOffers','filterOptions','conversionsStatus','params','urlForPagination'));
     }
 
     public function postbacks(Request $request){
         $pageTitle = 'Postbacks';
+        $filterOptions = [
+            'startDate' => '',
+            'endDate' => '',
+            'completeDate' => $request->range ?? '',
+            'offer' => $request->offer ?? '',
+            'goal' => $request->goal ?? '',
+            'status' => $request->status ?? '',
+        ];
+        if($request->isMethod('GET') && !empty($request->range)){
+            $completeDate = $request->range;
+            $seperateDate = explode('-',$request->range);
+            $filterOptions['startDate'] = date('Y-m-d',strtotime($seperateDate[0]));
+            $filterOptions['endDate'] = date('Y-m-d',strtotime($seperateDate[1]));
+        }
+       
         $perPage = 25;
         $allPostbacks = [];
         $currentPage = NULL;
         $totalCount = NULL;
         $prevPage = NULL;
         $nextPage = NULL;
-        $postbackStatus = $request->status ?? '';
-        $queryString = http_build_query([
-            'date_from' => $request->startDate ?? '2020-01-01',
-            'date_to' => $request->status ?? date('Y-m-d'),
+
+        $params = [
+            'date_from' => $filterOptions['startDate'],
+            'date_to' => $filterOptions['endDate'],
             'partner[]' => 27,
-            'status' => $request->status ?? '',
-            'page' => $request->page ?? '1',
+            'page' => isset($request->page) ? $request->page : '1',
             'limit' => $perPage,
-        ]);
+        ];
+        
+        if (!empty($filterOptions['offer'])) {
+            $params['offer[]'] = $filterOptions['offer'];
+        }
+        
+        if (!empty($filterOptions['goal'])) {
+            $params['goal'] = $filterOptions['goal'];
+        }
+
+        if (!empty($filterOptions['status'])) {
+            $params['status'] = $filterOptions['status'];
+        }
+        
+        // Build the query string
+        $queryString = http_build_query($params);
+
         $url = env('AFFISE_API_END') . "stats/affiliatepostbacks?".$queryString;
         $response = HTTP::withHeaders([
             'API-Key' => env('AFFISE_API_KEY'),
@@ -106,7 +194,18 @@ class ReportsController extends Controller
             $prevPage = $pagination['prev_page'] ?? null;
             $nextPage = $pagination['next_page'] ?? null;
         }
-        return view('reports.postbacks',compact('pageTitle','allPostbacks','currentPage','totalCount','prevPage','nextPage','perPage','postbackStatus'));
+        $urlForPagination = $request->all();
+
+        $url = env('AFFISE_API_END') . "offers";
+        $response = HTTP::withHeaders([
+            'API-Key' => env('AFFISE_API_KEY'),
+        ])->get($url);
+        $allOffers = [];
+        if ($response->successful()) {
+            $allOffers = $response->json();
+        }
+       
+        return view('reports.postbacks',compact('pageTitle','allPostbacks','currentPage','totalCount','prevPage','nextPage','perPage','urlForPagination','allOffers'));
     }
 
     public function exported(){
@@ -122,7 +221,7 @@ class ReportsController extends Controller
                 $returnOptions.='<option value="'.$country->iso.'">'.$country->nicename.'</option>';
             }
         }elseif($filterBy=='devices'){
-            $url = 'https://api-makamobile.affise.com/3.1/' .$filterBy;
+            $url = 'https://api-makamobile.affise.com/3.1/devices';
             $response = HTTP::withHeaders([
                 'API-Key' => env('AFFISE_API_KEY'),
             ])->get($url);
@@ -130,11 +229,11 @@ class ReportsController extends Controller
             if ($response->successful()) {
                 $allDevices = $response->json();
                 foreach($allDevices['types'] as $devices){
-                    $returnOptions.='<option value="'.$devices.'">'.$devices.'</option>';
+                    $returnOptions.='<option value="'.$devices.'">'.ucfirst($devices).'</option>';
                 }
             }
         }elseif($filterBy=='os'){
-            $returnOptions.='<option value="Android">Android</option><option value="Desktop">Desktop</option><option value="Max OS X">Max OS X</option><option value="iOS">iOS</option><option value="iPad">iPad</option><option value="iPhone">iPhone</option>';
+            $returnOptions.='<option value="Windows">Windows</option><option value="macOS">macOS</option><option value="Linux">Linux</option><option value="Android">Android</option><option value="iOS">iOS</option>';
         }elseif($filterBy=='offer'){
             $url = env('AFFISE_API_END') . "offers";
             $response = HTTP::withHeaders([
@@ -144,7 +243,7 @@ class ReportsController extends Controller
             if ($response->successful()) {
                 $allOffers = $response->json();
                 foreach($allOffers['offers'] as $offer){
-                    $returnOptions.='<option value="'.$offer['id'].'">'.$offer['title'].'</option>';
+                    $returnOptions.='<option value="'.$offer['offer_id'].'">'.$offer['title'].'</option>';
                 }
             }
         }

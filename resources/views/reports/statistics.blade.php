@@ -4,8 +4,9 @@
     <div class="bg-[#fff] p-[15px] md:p-[20px] rounded-[10px] mb-[20px]">
        <div class="flex items-center justify-between gap-[25px] w-[100%]  mb-[15px]">
           <h2 class="text-[20px] text-[#1A1A1A] font-[600]">Graph & Statistics</h2>
+          <button class="w-[100px] md:w-[110px] lg:w-[140px] bg-[#E36F3D] px-[20px] py-[10px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center">Export</button>
        </div>
-       <form method="get" >
+       <form method="get" id="filterStats" >
        <div class="flex flex-col items-center justify-center gap-[15px]">
           <div class="w-full flex flex-col gap-[10px]">
              <div class="w-[100%] flex flex-col lg:flex-row items-start lg:items-center justify-start gap-[10px]">
@@ -34,11 +35,11 @@
                       <select name="filterBy" class="sel2fld filterByDrop w-[100%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
                         <option value="">Select</option>
                         <option value="country">Country</option>
-                        <option value="devices">Device</option>
-                        <option value="os">Operating System</option>
-                        <option value="offer">Offer</option>
+                        {{-- <option value="devices">Device</option> --}}
+                        <option value="os" >Operating System</option>
+                        <option value="offer" >Offer</option>
                       </select>
-                      <select  class="search-input-filter w-[100%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
+                      <select  class="search-input-filter w-[100%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" name="filterByValue">
                       </select>
                       
                       <a href="javascript:void(0);" class="addCustomFilter w-[140px] bg-[#E36F3D] px-[20px] py-[11px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center" >Add</a>
@@ -46,16 +47,20 @@
                    <div class="w-[100%] lg:w-[35%] xl:w-[24%] flex items-center justify-end  gap-[10px]">
                       <button
                          class="w-[140px] bg-[#E36F3D] px-[20px] py-[11px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center" type="submit">Apply</button>
-                      <button
-                         class="w-[140px] bg-[#FFF3ED] px-[20px] py-[11px] w-[100px] border border-[#FFF3ED] rounded-[4px] text-[14px] font-[500] text-[#E36F3D] text-center">Clear</button>
+                      <a href="{{ route('report.statistics') }}"
+                         class="w-[140px] bg-[#FFF3ED] px-[20px] py-[11px] w-[100px] border border-[#FFF3ED] rounded-[4px] text-[14px] font-[500] text-[#E36F3D] text-center" >Clear</a>
                    </div>
                 </div>
              </div>
              <div class="w-[100%] flex flex-col lg:flex-row items-start lg:items-center justify-start gap-[10px]">
-                <label class="min-w-[160px] w-[10%] text-[14px] font-[500] text-[#898989] ">Active filters:</label>
-                <div class="w-[90%] flex flex-wrap items-center gap-[10px] allFilterInCommon">
-                   
-                </div>
+               <label class="min-w-[160px] w-[10%] text-[14px] font-[500] text-[#898989] ">Active filters:</label>
+                  <div class="w-[90%] flex flex-wrap items-center gap-[10px] allFilterInCommon">
+                     @if(!empty($filterByValue))
+                        @foreach ($filterByValue as $k => $inValue)
+                        <div class="flex items-center gap-[20px] bg-[#F6F6F6] pl-[15px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none"> <input type="hidden" name="filterIn[{{ $k }}][]" value="{{ $inValue[0] }}"><input type="hidden" name="filterInValue[{{$k }}][]" value="{{ $filterByText[$k][0] }}"> {{ $filterByText[$k][0] }} <button class="removeActiveOne w-[40px] h-[40px] flex items-center justify-center gap-[5px] bg-[#fff] border-l-[1px] border-l-[#E6E6E6]"> <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M10.4033 1.29822L0.999773 10.7018" stroke="#A1A1A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /> <path d="M10.4033 10.7018L0.999772 1.29822" stroke="#A1A1A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /> </svg> </button> </div>
+                        @endforeach
+                     @endif
+                  </div>
              </div>
           </div>
        </div>
@@ -127,10 +132,10 @@
                    @php 
                      $confirmCount = $stats['actions']['confirmed']['count'] ?? 0; 
                      $trafficCount = $stats['traffic']['uniq'] ?? 0;
-                     if($confirmCount==0 && $trafficCount==0){
-                        $percentage = 'N/A';
-                     }else{
+                     if($trafficCount>0){
                         $percentage = number_format(($confirmCount / $trafficCount) * 100, 2).' %';
+                     }else{
+                        $percentage = 'N/A';
                      }
                   @endphp
                    <td
@@ -228,7 +233,7 @@
          type: 'GET', // HTTP method
          success: function (response) {
             $('.loader-fcustm').hide();
-            $('.search-input-filter').html(response);
+            $('.search-input-filter').html(response).select2();
          },
          error: function (xhr) {
             $('#response').html('<p>An error occurred. Please try again.</p>');
@@ -238,10 +243,20 @@
 
    $(document).on('click','.addCustomFilter',function(){
       if($('.search-input-filter').val()!='' && $('.filterByDrop').val()!=''){
-         $('.allFilterInCommon').append('<input type="hidden" name="filterIn['+$('.filterByDrop').val()+'][]" value="'+$('.search-input-filter').val()+'"><div class=" flex items-center gap-[20px] bg-[#F6F6F6] pl-[15px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none"> '+$('.search-input-filter option:selected').text()+' <button class="w-[40px] h-[40px] flex items-center justify-center gap-[5px] bg-[#fff] border-l-[1px] border-l-[#E6E6E6]"> <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M10.4033 1.29822L0.999773 10.7018" stroke="#A1A1A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /> <path d="M10.4033 10.7018L0.999772 1.29822" stroke="#A1A1A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /> </svg> </button> </div>');
+         $('.allFilterInCommon').append('<div class=" flex items-center gap-[20px] bg-[#F6F6F6] pl-[15px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none"><input type="hidden" name="filterIn['+$('.filterByDrop').val()+'][]" value="'+$('.search-input-filter').val()+'"><input type="hidden" name="filterInValue['+$('.filterByDrop').val()+'][]" value="'+$('.search-input-filter option:selected').text()+'"> '+$('.search-input-filter option:selected').text()+' <button class="w-[40px] h-[40px] flex items-center justify-center gap-[5px] bg-[#fff] border-l-[1px] border-l-[#E6E6E6]"> <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M10.4033 1.29822L0.999773 10.7018" stroke="#A1A1A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /> <path d="M10.4033 10.7018L0.999772 1.29822" stroke="#A1A1A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /> </svg> </button> </div>');
          $('.search-input-filter').val('');
       }
+   });
+
+   $('#filterStats').on('submit',function(){
+      $('.loader-fcustm').show();
    })
+
+   $(document).on('click','.removeActiveOne',function(){
+      $(this).parent().remove();
+   });
+
+   $('.search-input-filter').select2();
 </script>
 
 @stop

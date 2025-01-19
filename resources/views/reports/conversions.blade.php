@@ -8,128 +8,63 @@
              class="w-[140px] bg-[#E36F3D] px-[20px] py-[10px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center">Export</button>
        </div>
        <div class="flex flex-col items-center justify-center gap-[15px]">
+         <form method="get" id="filterConversions">
           <div class="w-full flex flex-col gap-[10px]">
              <div class="w-[100%] flex flex-col lg:flex-row items-start lg:items-center justify-start gap-[10px]">
-                <label
-                   class="min-w-[160px] w-[100%] md:w-[10%] text-[14px] font-[500] text-[#898989] ">Range:</label>
-                <input type="date" name="" id=""
-                   class="w-[100%] lg:w-[90%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none"
-                   placeholder="2024-12-10">
+                <label class="min-w-[160px] w-[100%] md:w-[10%] text-[14px] font-[500] text-[#898989] ">Range:</label>
+                <input type="text" name="range" class="dateRange w-[100%] lg:w-[90%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none"
+                   placeholder="2024-12-10" value="{{ $filterOptions['completeDate'] }}">
              </div>
              <div class="w-[100%] flex flex-col lg:flex-row items-start lg:items-center justify-start gap-[10px]">
-                <label class="min-w-[160px] w-[10%] text-[14px] font-[500] text-[#898989] ">Currency:</label>
-                <select
-                   class="w-[100%] lg:w-[90%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
-                   <option>Europe/Amsterdam(UTC=01:00)</option>
-                   <option>India/USA(UTC=01:00)</option>
-                </select>
-             </div>
-             <div class="w-[100%] flex flex-col lg:flex-row items-start lg:items-center justify-start gap-[10px]">
-                <label class="min-w-[160px] w-[10%] text-[14px] font-[500] text-[#898989] ">Currency:</label>
-                <select
-                   class="w-[100%] lg:w-[90%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
-                   <option>Courtina</option>
-                   <option>Courtina 2</option>
+                <label class="min-w-[160px] w-[10%] text-[14px] font-[500] text-[#898989] ">Country:</label>
+                <select name="country" class="countryOptions w-[100%] lg:w-[90%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
+                  <option value="">Select</option>
+                  @foreach ($allCountry as $country)
+                     <option value="{{ $country->iso }}" @if($filterOptions['country'] == $country->iso) selected @endif>{{ $country->nicename }}</option>
+                  @endforeach
                 </select>
              </div>
              <div class="w-[100%] flex items-center flex-wrap justify-start lg:flex-nowrap gap-[10px]">
                 <label class="min-w-[160px] w-[10%] text-[14px] font-[500] text-[#898989] ">Filter by:</label>
                 <div class="w-[100%] xl:w-[90%] flex flex-wrap xl:flex-nowrap  items-center gap-[5px] md:gap-[8px] lg:gap-[10px] xl:gap-[15px]">
                    <div class="w-[100%] xl:w-[80%] flex flex-wrap xl:flex-nowrap items-center gap-[10px]">
-                      <select
-                         class="w-[100%] xl:w-[25%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
-                         <option>Offers</option>
-                         <option>Offers 2</option>
+                      <select name="offer"
+                         class="offerOption w-[100%] xl:w-[25%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
+                         <option value="">Select</option>
+                         @foreach ($allOffers['offers'] as $offer)
+                           <option value="{{ $offer['offer_id'] }}" @if($filterOptions['offer'] == $offer['id']) selected @endif>{{ $offer['title'] }}</option>
+                        @endforeach
                       </select>
-                      <select
-                         class="w-[100%] xl:w-[25%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
-                         <option>Os</option>
-                         <option>Os 2</option>
+                      <select name="os"
+                         class="osOption w-[100%] xl:w-[25%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
+                         <option value="">Select</option>
+                         <option value="Windows" @if($filterOptions['os'] == 'Windows') selected @endif>Windows</option>
+                         <option value="macOS" @if($filterOptions['os'] == 'macOS') selected @endif>macOS</option>
+                         <option value="Linux" @if($filterOptions['os'] == 'Linux') selected @endif>Linux</option>
+                         <option value="Android" @if($filterOptions['os'] == 'Android') selected @endif>Android</option>
+                         <option value="iOS" @if($filterOptions['os'] == 'iOS') selected @endif>iOS</option>
                       </select>
-                      <select
-                         class="w-[100%] xl:w-[25%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
-                         <option>Goal</option>
-                         <option>Goal 2</option>
+                      <select name="status"
+                         class="conversionstatusOption w-[100%] xl:w-[25%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
+                         <option value="">Select</option>
+                         <option value="1" @if($filterOptions['status'] == '1') selected @endif>Confirmed</option>
+                         <option value="2" @if($filterOptions['status'] == '2') selected @endif>Pending</option>
+                         <option value="3" @if($filterOptions['status'] == '3') selected @endif>Declined</option>
+                         <option value="5" @if($filterOptions['status'] == '5') selected @endif>Hold</option>
                       </select>
-                      <select
-                         class="w-[100%] xl:w-[25%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
-                         <option>Smart links</option>
-                         <option>Smart links 2</option>
-                      </select>
+                      <input name="goal" class="w-[100%] xl:w-[25%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" placeholder="Goal" value="{{ $filterOptions['goal'] }}">
+                      <input name="smartlink" class="w-[100%] xl:w-[25%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" placeholder="Smart Link" value="{{ $filterOptions['smartLink'] }}">
                    </div>
                    <div class="w-[100%] xl:w-[20%] flex items-center justify-start xl:justify-between gap-[10px]">
                       <button
                          class="w-[140px] bg-[#E36F3D] px-[20px] py-[11px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center">Apply</button>
-                      <button
-                         class="w-[140px] bg-[#FFF3ED] px-[20px] py-[11px] w-[100px] border border-[#FFF3ED] rounded-[4px] text-[14px] font-[500] text-[#E36F3D] text-center">Clear</button>
-                   </div>
-                </div>
-             </div>
-             <div class="w-[100%] flex flex-col lg:flex-row items-start lg:items-center justify-start gap-[10px]">
-                <label class="min-w-[160px] w-[10%] text-[14px] font-[500] text-[#898989] ">Active filters:</label>
-                <div class="w-[90%] flex flex-wrap items-center gap-[10px]">
-                   <div
-                      class=" flex items-center gap-[20px] bg-[#F6F6F6] pl-[15px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
-                      Filter001
-                      <button
-                         class="w-[40px] h-[40px] flex items-center justify-center gap-[5px] bg-[#fff] border-l-[1px] border-l-[#E6E6E6]">
-                         <svg
-                            width="12" height="12" viewBox="0 0 12 12" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.4033 1.29822L0.999773 10.7018" stroke="#A1A1A1" stroke-width="1.5"
-                               stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M10.4033 10.7018L0.999772 1.29822" stroke="#A1A1A1" stroke-width="1.5"
-                               stroke-linecap="round" stroke-linejoin="round" />
-                         </svg>
-                      </button>
-                   </div>
-                   <div class="flex items-center gap-[20px] bg-[#F6F6F6] pl-[15px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
-                      Filter001
-                      <button
-                         class="w-[40px] h-[40px] flex items-center justify-center gap-[5px] bg-[#fff] border-l-[1px] border-l-[#E6E6E6]">
-                         <svg
-                            width="12" height="12" viewBox="0 0 12 12" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.4033 1.29822L0.999773 10.7018" stroke="#A1A1A1" stroke-width="1.5"
-                               stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M10.4033 10.7018L0.999772 1.29822" stroke="#A1A1A1" stroke-width="1.5"
-                               stroke-linecap="round" stroke-linejoin="round" />
-                         </svg>
-                      </button>
-                   </div>
-                   <div
-                      class="flex items-center gap-[20px] bg-[#F6F6F6] pl-[15px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
-                      Filter001
-                      <button
-                         class="w-[40px] h-[40px] flex items-center justify-center gap-[5px] bg-[#fff] border-l-[1px] border-l-[#E6E6E6]">
-                         <svg
-                            width="12" height="12" viewBox="0 0 12 12" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.4033 1.29822L0.999773 10.7018" stroke="#A1A1A1" stroke-width="1.5"
-                               stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M10.4033 10.7018L0.999772 1.29822" stroke="#A1A1A1" stroke-width="1.5"
-                               stroke-linecap="round" stroke-linejoin="round" />
-                         </svg>
-                      </button>
-                   </div>
-                   <div
-                      class="flex items-center gap-[20px] bg-[#F6F6F6] pl-[15px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
-                      Filter001
-                      <button
-                         class="w-[40px] h-[40px] flex items-center justify-center gap-[5px] bg-[#fff] border-l-[1px] border-l-[#E6E6E6]">
-                         <svg
-                            width="12" height="12" viewBox="0 0 12 12" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.4033 1.29822L0.999773 10.7018" stroke="#A1A1A1" stroke-width="1.5"
-                               stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M10.4033 10.7018L0.999772 1.29822" stroke="#A1A1A1" stroke-width="1.5"
-                               stroke-linecap="round" stroke-linejoin="round" />
-                         </svg>
-                      </button>
+                      <a href="{{ route('report.conversions') }}"
+                         class="w-[140px] bg-[#FFF3ED] px-[20px] py-[11px] w-[100px] border border-[#FFF3ED] rounded-[4px] text-[14px] font-[500] text-[#E36F3D] text-center">Clear</a>
                    </div>
                 </div>
              </div>
           </div>
+         </form>
        </div>
        <div class="flex flex-col justify-between items-center gap-[5px] w-[100%] mt-[30px] ">
           <div class="w-[100%] overflow-x-scroll tableScroll">
@@ -221,7 +156,7 @@
                    </td>
                    <td
                       class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
-                      {{ $conversion['earnings'] }}
+                      $ {{ $conversion['earnings'] }}
                    </td>
                     @php
                         $goalConv = ($conversion['goal'] == '') ? '--' : $conversion['goal'];
@@ -279,16 +214,21 @@
                 @endif
              </table>
           </div>
+          
           <div class="pagination mt-[20px] flex flex-wrap gap-[10px] items-center justify-end">
             @if($prevPage)
-                <a href="{{ route('report.conversions', ['page' => $prevPage, 'status' => $conversionsStatus]) }}" class="btn group inline-flex gap-[8px] items-center bg-[#FFF3ED] border border-[#FED5C3] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#E36F3D] text-center hover:bg-[#E36F3D] hover:text-[#fff]">
+            @php 
+            $urlForPagination['page'] =$prevPage;
+            @endphp
+                <a href="{{ route('report.conversions', $urlForPagination) }}" class="btn group inline-flex gap-[8px] items-center bg-[#FFF3ED] border border-[#FED5C3] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#E36F3D] text-center hover:bg-[#E36F3D] hover:text-[#fff]">
                     <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5 1L1 5L5 9" stroke="#E36F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-[#fff]" />
                     </svg> Previous
                 </a>
             @endif
-        
+               
             @php
+               
                 $totalPages = ceil($totalCount / $perPage);
                 $range = 3; // Number of pages to display before and after the current page
                 $start = max($currentPage - $range, 1);
@@ -296,7 +236,10 @@
             @endphp
         
             @if($start > 1)
-                <a href="{{ route('report.conversions', ['page' => 1, 'status' => $conversionsStatus]) }}" class="btn inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#E36F3D] hover:text-[#fff]">
+            @php 
+            $urlForPagination['page'] =1;
+            @endphp
+                <a href="{{ route('report.conversions', $urlForPagination) }}" class="btn inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#E36F3D] hover:text-[#fff]">
                     1
                 </a>
                 @if($start > 2)
@@ -305,7 +248,10 @@
             @endif
         
             @for($i = $start; $i <= $end; $i++)
-                <a href="{{ route('report.conversions', ['page' => $i, 'status' => $conversionsStatus]) }}" class="{{ $i == $currentPage ? 'btn-active btn inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#E36F3D] hover:text-[#fff]' : 'btn inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#E36F3D] hover:text-[#fff]' }}">
+            @php 
+            $urlForPagination['page'] =$i;
+            @endphp
+                <a href="{{ route('report.conversions', $urlForPagination) }}" class="{{ $i == $currentPage ? 'btn-active btn inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#E36F3D] hover:text-[#fff]' : 'btn inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#E36F3D] hover:text-[#fff]' }}">
                     {{ $i }}
                 </a>
             @endfor
@@ -314,13 +260,19 @@
                 @if($end < $totalPages - 1)
                     <span class="text-[#808080] px-[5px]">...</span>
                 @endif
-                <a href="{{ route('report.conversions', ['page' => $totalPages, 'status' => $conversionsStatus]) }}" class="btn inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#E36F3D] hover:text-[#fff]">
+                @php 
+               $urlForPagination['page'] =$totalPages;
+               @endphp
+                <a href="{{ route('report.conversions', $urlForPagination) }}" class="btn inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#E36F3D] hover:text-[#fff]">
                     {{ $totalPages }}
                 </a>
             @endif
         
             @if($nextPage)
-                <a href="{{ route('report.conversions', ['page' => $nextPage, 'status' => $conversionsStatus]) }}" class="btn group inline-flex gap-[5px] items-center bg-[#FFF3ED] border border-[#FED5C3] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#E36F3D] text-center hover:bg-[#E36F3D] hover:text-[#fff]">
+            @php 
+            $urlForPagination['page'] =$nextPage;
+            @endphp
+                <a href="{{ route('report.conversions', $urlForPagination) }}" class="btn group inline-flex gap-[5px] items-center bg-[#FFF3ED] border border-[#FED5C3] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#E36F3D] text-center hover:bg-[#E36F3D] hover:text-[#fff]">
                     Next
                     <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 1L5 5L1 9" stroke="#E36F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-[#fff]" />
@@ -331,4 +283,27 @@
        </div>
     </div>
  </div>
+<script>
+    $(document).ready(function() {
+      $('.offerOption').select2({
+         placeholder: "Select Offer",
+         allowClear: true // Adds a clear (X) button
+      });
+      $('.countryOptions').select2({
+         placeholder: "Select Country",
+         allowClear: true // Adds a clear (X) button
+      });
+      $('.osOption').select2({
+         placeholder: "Select OS",
+         allowClear: true // Adds a clear (X) button
+      });
+      $('.conversionstatusOption').select2({
+         placeholder: "Select Status",
+         allowClear: true // Adds a clear (X) button
+      });
+   });
+   $('#filterConversions').on('submit',function(){
+      $('.loader-fcustm').show();
+   })
+</script>
 @stop

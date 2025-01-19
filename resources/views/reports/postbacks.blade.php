@@ -9,36 +9,47 @@
           <h2 class="text-[20px] text-[#1A1A1A] font-[600]">Overview</h2>
           <button class="w-[100px] md:w-[110px] lg:w-[140px] bg-[#E36F3D] px-[20px] py-[10px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center">Export</button>
        </div>
+       <form method="get" id="postbackForm">
        <div class="flex items-center justify-between flex-wrap lg:flex-nowrap gap-[10px]">
           <div class="w-[100%] md:w-auto flex items-end flex-wrap md:flex-nowrap gap-[10px]">
             <div class="flex flex-wrap md:flex-nowrap items-start gap-[10px] w-[100%] lg:w-[45%]">
-                <div class="w-[100%] md:w-[31%]">
+                <div class="w-[100%]">
                     <label class="flex items-center gap-[5px] text-[14] text-[#898989]">Start Date</label>
-                    <input type="Date" name="" id="" class="w-[100%] bg-[#F6F6F6] px-[15px] py-[10px] text-[12px] font-[500] text-[#808080] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" placeholder="Date">
+                    <input type="text" name="range"  class="dateRange w-[100%] bg-[#F6F6F6] px-[15px] py-[10px] text-[12px] font-[500] text-[#808080] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" placeholder="Date" value="{{ $urlForPagination['range'] ?? '' }}">
                 </div>
-
-                <div class="w-[100%] md:w-[31%]">
-                    <label class="flex items-center gap-[5px] text-[14] text-[#898989]">End Date</label>
-                    <input type="Date" name="" id="" class="w-[100%] bg-[#F6F6F6] px-[15px] py-[10px] text-[12px] font-[500] text-[#808080] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" placeholder="Date">
-                </div>
-
-                <div class="w-[100%] md:w-[31%]">
-                    <label class="flex items-center gap-[5px] text-[14] text-[#898989]">Filter By</label>
-                    <input type="Date" name="" id="" class="w-[100%] bg-[#F6F6F6] px-[15px] py-[10px] text-[12px] font-[500] text-[#808080] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" placeholder="Date">
+            </div>
+            <div class="flex flex-wrap md:flex-nowrap items-start gap-[10px] w-[100%] lg:w-[45%]">
+                <div class="w-[100%]">
+                    <select name="status" class="filterByStatus bg-[#F6F6F6] px-[15px] py-[12px] text-[12px] font-[500] text-[#808080] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
+                        <option value="">Select</option>
+                        <option value="1" @if(isset($urlForPagination['status']) && $urlForPagination['status']==1) selected @endif>Confirmed</option>
+                        <option value="0" @if(isset($urlForPagination['status']) && $urlForPagination['status']==2) selected @endif>Rejected</option>
+                    </select>
                 </div>
             </div>
 
+            <div class="flex flex-wrap md:flex-nowrap items-start gap-[10px] w-[100%] lg:w-[45%]">
+                <div class="w-[100%]">
+                    <select class="search-postback-filter w-[100%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" name="offer">
+                        <option value="">Select Offer </option>
+                    @foreach($allOffers['offers'] as $offer)
+                        <option value="{{ $offer['offer_id'] }}" @if(isset($urlForPagination['offer']) && $urlForPagination['offer']==$offer['offer_id']) selected @endif>{{ $offer['title'] }}</option>
+                    @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="flex flex-wrap md:flex-nowrap items-start gap-[10px] w-[100%] lg:w-[45%]">
+                <div class="w-[100%]">
+                    <input type="text" name="goal"  class="goal-postback-filter w-[100%] bg-[#F6F6F6] px-[15px] py-[10px] text-[12px] font-[500] text-[#808080] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" placeholder="Goal Name" value="{{ $urlForPagination['goal'] ?? '' }}">
+                </div>
+            </div>
             <div class="w-[100%] lg:w-[55%] flex items-center gap-[10px]">
-             <select class="w-[35%]  bg-[#F6F6F6] px-[15px] py-[12px] text-[12px] font-[500] text-[#808080] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
-                <option>Status</option>
-                <option>Status 2</option>
-             </select>
-             <button class="w-[100px] md:w-[110px] lg:w-[140px] bg-[#E36F3D] px-[20px] py-[10px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center">Apply</button>
-             <button class="w-[100px] md:w-[110px] lg:w-[140px] bg-[#FFF3ED] px-[20px] py-[10px] w-[100px] border border-[#FED5C3] rounded-[4px] text-[14px] font-[500] text-[#E36F3D] text-center">Clear</button>
-          </div>
-         
+                <button class="w-[100px] md:w-[110px] lg:w-[140px] bg-[#E36F3D] px-[20px] py-[10px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center">Apply</button>
+                <a href="{{ route('report.postbacks') }}" class="w-[100px] md:w-[110px] lg:w-[140px] bg-[#FFF3ED] px-[20px] py-[10px] w-[100px] border border-[#FED5C3] rounded-[4px] text-[14px] font-[500] text-[#E36F3D] text-center">Clear</a>
+            </div>
           </div>
        </div>
+    </form>
        <div class="flex flex-col justify-between items-center gap-[5px] w-[100%] mt-[30px] ">
           <div class="w-[100%] overflow-x-scroll tableScroll">
              <table class="w-[100%] border-collapse border-spacing-0 rounded-[10px] border-separate border border-[#E6E6E6]">
@@ -90,7 +101,10 @@
          </div>
          <div class="pagination mt-[20px] flex flex-wrap gap-[10px] items-center justify-end">
             @if($prevPage)
-                <a href="{{ route('report.postbacks', ['page' => $prevPage, 'status' => $postbackStatus]) }}" class="btn group inline-flex gap-[8px] items-center bg-[#FFF3ED] border border-[#FED5C3] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#E36F3D] text-center hover:bg-[#E36F3D] hover:text-[#fff]">
+            @php 
+            $urlForPagination['page'] =$nextPage;
+            @endphp
+                <a href="{{ route('report.postbacks', $urlForPagination) }}" class="btn group inline-flex gap-[8px] items-center bg-[#FFF3ED] border border-[#FED5C3] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#E36F3D] text-center hover:bg-[#E36F3D] hover:text-[#fff]">
                     <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5 1L1 5L5 9" stroke="#E36F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-[#fff]" />
                     </svg> Previous
@@ -105,7 +119,10 @@
             @endphp
         
             @if($start > 1)
-                <a href="{{ route('report.postbacks', ['page' => 1, 'status' => $postbackStatus]) }}" class="btn inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#E36F3D] hover:text-[#fff]">
+            @php 
+            $urlForPagination['page'] =1;
+            @endphp
+                <a href="{{ route('report.postbacks', $urlForPagination) }}" class="btn inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#E36F3D] hover:text-[#fff]">
                     1
                 </a>
                 @if($start > 2)
@@ -114,7 +131,10 @@
             @endif
         
             @for($i = $start; $i <= $end; $i++)
-                <a href="{{ route('report.postbacks', ['page' => $i, 'status' => $postbackStatus]) }}" class="{{ $i == $currentPage ? 'btn-active btn inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#E36F3D] hover:text-[#fff]' : 'btn inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#E36F3D] hover:text-[#fff]' }}">
+            @php 
+            $urlForPagination['page'] =$i;
+            @endphp
+                <a href="{{ route('report.postbacks', $urlForPagination) }}" class="{{ $i == $currentPage ? 'btn-active btn inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#E36F3D] hover:text-[#fff]' : 'btn inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#E36F3D] hover:text-[#fff]' }}">
                     {{ $i }}
                 </a>
             @endfor
@@ -123,13 +143,19 @@
                 @if($end < $totalPages - 1)
                     <span class="text-[#808080] px-[5px]">...</span>
                 @endif
-                <a href="{{ route('report.postbacks', ['page' => $totalPages, 'status' => $postbackStatus]) }}" class="btn inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#E36F3D] hover:text-[#fff]">
+                @php 
+                $urlForPagination['page'] =$totalPages;
+                @endphp
+                <a href="{{ route('report.postbacks', $urlForPagination) }}" class="btn inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#E36F3D] hover:text-[#fff]">
                     {{ $totalPages }}
                 </a>
             @endif
         
             @if($nextPage)
-                <a href="{{ route('report.postbacks', ['page' => $nextPage, 'status' => $postbackStatus]) }}" class="btn group inline-flex gap-[5px] items-center bg-[#FFF3ED] border border-[#FED5C3] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#E36F3D] text-center hover:bg-[#E36F3D] hover:text-[#fff]">
+            @php 
+                $urlForPagination['page'] =$nextPage;
+                @endphp
+                <a href="{{ route('report.postbacks', $urlForPagination) }}" class="btn group inline-flex gap-[5px] items-center bg-[#FFF3ED] border border-[#FED5C3] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#E36F3D] text-center hover:bg-[#E36F3D] hover:text-[#fff]">
                     Next
                     <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 1L5 5L1 9" stroke="#E36F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-[#fff]" />
@@ -140,4 +166,18 @@
        </div>
     </div>
 </div>
+<script>
+    $('.filterByStatus').select2({
+         placeholder: "Select Status",
+         allowClear: true // Adds a clear (X) button
+    });
+    $('#postbackForm').on('submit',function(){
+      $('.loader-fcustm').show();
+   });
+   $('.search-postback-filter').select2({
+    placeholder: "Select Offer",
+    allowClear: true // Adds a clear (X) button
+   });
+   
+</script>
 @stop

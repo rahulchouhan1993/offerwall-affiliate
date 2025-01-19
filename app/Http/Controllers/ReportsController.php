@@ -213,6 +213,11 @@ class ReportsController extends Controller
         return view('reports.exported',compact('pageTitle'));
     }
 
+    public function reportStatus(){
+        $pageTitle = 'Report Status';
+        return view('reports.status',compact('pageTitle'));
+    }
+
     public function filterGroup($filterBy = null){
         $returnOptions = '';
         if($filterBy=='country'){

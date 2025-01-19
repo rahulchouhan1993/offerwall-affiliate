@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/conversions', [ReportsController::class, 'conversions'])->name('report.conversions');
     Route::get('/postbacks', [ReportsController::class, 'postbacks'])->name('report.postbacks');
     Route::get('/exported-reports', [ReportsController::class, 'exported'])->name('report.exported');
+    Route::get('/report-status', [ReportsController::class, 'reportStatus'])->name('report.status');
 
     // Apps
     Route::get('/apps', [AppsController::class, 'index'])->name('apps.index');
@@ -34,6 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/test-postback', [AppsController::class, 'testPostback'])->name('apps.testpostback');
     Route::get('/integration/{id}', [AppsController::class, 'integration'])->name('apps.integration');
     Route::get('/update-status/{id}', [AppsController::class, 'updateStatus'])->name('apps.status');
+    
 
     // Chart Data
     Route::get('/chart-data', [ChartController::class, 'chartData'])->name('chart.data');

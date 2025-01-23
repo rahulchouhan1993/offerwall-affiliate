@@ -1,12 +1,12 @@
 <div class="fixed w-[100%] h-[50px] md:h-[80px] lg:h-[80px] top-[0] z-[9] w-[100%] bg-[#fff]   flex items-center gap-[0]">
     <div class="flex items-center w-[200px] md:w-[230px] 2xl:w-[290px] bg-[#FF71DF] py-[15px] px-[15px] md:py-[30px] md:px-[30px] lg:py-[30px] lg:px-[30px] head-logo">
-        <h2 class="text-[30px] text-[#fff] text-[center] font-[700]">OFFERWALL</h2>
+        <h2 class="text-[20px] md:text-[25px] xl:text-[30px] text-[#fff] text-[center] font-[700]">OFFERWALL</h2>
         <!-- <img src="/images/dashboardlogo.png" alt="img"> -->
     </div>
     <div class="w-[100%] flex  items-center justify-between gap-[15px] font-[600] py-[15px] px-[7px] sm:px-[10px] md:py-[30px] md:px-[30px] lg:py-[30px] lg:px-[30px] head-w-cal">
         <div class="flex items-center  gap-[5px] md:gap-[10px] xl:gap-[15px]">
             <button id="menuToggle" class="p-[0]"><i class="ri-menu-line  text-[#FF71DF] text-[20px] md:text-[25px]"></i></button>
-            <h2 class="text-[#1A1A1A] text-[16px] md:text-[17px]  lg:text-[18px]  font-[600]">{{ $pageTitle }}</h2>
+            <h2 class="text-[#1A1A1A] text-[14px] md:text-[17px]  lg:text-[18px]  font-[600]">{{ $pageTitle }}</h2>
         </div>
         <div class="">
             <div class="m-1 hs-dropdown relative inline-flex">

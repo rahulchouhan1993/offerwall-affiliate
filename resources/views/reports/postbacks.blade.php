@@ -10,12 +10,12 @@
           <button class="w-[100px] md:w-[110px] lg:w-[140px] bg-[#E36F3D] px-[20px] py-[10px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center">Export</button>
        </div>
        <form method="get" id="postbackForm">
-       <div class="flex items-center justify-between flex-wrap lg:flex-nowrap gap-[10px]">
-          <div class="w-[100%] md:w-auto flex items-end flex-wrap md:flex-nowrap gap-[10px]">
+       <div class="w-full flex items-center justify-between flex-wrap lg:flex-nowrap gap-[10px]">
+          <div class="w-[100%] flex items-end flex-wrap md:flex-nowrap gap-[10px]">
             <div class="flex flex-wrap md:flex-nowrap items-start gap-[10px] w-[100%] lg:w-[45%]">
                 <div class="w-[100%]">
                     <label class="flex items-center gap-[5px] text-[14] text-[#898989]">Start Date</label>
-                    <input type="text" name="range"  class="dateRange w-[100%] bg-[#F6F6F6] px-[15px] py-[10px] text-[12px] font-[500] text-[#808080] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" placeholder="Date" value="{{ $urlForPagination['range'] ?? '' }}">
+                    <input type="text" name="range"  class="dateRange w-[100%] bg-[#F6F6F6] px-[15px] py-[12px] text-[12px] font-[500] text-[#808080] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" placeholder="Date" value="{{ $urlForPagination['range'] ?? '' }}">
                 </div>
             </div>
             <div class="flex flex-wrap md:flex-nowrap items-start gap-[10px] w-[100%] lg:w-[45%]">
@@ -40,12 +40,12 @@
             </div>
             <div class="flex flex-wrap md:flex-nowrap items-start gap-[10px] w-[100%] lg:w-[45%]">
                 <div class="w-[100%]">
-                    <input type="text" name="goal"  class="goal-postback-filter w-[100%] bg-[#F6F6F6] px-[15px] py-[10px] text-[12px] font-[500] text-[#808080] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" placeholder="Goal Name" value="{{ $urlForPagination['goal'] ?? '' }}">
+                    <input type="text" name="goal"  class="goal-postback-filter w-[100%] bg-[#F6F6F6] px-[15px] py-[12px] text-[12px] font-[500] text-[#808080] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" placeholder="Goal Name" value="{{ $urlForPagination['goal'] ?? '' }}">
                 </div>
             </div>
             <div class="w-[100%] lg:w-[55%] flex items-center gap-[10px]">
-                <button class="w-[100px] md:w-[110px] lg:w-[140px] bg-[#E36F3D] px-[20px] py-[10px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center">Apply</button>
-                <a href="{{ route('report.postbacks') }}" class="w-[100px] md:w-[110px] lg:w-[140px] bg-[#FFF3ED] px-[20px] py-[10px] w-[100px] border border-[#FED5C3] rounded-[4px] text-[14px] font-[500] text-[#E36F3D] text-center">Clear</a>
+                <button class="w-[80px] md:w-[90px] lg:w-[100px] xl:w-[130px] 2xl:w-[140px] bg-[#E36F3D] px-[3px] py-[12px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center">Apply</button>
+                <a href="{{ route('report.postbacks') }}" class="w-[80px] md:w-[90px] lg:w-[100px] xl:w-[130px] 2xl:w-[140px] bg-[#FFF3ED] px-[20px] py-[10px] w-[100px] border border-[#FED5C3] rounded-[4px] text-[14px] font-[500] text-[#E36F3D] text-center">Clear</a>
             </div>
           </div>
        </div>

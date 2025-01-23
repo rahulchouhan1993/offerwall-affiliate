@@ -22,14 +22,14 @@
         </div>
         <div class="flex items-center gap-[5px] md:gap-[15px]">
             <button
-                class="w-[120px] md:w-[120px] lg:w-[130px] bg-[#E36F3D] px-[5px] py-[10px] rounded-[4px] text-[12px] m:text-[14px] font-[500] text-[#fff] text-center">Last
+                class="w-[120px] md:w-[120px] lg:w-[130px] bg-[#FF71DF] px-[5px] py-[10px] rounded-[4px] text-[12px] m:text-[14px] font-[500] text-[#fff] text-center">Last
                 7 Days</button>
             <button
-                class="w-[120px] md:w-[120px] lg:w-[130px] bg-[#FFF3ED] px-[5px] py-[10px] rounded-[4px] text-[12px] m:text-[14px]  font-[500] text-[#E36F3D] text-center">Last
+                class="w-[120px] md:w-[120px] lg:w-[130px] bg-[#ff71df21] px-[5px] py-[10px] rounded-[4px] text-[12px] m:text-[14px]  font-[500] text-[#FF71DF] text-center">Last
                 15 Days</button>
 
             <button
-                class="w-[120px] md:w-[125px] lg:w-[130px] bg-[#FFF3ED] px-[5px] py-[10px] rounded-[4px] text-[12px] m:text-[14px]  font-[500] text-[#E36F3D] text-center">Last
+                class="w-[120px] md:w-[125px] lg:w-[130px] bg-[#ff71df21] px-[5px] py-[10px] rounded-[4px] text-[12px] m:text-[14px]  font-[500] text-[#FF71DF] text-center">Last
                 30 Days</button>
         </div>
     </div>

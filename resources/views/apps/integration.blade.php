@@ -1,8 +1,8 @@
 @extends('layouts.default')
 @section('content')
 <div class="bg-[#f2f2f2] p-[15px] md:p-[35px]">
-        <div class="flex items-start flex-wrap lg:flex-nowrap gap-[20px] justify-between">
-            <div class="w-[1000%] lg:w-[40%] bg-[#fff] p-[15px] md:p-[20px] lg:p-[40px] rounded-[8px] md:rounded-[10px]">
+        <div class="flex items-start flex-wrap xl:flex-nowrap gap-[20px] justify-between">
+            <div class="w-[100%] xl:w-[40%] bg-[#fff] p-[12px] lg:p-[15px] xl:p-[20px] rounded-[8px] md:rounded-[10px]">
                 <h2 class="mb-[20px] text-[20px] text-[#1A1A1A] font-[600] ">
                     The Cash Bag   
                 </h2>  
@@ -32,7 +32,7 @@
                 </div>
             </div>
 
-            <div class="w-[100%] lg:w-[60%] bg-[#fff] p-[15px] md:p-[20px] lg:p-[40px] rounded-[8px] md:rounded-[10px]">
+            <div class="w-[100%] xl:w-[60%] bg-[#fff] p-[12px] lg:p-[15px] xl:p-[20px] rounded-[8px] md:rounded-[10px]">
                 <h2 class="mb-[20px] text-[20px] text-[#1A1A1A] font-[600] ">
                     Offerwall integration 
                 </h2>  
@@ -45,7 +45,7 @@
                         Offerwall
                     </h2>  
                     
-                    <code class="flex items-center justify-center bg-[#1E233B] h-[125px] rounded-[8px] px-[15px] py-[15px] text-[14px] text-[#FFFFFF]"  data-lang="html">
+                    <code class="flex items-center justify-center bg-[#1E233B] h-[100%] xl:h-[125px] rounded-[8px] px-[15px] py-[15px] text-[14px] text-[#FFFFFF]"  data-lang="html">
                         
                             &lt;iframe style="width:100%; height:800px; border:0; padding:0; margin:0;" scrolling="yes" "frameborder="0" src="https://earn.wannads.com/wall? apiKey=650acd8a5935b360681156&userId= (USER_ID]">&gt;&lt;/iframe&gt;
                    
@@ -57,7 +57,7 @@
                         Surveywall
                     </h2>  
                     
-                    <code class="flex items-center justify-center bg-[#1E233B] h-[125px] rounded-[8px] px-[15px] py-[15px] text-[14px] text-[#FFFFFF]"  data-lang="html">
+                    <code class="flex items-center justify-center bg-[#1E233B] h-[100%] xl:h-[125px] rounded-[8px] px-[15px] py-[15px] text-[14px] text-[#FFFFFF]"  data-lang="html">
                         
                             &lt;iframe style="width:100%; height:800px; border:0; padding:0; margin:0;" scrolling="yes" "frameborder="0" src="https://earn.wannads.com/wall? apiKey=650acd8a5935b360681156&userId= (USER_ID]">&gt;&lt;/iframe&gt;
                    

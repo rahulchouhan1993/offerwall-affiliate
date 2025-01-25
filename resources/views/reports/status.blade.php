@@ -26,7 +26,7 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-col gap-[20px] bg-[#F6F6F6] border-[1px] border-[#E6E6E6] p-[40px] mt-[40px] mb-[40px]">
+                    <div class="flex flex-col gap-[20px] bg-[#F6F6F6] border-[1px] border-[#E6E6E6] p-[20px] md:p-[30px] lg:p-[40px] mt-[40px] mb-[40px]">
                         <h3 class="text-[20px] font-[600] text-[#4D4D4D]">Terms and condition</h3>
                         <p class="text-[14px] text-[#898989] font-[500]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                     </div>

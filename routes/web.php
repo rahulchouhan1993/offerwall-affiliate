@@ -27,7 +27,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/conversions', [ReportsController::class, 'conversions'])->name('report.conversions');
     Route::get('/postbacks', [ReportsController::class, 'postbacks'])->name('report.postbacks');
     Route::get('/exported-reports', [ReportsController::class, 'exported'])->name('report.exported');
-    Route::get('/report-status', [ReportsController::class, 'reportStatus'])->name('report.status');
 
     // Apps
     Route::get('/apps', [AppsController::class, 'index'])->name('apps.index');

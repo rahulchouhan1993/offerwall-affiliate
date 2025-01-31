@@ -32,7 +32,7 @@
                          class="offerOption w-[100%] xl:w-[25%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
                          <option value="">Select</option>
                          @foreach ($allOffers['offers'] as $offer)
-                           <option value="{{ $offer['offer_id'] }}" @if($filterOptions['offer'] == $offer['id']) selected @endif>{{ $offer['title'] }}</option>
+                           <option value="{{ $offer['offer_id'] }}" @if($filterOptions['offer'] == $offer['id']) selected @endif>{{ $offer['title'].' ('.$offer['offer_id'].')' }}</option>
                         @endforeach
                       </select>
                       <select name="os"
@@ -53,7 +53,7 @@
                          <option value="5" @if($filterOptions['status'] == '5') selected @endif>Hold</option>
                       </select>
                       <input name="goal" class="w-[100%] xl:w-[25%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" placeholder="Goal" value="{{ $filterOptions['goal'] }}">
-                      <input name="smartlink" class="w-[100%] xl:w-[25%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" placeholder="Smart Link" value="{{ $filterOptions['smartLink'] }}">
+                      {{-- <input name="smartlink" class="w-[100%] xl:w-[25%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" placeholder="Smart Link" value="{{ $filterOptions['smartLink'] }}"> --}}
                    </div>
                    <div class="w-[100%] xl:w-[20%] flex items-center justify-start xl:justify-between gap-[10px]">
                       <button
@@ -82,6 +82,10 @@
                    <th
                       class="bg-[#F6F6F6] text-[14px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap">
                       IP
+                   </th>
+                   <th
+                      class="bg-[#F6F6F6] text-[14px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap">
+                      Country
                    </th>
                    <th
                       class="bg-[#F6F6F6] text-[14px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap">
@@ -137,7 +141,11 @@
                    </td>
                    <td
                       class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left  ">
-                      {{ $conversion['country_name'].' '.$conversion['ip'] }}
+                      {{ $conversion['ip'] }}
+                   </td>
+                   <td
+                      class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left  ">
+                      {{ $conversion['country_name'] }}
                    </td>
                    <td
                       class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">

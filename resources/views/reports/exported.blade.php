@@ -12,7 +12,7 @@
 
                 <div class="inline-flex w-[100%] md:w-auto items-center gap-[10px]">
                     <input type="text" name="" id="" class="w-[100%] md:w-[250] lg:w-[290] xl:w-[300px] bg-[#F6F6F6] px-[15px] py-[10px] text-[12px] font-[500] text-[#808080] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" placeholder="Search file here">
-                    <button class="w-[100px] md:w-[100px] lg:w-[107px] bg-[#E36F3D] px-[20px] py-[10px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center">Search</button>
+                    <button class="w-[100px] md:w-[100px] lg:w-[107px] bg-[#D272D2] px-[20px] py-[10px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center">Search</button>
                 </div>
             </div>
 
@@ -31,7 +31,7 @@
 
                         <tr>
                             <td class="border-b-[1px] border-b-[#E6E6E6] max-w-[95px] text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-center whitespace-normal "><svg class="m-auto" width="21" height="26" viewBox="0 0 21 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11.7 9.1V1.95L18.85 9.1M2.6 0C1.157 0 0 1.157 0 2.6V23.4C0 24.0896 0.273928 24.7509 0.761522 25.2385C1.24912 25.7261 1.91044 26 2.6 26H18.2C18.8896 26 19.5509 25.7261 20.0385 25.2385C20.5261 24.7509 20.8 24.0896 20.8 23.4V7.8L13 0H2.6Z" fill="#E36F3D"/>
+                                <path d="M11.7 9.1V1.95L18.85 9.1M2.6 0C1.157 0 0 1.157 0 2.6V23.4C0 24.0896 0.273928 24.7509 0.761522 25.2385C1.24912 25.7261 1.91044 26 2.6 26H18.2C18.8896 26 19.5509 25.7261 20.0385 25.2385C20.5261 24.7509 20.8 24.0896 20.8 23.4V7.8L13 0H2.6Z" fill="#D272D2"/>
                                 </svg>
                                 </td>
                             <td class="border-b-[1px] border-b-[#E6E6E6] text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">Dec 20. 2024</td>
@@ -72,27 +72,27 @@
                     <h2 class="text-[14px] text-[#808080] font-[500]">Showing 1 to 4 of 4 entries</h2>
                     <div class="inline-flex gap-[8px]">
                         <a href="#"
-                            class="group inline-flex gap-[8px] items-center bg-[#FFF3ED] border border-[#FED5C3] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#E36F3D] text-center hover:bg-[#E36F3D] hover:text-[#fff]">
+                            class="group inline-flex gap-[8px] items-center bg-[#F5EAF5] border border-[#FED5C3] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#D272D2] text-center hover:bg-[#D272D2] hover:text-[#fff]">
                             <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5 1L1 5L5 9" stroke="#E36F3D" stroke-width="1.5" stroke-linecap="round"
+                                <path d="M5 1L1 5L5 9" stroke="#D272D2" stroke-width="1.5" stroke-linecap="round"
                                     stroke-linejoin="round" class="group-hover:stroke-[#fff] " />
                             </svg> Previous</a>
 
                         <a href="#"
-                            class="inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#E36F3D] hover:text-[#fff]">1</a>
+                            class="inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#D272D2] hover:text-[#fff]">1</a>
 
                         <a href="#"
-                            class="inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#E36F3D] hover:text-[#fff]">2</a>
+                            class="inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#D272D2] hover:text-[#fff]">2</a>
 
                         <a href="#"
-                            class="inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#E36F3D] hover:text-[#fff]">3</a>
+                            class="inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#D272D2] hover:text-[#fff]">3</a>
 
 
                         <a href="#"
-                            class="group inline-flex gap-[5px] items-center bg-[#FFF3ED] border border-[#FED5C3] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#E36F3D] text-center hover:bg-[#E36F3D] hover:text-[#fff]">
+                            class="group inline-flex gap-[5px] items-center bg-[#F5EAF5] border border-[#FED5C3] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#D272D2] text-center hover:bg-[#D272D2] hover:text-[#fff]">
                             Next <svg width="6" height="10" viewBox="0 0 6 10" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M1 1L5 5L1 9" stroke="#E36F3D" stroke-width="1.5" stroke-linecap="round"
+                                <path d="M1 1L5 5L1 9" stroke="#D272D2" stroke-width="1.5" stroke-linecap="round"
                                     stroke-linejoin="round" class="group-hover:stroke-[#fff] " />
                             </svg> </a>
 

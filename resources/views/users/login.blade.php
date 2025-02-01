@@ -64,10 +64,10 @@
                     </div>
                 </div> 
                 <div class="text-right mt-[8px]">
-                    <a id="resetPass" href="#" class="text-[14px] text-[#E36F3D] font-[500]" onclick="resetPass()">Reset password</a>
+                    <a id="resetPass" href="#" class="text-[14px] text-[#D272D2] font-[500]" onclick="resetPass()">Reset password</a>
                 </div>--}}
                     <div class="mt-[30px]">
-                        <button type="submit" class="w-[100%] bg-[#E36F3D] px-[10px] py-[15px] text-[18px] text-[#fff] font-[500] text-center rounded-[8px] hover:bg-[#000]">
+                        <button type="submit" class="w-[100%] bg-[#D272D2] px-[10px] py-[15px] text-[18px] text-[#fff] font-[500] text-center rounded-[8px] hover:bg-[#000]">
                         Submit
                         </button>
                     </div>
@@ -79,7 +79,7 @@
                 </div>
                 <div class="mt-[50px] text-[14px] font-[500] text-[#898989]">
                 Don’t have an account? 
-                    <a href="#" class="text-[#E36F3D] underline hover:text-[#000] hover:no-underline ">
+                    <a href="#" class="text-[#D272D2] underline hover:text-[#000] hover:no-underline ">
                     Sign Up
                     </a>
                 </div>

@@ -27,8 +27,8 @@
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
         <div class="loader-fcustm fixed inset-0 flex flex-col items-center justify-center bg-white bg-opacity-75 backdrop-blur-md z-50">
-            <div class="w-10 h-10 border-4 border-[#E36F3D] border-t-transparent rounded-full animate-spin"></div>
-            <p class="mt-4 text-lg font-semibold text-[#E36F3D]">Loading...</p>
+            <div class="w-10 h-10 border-4 border-[#D272D2] border-t-transparent rounded-full animate-spin"></div>
+            <p class="mt-4 text-lg font-semibold text-[#D272D2]">Loading...</p>
         </div>
         <script>
             @if (session('success'))

@@ -4,7 +4,7 @@
     <div class="bg-[#fff] p-[15px] md:p-[20px] rounded-[10px] mb-[20px]">
        <div class="flex items-center justify-between gap-[25px] w-[100%]  mb-[15px]">
           <h2 class="text-[20px] text-[#1A1A1A] font-[600]">Graph & Statistics</h2>
-          <button class="w-[100px] md:w-[110px] lg:w-[140px] bg-[#E36F3D] px-[20px] py-[10px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center">Export</button>
+          <button class="w-[100px] md:w-[110px] lg:w-[140px] bg-[#D272D2] px-[20px] py-[10px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center">Export</button>
        </div>
        <form method="get" id="filterStats" >
        <div class="flex flex-col items-center justify-center gap-[15px]">
@@ -46,11 +46,11 @@
                    </div>
                    <div class="w-[100%] lg:w-[100%] xl:w-[24%] 2xl:w-[24%] flex items-center justify-end  gap-[10px]">
 
-                   <a href="javascript:void(0);" class="addCustomFilter w-[90px] xl:w-[120px] bg-[#E36F3D] px-[20px] py-[11px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center" >Add</a>
+                   <a href="javascript:void(0);" class="addCustomFilter w-[90px] xl:w-[120px] bg-[#D272D2] px-[20px] py-[11px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center" >Add</a>
                       <button
-                         class="w-[140px] bg-[#E36F3D] px-[20px] py-[11px] w-[90px] xl:w-[120px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center" type="submit">Apply</button>
+                         class="w-[140px] bg-[#D272D2] px-[20px] py-[11px] w-[90px] xl:w-[120px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center" type="submit">Apply</button>
                       <a href="{{ route('report.statistics') }}"
-                         class="w-[140px] bg-[#FFF3ED] px-[20px] py-[11px] w-[90px] xl:w-[120px] border border-[#FFF3ED] rounded-[4px] text-[14px] font-[500] text-[#E36F3D] text-center" >Clear</a>
+                         class="w-[140px] bg-[#F5EAF5] px-[20px] py-[11px] w-[90px] xl:w-[120px] border border-[#F5EAF5] rounded-[4px] text-[14px] font-[500] text-[#D272D2] text-center" >Clear</a>
                    </div>
                 </div>
              </div>

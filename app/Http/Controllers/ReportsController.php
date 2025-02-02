@@ -5,11 +5,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use App\Models\Country;
+use App\Models\App;
 
 class ReportsController extends Controller
 {
     public function statistics(Request $request){
         $pageTitle = 'Statistics';
+        $allAffiliatesApp = App::where('affiliateId',auth()->user()->id)->get();
         $completeDate = '';
         if($request->isMethod('GET') && !empty($request->range)){
             $completeDate = $request->range;
@@ -30,7 +32,7 @@ class ReportsController extends Controller
         $endDate = $seperateDate[1] ?? date('Y-m-d');
         $filterByText =  $request['filterInValue'];
         $filterByValue =  $request['filterIn'];
-        
+        $filterByAffApp =  $request['appid'];
         if(!empty($recordGroupBy) && !empty($startDate) && !empty($endDate)){
             $queryString = http_build_query([
                 'filter[date_from]' => $startDate ?? '2020-01-01',
@@ -53,11 +55,12 @@ class ReportsController extends Controller
             }
         }
         
-        return view('reports.statistics',compact('pageTitle','allStatistics','recordGroupBy','completeDate','filterByCountry','filterByDevice','filterByOs','filterByOffer','filterBy','filterByText','filterByValue'));
+        return view('reports.statistics',compact('allAffiliatesApp','filterByAffApp','pageTitle','allStatistics','recordGroupBy','completeDate','filterByCountry','filterByDevice','filterByOs','filterByOffer','filterBy','filterByText','filterByValue'));
     }
 
     public function conversions(Request $request){
         $pageTitle = 'Conversions';
+        $allAffiliatesApp = App::where('affiliateId',auth()->user()->id)->get();
         $allCountry = Country::get();
         $filterOptions = [
             'startDate' => '',
@@ -69,6 +72,7 @@ class ReportsController extends Controller
             'goal' => $request->goal ?? '',
             'smartLink' => $request->smartlink ?? '',
             'status' => $request->status ?? '',
+            'filterByAffApp' => $request->appid ?? '',
         ];
         if($request->isMethod('GET') && !empty($request->range)){
             $completeDate = $request->range;
@@ -131,11 +135,12 @@ class ReportsController extends Controller
         }
         $urlForPagination = $request->all();
         $conversionsStatus = '';
-        return view('reports.conversions',compact('pageTitle','allConversions','currentPage','totalCount','prevPage','nextPage','perPage','allCountry','allOffers','filterOptions','conversionsStatus','params','urlForPagination'));
+        return view('reports.conversions',compact('allAffiliatesApp','pageTitle','allConversions','currentPage','totalCount','prevPage','nextPage','perPage','allCountry','allOffers','filterOptions','conversionsStatus','params','urlForPagination'));
     }
 
     public function postbacks(Request $request){
         $pageTitle = 'Postbacks';
+        $allAffiliatesApp = App::where('affiliateId',auth()->user()->id)->get();
         $filterOptions = [
             'startDate' => '',
             'endDate' => '',
@@ -205,7 +210,7 @@ class ReportsController extends Controller
             $allOffers = $response->json();
         }
        
-        return view('reports.postbacks',compact('pageTitle','allPostbacks','currentPage','totalCount','prevPage','nextPage','perPage','urlForPagination','allOffers'));
+        return view('reports.postbacks',compact('pageTitle','allPostbacks','currentPage','totalCount','prevPage','nextPage','perPage','urlForPagination','allOffers','allAffiliatesApp'));
     }
 
     public function exported(){

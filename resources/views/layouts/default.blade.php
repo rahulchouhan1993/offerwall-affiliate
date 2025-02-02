@@ -73,6 +73,8 @@
                         'This Month': [moment().startOf('month'), moment().endOf('month')],
                         'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
                     },
+                    startDate: moment().subtract(6, 'days'),  // Default start date (7 days ago)
+                    endDate: moment(),  
                     opens: 'right'
                 }, function(start, end, label) {
                     console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));

@@ -13,6 +13,7 @@ body.active .sidebar a,body.active .sidebar h2{font-size:0;transition:all ease .
 body.active .dashboardContainer{width:calc(100% - 70px);}
 body.active .head-w-cal{width:calc(100% - 70px);}
 .sidebar a.active { color: #ce68ce;}
+.btn-active { background: #ce68ce; color: #fff;}
 .tableScroll{padding-bottom:10px;}
 .tableScroll::-webkit-scrollbar{width:6px;height:5px;}
 .tableScroll::-webkit-scrollbar-track{background:#f1f1f1;border-radius:10px;}
@@ -65,9 +66,20 @@ span.select2.select2-container.select2-container--default{width:100% !important;
 form#filterConversions{width:100%;}
 
 
+/* new css */
+.bigcontent { max-width: 150px; /* Adjust as needed */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;}
 
-
-
+.bigconten:hover { white-space: normal;
+    overflow: visible;
+    position: absolute;
+    background: #fff;
+    z-index: 10;
+    width: auto;
+    max-width: 300px; /* Set a max width for readability */
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);}
 
 /* Responsvie */
 @media(max-width:1535px){.sidebar{width:230px;}

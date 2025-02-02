@@ -59,7 +59,7 @@
                 </div>
             </div>
             <div class="flex gap-[10px] md:gap-[20px] mt-[15px]">
-                <button type="submit" class="w-[120px] bg-[#E36F3D] px-[10px] py-[11px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center">Save</button>
+                <button type="submit" class="w-[120px] bg-[#D272D2] px-[10px] py-[11px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center">Save</button>
             </div>
         </div>
     </form>

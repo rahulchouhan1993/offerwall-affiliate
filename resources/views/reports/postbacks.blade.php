@@ -11,10 +11,10 @@
        </div>
        <form method="get" id="postbackForm">
        <div class="w-full flex items-center justify-between flex-wrap lg:flex-nowrap gap-[10px]">
-          <div class="w-[100%] flex items-end flex-wrap md:flex-nowrap gap-[10px]">
-            <div class="w-[100%] flex flex-col lg:flex-row items-start lg:items-center justify-start gap-[10px]">
+          <div class="w-[100%] flex items-end flex-wrap xl:flex-nowrap gap-[10px]">
+            <div class="flex flex-col items-start  justify-start gap-[10px] w-[100%] xl:w-[45%]">
                 <label class="min-w-[160px] w-[100%] md:w-[10%] text-[14px] font-[500] text-[#898989] ">Apps:</label>
-                <select name="appid" class="appendAffiliateApps sel2fld w-[100%] lg:w-[90%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
+                <select name="appid" class="appendAffiliateApps sel2fld w-[100%] xl:w-[90%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
                    <option value="" >Select</option>
                    @if($allAffiliatesApp && $allAffiliatesApp->isNotEmpty())
                       @foreach ($allAffiliatesApp as $affiliateApp)
@@ -23,14 +23,15 @@
                    @endif
                 </select>
              </div>
-            <div class="flex flex-wrap md:flex-nowrap items-start gap-[10px] w-[100%] lg:w-[45%]">
+            <div class="flex flex-wrap md:flex-nowrap items-start gap-[10px] w-[100%] xl:w-[45%]">
                 <div class="w-[100%]">
                     <label class="flex items-center gap-[5px] text-[14] text-[#898989]">Start Date</label>
                     <input type="text" name="range"  class="dateRange w-[100%] bg-[#F6F6F6] px-[15px] py-[12px] text-[12px] font-[500] text-[#808080] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" placeholder="Date" value="{{ $urlForPagination['range'] ?? '' }}">
                 </div>
             </div>
-            <div class="flex flex-wrap md:flex-nowrap items-start gap-[10px] w-[100%] lg:w-[45%]">
+            <div class="flex flex-wrap md:flex-nowrap items-start gap-[10px] w-[100%] xl:w-[45%]">
                 <div class="w-[100%]">
+                <label class="flex items-center gap-[5px] text-[14] text-[#898989]">Start Date</label>
                     <select name="status" class="filterByStatus bg-[#F6F6F6] px-[15px] py-[12px] text-[12px] font-[500] text-[#808080] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
                         <option value="">Select</option>
                         <option value="1" @if(isset($urlForPagination['status']) && $urlForPagination['status']==1) selected @endif>Confirmed</option>
@@ -39,8 +40,9 @@
                 </div>
             </div>
 
-            <div class="flex flex-wrap md:flex-nowrap items-start gap-[10px] w-[100%] lg:w-[45%]">
+            <div class="flex flex-wrap md:flex-nowrap items-start gap-[10px] w-[100%] xl:w-[45%]">
                 <div class="w-[100%]">
+                <label class="flex items-center gap-[5px] text-[14] text-[#898989]">Start Date</label>
                     <select class="search-postback-filter w-[100%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" name="offer">
                         <option value="">Select Offer </option>
                     @foreach($allOffers['offers'] as $offer)
@@ -49,12 +51,13 @@
                     </select>
                 </div>
             </div>
-            <div class="flex flex-wrap md:flex-nowrap items-start gap-[10px] w-[100%] lg:w-[45%]">
+            <div class="flex flex-wrap md:flex-nowrap items-start gap-[10px] w-[100%] xl:w-[45%]">
                 <div class="w-[100%]">
+                <label class="flex items-center gap-[5px] text-[14] text-[#898989]">Start Date</label>
                     <input type="text" name="goal"  class="goal-postback-filter w-[100%] bg-[#F6F6F6] px-[15px] py-[12px] text-[12px] font-[500] text-[#808080] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" placeholder="Goal Name" value="{{ $urlForPagination['goal'] ?? '' }}">
                 </div>
             </div>
-            <div class="w-[100%] lg:w-[55%] flex items-center gap-[10px]">
+            <div class="w-[100%] xl:w-[55%] flex items-center gap-[10px]">
                 <button class="w-[80px] md:w-[90px] lg:w-[100px] xl:w-[130px] 2xl:w-[140px] bg-[#D272D2] px-[3px] py-[12px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center">Apply</button>
                 <a href="{{ route('report.postbacks') }}" class="w-[80px] md:w-[90px] lg:w-[100px] xl:w-[130px] 2xl:w-[140px] bg-[#F5EAF5] px-[20px] py-[10px] w-[100px] border border-[#FED5C3] rounded-[4px] text-[14px] font-[500] text-[#D272D2] text-center">Clear</a>
             </div>
@@ -65,7 +68,7 @@
           <div class="w-[100%] overflow-x-scroll tableScroll">
              <table class="w-[100%] border-collapse border-spacing-0 rounded-[10px] border-separate border border-[#E6E6E6]">
                 <tr>
-                   <th class="w-[500px] min-w-[500px] bg-[#F6F6F6] rounded-tl-[10px] text-[14px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap ">Postback URL</th>
+                   <th class="bg-[#F6F6F6] rounded-tl-[10px] text-[14px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap ">Postback URL</th>
                    <th class="bg-[#F6F6F6] text-[14px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap">Conversion ID</th>
                    <th class="bg-[#F6F6F6] text-[14px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap">Offer</th>
                    <th class="bg-[#F6F6F6] text-[14px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap">Goal</th>
@@ -92,9 +95,9 @@
                   }
                 @endphp
                 <tr>
-                   <td class="w-[500px] min-w-[500px] text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-normal breakword">{{ $postBacks['postback_url'] }}</td>
-                   <td class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">{{ $postBacks['conversion_id'] }}</td>
-                   <td class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">{{ $offerName }}</td>
+                   <td title="https://uttdp.trckinnovative.com/postback/provider/YqJeA7iPuF?secure_key=rdEwgEyH7Z&uuid=925ac38213f9417289e43ce6ac85b376&transaction_id=679e8589f4b0420001df6b62&campaign_id=3680&payout=5.5" class="bigcontent text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-normal breakword">{{ $postBacks['postback_url'] }}</td>
+                   <td title="https://uttdp.trckinnovative.com/postback/provider/YqJeA7iPuF?secure_key=rdEwgEyH7Z&uuid=925ac38213f9417289e43ce6ac85b376&transaction_id=679e8589f4b0420001df6b62&campaign_id=3680&payout=5.5" class="bigcontent text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">{{ $postBacks['conversion_id'] }}</td>
+                   <td title="https://uttdp.trckinnovative.com/postback/provider/YqJeA7iPuF?secure_key=rdEwgEyH7Z&uuid=925ac38213f9417289e43ce6ac85b376&transaction_id=679e8589f4b0420001df6b62&campaign_id=3680&payout=5.5" class="bigcontent text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">{{ $offerName }}</td>
                    <td class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">{{ $postBacks['goal'] }}</td>
                    <td class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
                       <div class="inline-flex bg-[#F3FEE7] border border-[#BCEE89] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#6EBF1A] text-center uppercase">Success</div>

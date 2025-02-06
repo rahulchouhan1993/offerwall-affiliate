@@ -166,7 +166,7 @@ class ReportsController extends Controller
         $params = [
             'date_from' => $filterOptions['startDate'],
             'date_to' => $filterOptions['endDate'],
-            'partner[]' => 27,
+            'partner[]' => 6,
             'page' => isset($request->page) ? $request->page : '1',
             'limit' => $perPage,
         ];

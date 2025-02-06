@@ -2,6 +2,9 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
+        <meta name="Googlebot-News" content="noindex, nnofollow">
+	    <meta name="googlebot" content="noindex, nofollow">
+        <link rel="icon" type="image/x-icon" href="/images/favicon.png">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>OfferWall | Login</title>
         <!-- Fonts -->

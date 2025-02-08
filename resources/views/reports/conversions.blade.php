@@ -12,7 +12,7 @@
           <div class="w-full flex flex-col gap-[10px]">
             <div class="w-[100%] flex flex-col lg:flex-row items-start lg:items-center justify-start gap-[10px]">
                <label class="min-w-[160px] w-[100%] md:w-[10%] text-[14px] font-[500] text-[#898989] ">Apps:</label>
-               <select name="appid" class="appendAffiliateApps sel2fld w-[100%] lg:w-[90%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
+               <select name="appid" class="appendAffiliateApps w-[100%] lg:w-[90%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
                   <option value="" >Select</option>
                   @if($allAffiliatesApp && $allAffiliatesApp->isNotEmpty())
                      @foreach ($allAffiliatesApp as $affiliateApp)
@@ -305,11 +305,11 @@
 <script>
     $(document).ready(function() {
       $('.offerOption').select2({
-         placeholder: "Select Offer",
+         placeholder: "Select an offer",
          allowClear: true // Adds a clear (X) button
       });
       $('.countryOptions').select2({
-         placeholder: "Select Country",
+         placeholder: "Select country",
          allowClear: true // Adds a clear (X) button
       });
       $('.osOption').select2({
@@ -317,12 +317,17 @@
          allowClear: true // Adds a clear (X) button
       });
       $('.conversionstatusOption').select2({
-         placeholder: "Select Status",
+         placeholder: "Select status",
+         allowClear: true // Adds a clear (X) button
+      });
+      $('.appendAffiliateApps').select2({
+         placeholder: "Select an app",
          allowClear: true // Adds a clear (X) button
       });
    });
    $('#filterConversions').on('submit',function(){
       $('.loader-fcustm').show();
    })
+   
 </script>
 @stop

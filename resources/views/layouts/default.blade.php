@@ -57,8 +57,23 @@
                     document.body.classList.toggle('active');
                 });
             });
+
+            document.addEventListener("DOMContentLoaded", function() {
+                document.querySelectorAll("a").forEach(link => {
+                    link.addEventListener("click", function(event) {
+                        // Only show loading if the link is navigating away from the page
+                        if (this.href && this.target !== "_blank" && this.href!='javascript:void(0);' && this.href!='#') {
+                            $('.loader-fcustm').show()
+                        }
+                    });
+                });
+
+                // Hide loading overlay when page is fully loaded
+                window.onload = function() {
+                    $('.loader-fcustm').fadeOut(1000)
+                };
+            });
             $(document).ready(function() {
-                $('.loader-fcustm').fadeOut(1000)
                 $('.sel2fld').select2({
                     placeholder: "Select an option",
                     allowClear: true // Adds a clear (X) button

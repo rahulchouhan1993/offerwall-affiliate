@@ -11,7 +11,7 @@
           <div class="w-full flex flex-col gap-[10px]">
             <div class="w-[100%] flex flex-col lg:flex-row items-start lg:items-center justify-start gap-[10px]">
                <label class="min-w-[160px] w-[100%] md:w-[10%] text-[14px] font-[500] text-[#898989] ">Apps:</label>
-               <select name="appid" class="appendAffiliateApps sel2fld w-[100%] lg:w-[90%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
+               <select name="appid" class="appendAffiliateApps w-[100%] lg:w-[90%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
                   <option value="" >Select</option>
                   @if($allAffiliatesApp && $allAffiliatesApp->isNotEmpty())
                      @foreach ($allAffiliatesApp as $affiliateApp)
@@ -23,7 +23,7 @@
              <div class="w-[100%] flex flex-col lg:flex-row items-start lg:items-center justify-start gap-[10px]">
                 <label
                    class="min-w-[160px] w-[100%] md:w-[10%] text-[14px] font-[500] text-[#898989] ">Group by:</label>
-                <select name="groupBy" class="sel2fld w-[100%] lg:w-[90%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
+                <select name="groupBy" class="groupby-fltr w-[100%] lg:w-[90%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
                    <option value="hour" @if($recordGroupBy=='hour') selected @endif>Hour</option>
                    <option value="day" @if($recordGroupBy=='day') selected @endif>Date</option>
                    <option value="month" @if($recordGroupBy=='month') selected @endif>Month</option>
@@ -43,7 +43,7 @@
                 <label class="min-w-[160px] w-[100%] lg:w-[10%] text-[14px] font-[500] text-[#898989] ">Filter by:</label>
                 <div class="w-[100%] xl:w-[85%] 2xl:w-[90%] flex justify-between flex-wrap xl:flex-nowrap  items-center gap-[5px] md:gap-[8px] lg:gap-[10px] xl:gap-[15px]">
                    <div class="w-[100%] lg:w-[100%] xl:w-[60.5%]  2xl:w-[70.7%] flex flex-wrap xl:flex-nowrap items-center gap-[10px]">
-                      <select name="filterBy" class="sel2fld filterByDrop w-[100%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
+                      <select name="filterBy" class="filterByDrop w-[100%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
                         <option value="">Select</option>
                         <option value="country">Country</option>
                         {{-- <option value="devices">Device</option> --}}
@@ -247,7 +247,10 @@
          type: 'GET', // HTTP method
          success: function (response) {
             $('.loader-fcustm').hide();
-            $('.search-input-filter').html(response).select2();
+            $('.search-input-filter').html(response).select2({
+               placeholder: "Select a filter by option",
+               allowClear: true // Adds a clear (X) button
+            });;
          },
          error: function (xhr) {
             $('#response').html('<p>An error occurred. Please try again.</p>');
@@ -270,7 +273,27 @@
       $(this).parent().remove();
    });
 
-   $('.search-input-filter').select2();
+   $('.appendAffiliateApps').select2({
+      placeholder: "Select an app",
+      allowClear: true // Adds a clear (X) button
+   });
+
+   $('.filterByDrop').select2({
+      placeholder: "Select a filter by option",
+      allowClear: true // Adds a clear (X) button
+   });
+
+   $('.search-input-filter').select2({
+      placeholder: "Select a filter by option",
+      allowClear: true // Adds a clear (X) button
+   });
+
+   $('.groupby-fltr').select2({
+      placeholder: "Select group by option",
+      allowClear: true // Adds a clear (X) button
+   });
+
+   
 </script>
 
 @stop

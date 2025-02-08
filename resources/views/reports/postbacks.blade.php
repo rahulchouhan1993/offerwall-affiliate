@@ -13,8 +13,8 @@
        <div class="w-full flex items-center justify-between flex-wrap lg:flex-nowrap gap-[10px]">
           <div class="w-[100%] flex items-end flex-wrap xl:flex-nowrap gap-[10px]">
             <div class="flex flex-col items-start  justify-start gap-[10px] w-[100%] xl:w-[45%]">
-                <label class="min-w-[160px] w-[100%] md:w-[10%] text-[14px] font-[500] text-[#898989] ">Apps:</label>
-                <select name="appid" class="appendAffiliateApps sel2fld w-[100%] xl:w-[90%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
+                <label class="flex items-center gap-[5px] text-[14] text-[#898989]">Apps</label>
+                <select name="appid" class="appendAffiliateApps w-[100%] xl:w-[90%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
                    <option value="" >Select</option>
                    @if($allAffiliatesApp && $allAffiliatesApp->isNotEmpty())
                       @foreach ($allAffiliatesApp as $affiliateApp)
@@ -25,13 +25,13 @@
              </div>
             <div class="flex flex-wrap md:flex-nowrap items-start gap-[10px] w-[100%] xl:w-[45%]">
                 <div class="w-[100%]">
-                    <label class="flex items-center gap-[5px] text-[14] text-[#898989]">Start Date</label>
+                    <label class="flex items-center gap-[5px] text-[14] text-[#898989]">Range</label>
                     <input type="text" name="range"  class="dateRange w-[100%] bg-[#F6F6F6] px-[15px] py-[12px] text-[12px] font-[500] text-[#808080] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" placeholder="Date" value="{{ $urlForPagination['range'] ?? '' }}">
                 </div>
             </div>
             <div class="flex flex-wrap md:flex-nowrap items-start gap-[10px] w-[100%] xl:w-[45%]">
                 <div class="w-[100%]">
-                <label class="flex items-center gap-[5px] text-[14] text-[#898989]">Start Date</label>
+                <label class="flex items-center gap-[5px] text-[14] text-[#898989]">Status</label>
                     <select name="status" class="filterByStatus bg-[#F6F6F6] px-[15px] py-[12px] text-[12px] font-[500] text-[#808080] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
                         <option value="">Select</option>
                         <option value="1" @if(isset($urlForPagination['status']) && $urlForPagination['status']==1) selected @endif>Confirmed</option>
@@ -42,7 +42,7 @@
 
             <div class="flex flex-wrap md:flex-nowrap items-start gap-[10px] w-[100%] xl:w-[45%]">
                 <div class="w-[100%]">
-                <label class="flex items-center gap-[5px] text-[14] text-[#898989]">Start Date</label>
+                <label class="flex items-center gap-[5px] text-[14] text-[#898989]">Offer</label>
                     <select class="search-postback-filter w-[100%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" name="offer">
                         <option value="">Select Offer </option>
                     @foreach($allOffers['offers'] as $offer)
@@ -53,7 +53,7 @@
             </div>
             <div class="flex flex-wrap md:flex-nowrap items-start gap-[10px] w-[100%] xl:w-[45%]">
                 <div class="w-[100%]">
-                <label class="flex items-center gap-[5px] text-[14] text-[#898989]">Start Date</label>
+                <label class="flex items-center gap-[5px] text-[14] text-[#898989]">Goal</label>
                     <input type="text" name="goal"  class="goal-postback-filter w-[100%] bg-[#F6F6F6] px-[15px] py-[12px] text-[12px] font-[500] text-[#808080] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" placeholder="Goal Name" value="{{ $urlForPagination['goal'] ?? '' }}">
                 </div>
             </div>
@@ -182,15 +182,22 @@
 </div>
 <script>
     $('.filterByStatus').select2({
-         placeholder: "Select Status",
-         allowClear: true // Adds a clear (X) button
+        placeholder: "Select status",
+        allowClear: true // Adds a clear (X) button
     });
     $('#postbackForm').on('submit',function(){
-      $('.loader-fcustm').show();
-   });
-   $('.search-postback-filter').select2({
-    placeholder: "Select Offer",
-    allowClear: true // Adds a clear (X) button
+        $('.loader-fcustm').show();
+    });
+    $('.search-postback-filter').select2({
+        placeholder: "Select an offer",
+        allowClear: true // Adds a clear (X) button
+    });
+
+    $(document).ready(function() {
+        $('.appendAffiliateApps').select2({
+            placeholder: "Select an app",
+            allowClear: true // Adds a clear (X) button
+        });
    });
    
 </script>

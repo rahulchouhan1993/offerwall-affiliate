@@ -10,10 +10,17 @@
           <button class="w-[100px] md:w-[110px] lg:w-[140px] bg-[#D272D2] px-[20px] py-[10px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center">Export</button>
        </div>
        <form method="get" id="postbackForm">
-       <div class="w-full flex items-center justify-between flex-wrap lg:flex-nowrap gap-[10px]">
-          <div class="w-[100%] flex items-end flex-wrap xl:flex-nowrap gap-[10px]">
-            <div class="flex flex-col items-start  justify-start gap-[10px] w-[100%] xl:w-[45%]">
-                <label class="flex items-center gap-[5px] text-[14] text-[#898989]">Apps</label>
+
+        <div class="w-full flex flex-col gap-[10px]">
+            
+
+            <div class="w-[100%] flex flex-col lg:flex-row items-start lg:items-center justify-start gap-[10px]">
+                <label class="min-w-[160px] w-[100%] md:w-[10%] text-[14px] font-[500] text-[#898989] ">Range:</label>
+                <input type="text" name="range"  class="dateRange w-[100%] bg-[#F6F6F6] px-[9px] py-[12px] text-[11px] font-[500] text-[#808080] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" placeholder="Date" value="{{ $urlForPagination['range'] ?? '' }}">
+            </div>
+        
+            <div class="w-[100%] flex flex-col lg:flex-row items-start lg:items-center justify-start gap-[10px]">
+                <label class="min-w-[160px] w-[100%] md:w-[10%] text-[14px] font-[500] text-[#898989] ">Apps:</label>
                 <select name="appid" class="appendAffiliateApps w-[100%] xl:w-[90%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
                    <option value="" >Select</option>
                    @if($allAffiliatesApp && $allAffiliatesApp->isNotEmpty())
@@ -22,16 +29,15 @@
                       @endforeach
                    @endif
                 </select>
-             </div>
-            <div class="flex flex-wrap md:flex-nowrap items-start gap-[10px] w-[100%] xl:w-[45%]">
-                <div class="w-[100%]">
-                    <label class="flex items-center gap-[5px] text-[14] text-[#898989]">Range</label>
-                    <input type="text" name="range"  class="dateRange w-[100%] bg-[#F6F6F6] px-[15px] py-[12px] text-[12px] font-[500] text-[#808080] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" placeholder="Date" value="{{ $urlForPagination['range'] ?? '' }}">
-                </div>
             </div>
-            <div class="flex flex-wrap md:flex-nowrap items-start gap-[10px] w-[100%] xl:w-[45%]">
+
+
+        <div class="w-[100%] flex items-center flex-wrap justify-start lg:flex-nowrap gap-[10px]">
+                <label class="min-w-[160px] w-[10%] text-[14px] font-[500] text-[#898989] ">Filter by:</label>
+                <div class="w-[100%] xl:w-[90%] flex flex-wrap xl:flex-nowrap  items-center gap-[5px] md:gap-[8px] lg:gap-[10px] xl:gap-[15px]">
+                   <div class="relative w-[100%] xl:w-[80%] flex flex-wrap xl:flex-nowrap items-center gap-[10px]">
+                   <div class="flex flex-wrap md:flex-nowrap items-start gap-[10px] w-[100%] xl:w-[33%]">
                 <div class="w-[100%]">
-                <label class="flex items-center gap-[5px] text-[14] text-[#898989]">Status</label>
                     <select name="status" class="filterByStatus bg-[#F6F6F6] px-[15px] py-[12px] text-[12px] font-[500] text-[#808080] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
                         <option value="">Select</option>
                         <option value="1" @if(isset($urlForPagination['status']) && $urlForPagination['status']==1) selected @endif>Confirmed</option>
@@ -40,9 +46,8 @@
                 </div>
             </div>
 
-            <div class="flex flex-wrap md:flex-nowrap items-start gap-[10px] w-[100%] xl:w-[45%]">
+            <div class="flex flex-wrap md:flex-nowrap items-start gap-[10px] w-[100%] xl:w-[33%]">
                 <div class="w-[100%]">
-                <label class="flex items-center gap-[5px] text-[14] text-[#898989]">Offer</label>
                     <select class="search-postback-filter w-[100%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" name="offer">
                         <option value="">Select Offer </option>
                     @foreach($allOffers['offers'] as $offer)
@@ -51,18 +56,22 @@
                     </select>
                 </div>
             </div>
-            <div class="flex flex-wrap md:flex-nowrap items-start gap-[10px] w-[100%] xl:w-[45%]">
+            <div class="flex flex-wrap md:flex-nowrap items-start gap-[10px] w-[100%] xl:w-[33%]">
                 <div class="w-[100%]">
-                <label class="flex items-center gap-[5px] text-[14] text-[#898989]">Goal</label>
                     <input type="text" name="goal"  class="goal-postback-filter w-[100%] bg-[#F6F6F6] px-[15px] py-[12px] text-[12px] font-[500] text-[#808080] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" placeholder="Goal Name" value="{{ $urlForPagination['goal'] ?? '' }}">
                 </div>
             </div>
-            <div class="w-[100%] xl:w-[55%] flex items-center gap-[10px]">
-                <button class="w-[80px] md:w-[90px] lg:w-[100px] xl:w-[130px] 2xl:w-[140px] bg-[#D272D2] px-[3px] py-[12px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center">Apply</button>
-                <a href="{{ route('report.postbacks') }}" class="w-[80px] md:w-[90px] lg:w-[100px] xl:w-[130px] 2xl:w-[140px] bg-[#F5EAF5] px-[20px] py-[10px] w-[100px] border border-[#FED5C3] rounded-[4px] text-[14px] font-[500] text-[#D272D2] text-center">Clear</a>
-            </div>
-          </div>
-       </div>
+                   </div>
+                   <div class="w-[100%] xl:w-[20%] flex items-center justify-start xl:justify-between gap-[10px]">
+                    <button class="w-[80px] md:w-[90px] lg:w-[100px] xl:w-[130px] 2xl:w-[140px] bg-[#D272D2] px-[3px] py-[12px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center">Apply</button>
+                        <a href="{{ route('report.postbacks') }}" class="w-[80px] md:w-[90px] lg:w-[100px] xl:w-[130px] 2xl:w-[140px] bg-[#F5EAF5] px-[20px] py-[10px] w-[100px] border border-[#FED5C3] rounded-[4px] text-[14px] font-[500] text-[#D272D2] text-center">Clear</a>
+                   </div>
+                </div></div>
+             </div>
+
+
+
+
     </form>
        <div class="flex flex-col justify-between items-center gap-[5px] w-[100%] mt-[30px] ">
           <div class="w-[100%] overflow-x-scroll tableScroll">

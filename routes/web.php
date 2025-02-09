@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/test-postback', [AppsController::class, 'testPostback'])->name('apps.testpostback');
     Route::get('/integration/{id}', [AppsController::class, 'integration'])->name('apps.integration');
     Route::get('/update-status/{id}', [AppsController::class, 'updateStatus'])->name('apps.status');
-    
+    Route::match(['get','post'],'/template/{id}', [AppsController::class, 'template'])->name('apps.template');
 
     // Chart Data
     Route::get('/chart-data', [ChartController::class, 'chartData'])->name('chart.data');

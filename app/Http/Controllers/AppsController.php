@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\App;
+use App\Models\Template;
 use Illuminate\Http\Request;
 
 class AppsController extends Controller
@@ -52,9 +53,10 @@ class AppsController extends Controller
         return view('apps.test-postback',compact('pageTitle'));
     }
 
-    public function integration(){
+    public function integration($id){
         $pageTitle = 'Integration';
-        return view('apps.integration',compact('pageTitle'));
+        $appDetail = App::find($id);
+        return view('apps.integration',compact('pageTitle','appDetail'));
     }
 
     public function updateStatus($id){
@@ -63,5 +65,31 @@ class AppsController extends Controller
         $appDetail->save();
 
         return redirect()->back()->with('success','Status updated');
+    }
+
+    public function template(Request $request, $id){
+        $appDetail = App::find($id);
+        $pageTitle = $appDetail->appName.' Template';
+        $templateColor = Template::where('app_id',$id)->first();
+        if($request->isMethod('post')){
+            $templateColor->bodyBg = $request->bodyBg;
+            $templateColor->headerTextColor = $request->headerTextColor;
+            $templateColor->headerButtonBg = $request->headerButtonBg;
+            $templateColor->headerButtonColor = $request->headerButtonColor;
+            $templateColor->NotificationBg = $request->NotificationBg;
+            $templateColor->notificationText = $request->notificationText;
+            $templateColor->offerBg = $request->offerBg;
+            $templateColor->offerBgInner = $request->offerBgInner;
+            $templateColor->offerText = $request->offerText;
+            $templateColor->offerInfoBg = $request->offerInfoBg;
+            $templateColor->offerInfoText = $request->offerInfoText;
+            $templateColor->offerInfoBorder = $request->offerInfoBorder;
+            $templateColor->offerButtonBg = $request->offerButtonBg;
+            $templateColor->offerButtonText = $request->offerButtonText;
+            $templateColor->footerText = $request->footerText;
+            $templateColor->save();
+            return redirect()->back()->with('success','Template updated successfully');
+        }
+        return view('apps.template',compact('pageTitle','templateColor','appDetail'));
     }
 }

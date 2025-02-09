@@ -1,5 +1,7 @@
 @extends('layouts.default')
 @section('content')
+
+
 <div class="bg-[#f2f2f2] p-[15px] md:p-[35px]">
     <div class="bg-[#fff] p-[15px] md:p-[20px] rounded-[10px] mb-[20px]">
        <div class="flex items-center justify-between gap-[25px] w-[100%]  mb-[15px]">

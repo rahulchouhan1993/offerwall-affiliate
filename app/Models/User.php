@@ -19,7 +19,11 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'affiseId',
+        'unique_id',
         'name',
+        'last_name',
+        'api_key',
+        'postback_key',
         'email',
         'password',
         'role',

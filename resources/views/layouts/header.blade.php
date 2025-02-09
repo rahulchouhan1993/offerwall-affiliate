@@ -13,7 +13,7 @@
                     class="hs-dropdown-toggle py-[4px] pl-[4px] pr-[15px] md:pr-[34px] 2xl:pl-[6px] 2xl:pr-[40px]  inline-flex items-center gap-x-2 border border-[#E6E6E6] rounded-[60px] bg-[#F6F6F6] text-[13px] lg:text-[13px] 2xl:text-[16px] font-[600] text-[#1A1A1A] shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
                     aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
                     <img src="/images/usericon.png" alt="img" class="rouded-[60px] w-30px h-[30px] 2xl:w-40px 2xl:h-[40px]">
-                    {{ auth()->user()->name }}
+                    {{ auth()->user()->name }} 
                     <svg class="absolute right-[5px] md:right-[15px]" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1 1L5 5L9 1" stroke="#A1A1A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>

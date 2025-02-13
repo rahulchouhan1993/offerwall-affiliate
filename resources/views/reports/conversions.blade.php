@@ -84,17 +84,37 @@
              <table
                 class="w-[100%] border-collapse border-spacing-0 rounded-[10px] border-separate border border-[#E6E6E6]">
                 <tr>
+                  <th
+                      class="bg-[#F6F6F6] rounded-tl-[10px] text-[10px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap ">
+                      Click Id
+                   </th>
+                   <th
+                      class=" whitespace-normal breakword bg-[#F6F6F6] rounded-tr-[10px] text-[10px] text-center font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left">
+                      Conversion Id
+                   </th>
                    <th
                       class="bg-[#F6F6F6] rounded-tl-[10px] text-[10px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap ">
-                      Date
+                      Click Date
+                   </th>
+                   <th
+                      class="bg-[#F6F6F6] rounded-tl-[10px] text-[10px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap ">
+                      Conversion Date
+                   </th>
+                   <th
+                      class="bg-[#F6F6F6] text-[10px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap">
+                      Status
                    </th>
                    <th
                       class="bigcontent whitespace-normal breakword bg-[#F6F6F6] text-[10px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left">
                       Offer
                    </th>
                    <th
-                      class="bg-[#F6F6F6] text-[10px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap">
-                      IP
+                      class="bigcontent whitespace-normal breakword bg-[#F6F6F6] text-[10px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left">
+                      Goal
+                   </th>
+                   <th
+                      class="bigcontent whitespace-normal breakword bg-[#F6F6F6] text-[10px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left">
+                      Payout
                    </th>
                    <th
                       class="bg-[#F6F6F6] text-[10px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap">
@@ -102,43 +122,23 @@
                    </th>
                    <th
                       class="bg-[#F6F6F6] text-[10px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap">
+                      IP
+                   </th>
+                   <th
+                      class="bg-[#F6F6F6] text-[10px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap">
+                      OS
+                   </th>
+                   <th
+                      class="bg-[#F6F6F6] text-[10px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap">
                       Device
                    </th>
                    <th
                       class="bg-[#F6F6F6] text-[10px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap">
-                      Status
+                      Mobile ISP
                    </th>
                    <th
                       class="bg-[#F6F6F6] text-[10px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap">
-                      Income
-                   </th>
-                   <th
-                      class="bg-[#F6F6F6] text-[10px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap">
-                      Name of goal
-                   </th>
-                   <th
-                      class=" whitespace-normal breakword bg-[#F6F6F6] text-[10px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left ">
-                      Sub1
-                   </th>
-                   <th
-                      class=" whitespace-normal breakword bg-[#F6F6F6] text-[10px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left ">
-                      Sub2
-                   </th>
-                   <th
-                      class=" whitespace-normal breakword bg-[#F6F6F6] text-[10px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left ">
-                      Sub3
-                   </th>
-                   {{-- <th
-                      class="bg-[#F6F6F6] text-[10px] font-[500] text-[#1A1A1A] text-center px-[10px] py-[13px] text-left ">
-                      UserAgent
-                   </th> --}}
-                   <th
-                      class=" whitespace-normal breakword bg-[#F6F6F6] text-[10px] font-[500] text-[#1A1A1A] text-center px-[10px] py-[13px] text-left">
-                      Comment
-                   </th>
-                   <th
-                      class=" whitespace-normal breakword bg-[#F6F6F6] rounded-tr-[10px] text-[10px] text-center font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left">
-                      ID
+                      User Agent
                    </th>
                 </tr>
                 @if(!empty($allConversions['conversions']))
@@ -146,23 +146,19 @@
                 <tr>
                    <td
                       class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
-                      {{ $conversion['created_at'] }}
+                      {{ $conversion['clickid'] }}
                    </td>
                    <td title="AU - Ipsos iSay (TOI) [Responsive]" 
                       class="bigcontent  whitespace-normal breakword text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left  ">
-                      {{ $conversion['offer']['title'] }}
+                      {{ $conversion['conversion_id'] }}
                    </td>
                    <td
                       class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left  ">
-                      {{ $conversion['ip'] }}
+                      {{ $conversion['click_time'] }}
                    </td>
                    <td
                       class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left  ">
-                      {{ $conversion['country_name'] }}
-                   </td>
-                   <td
-                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
-                      {{ $conversion['device'].' '.$conversion['os'] }}
+                      {{ $conversion['created_at'] }}
                    </td>
                    <td
                       class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
@@ -177,58 +173,42 @@
                    </td>
                    <td
                       class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
-                      $ {{ $conversion['earnings'] }}
+                      {{ $conversion['offer']['title'] }}
                    </td>
-                    @php
+                     @php
                         $goalConv = ($conversion['goal'] == '') ? '--' : $conversion['goal'];
-                    @endphp
-                   <td title="ed63980ad7a44ce782323acf2e722887"
-                      class="bigcontent text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
-                      {{ $goalConv }}
-                   </td>
-                   @php
-                        $sub1conv = ($conversion['sub1'] == '') ? '--' : $conversion['sub1'];
-                    @endphp
-                   <td title="ed63980ad7a44ce782323acf2e722887"
-                      class="bigcontent whitespace-normal breakword text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left ">
-                      {{ $sub1conv }}
-                   </td>
-                   @php
-                        $sub2conv = ($conversion['sub2'] == '') ? '--' : $conversion['sub2'];
-                    @endphp
-                   <td title="ed63980ad7a44ce782323acf2e722887"
-                      class="bigcontent whitespace-normal breakword text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left ">
-                      {{ $sub2conv }}
-                   </td>
-                   @php
-                        $sub3conv = ($conversion['sub3'] == '') ? '--' : $conversion['sub3'];
-                    @endphp
+                     @endphp
                    <td
-                      class=" whitespace-normal breakword text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left ">
-                      {{ $sub3conv }}
+                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
+                       {{ $goalConv }}
                    </td>
-                   {{-- <td
+                   <td
+                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
+                       $ {{ $conversion['payouts'] }}
+                   </td>
+                   <td
+                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
+                       {{ $conversion['country_name'] }}
+                   </td>
+                   <td
+                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
+                       {{ $conversion['ip'] }}
+                   </td>
+                   <td
+                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
+                       {{ $conversion['os'] }}
+                   </td>
+                   <td
+                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
+                       {{ $conversion['device'] }}
+                   </td>
+                   <td
+                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
+                       {{ $conversion['isp_code'] }}
+                   </td>
+                   <td
                       class="text-[10px] font-[500] text-[#808080] text-center px-[10px] py-[10px] text-left  ">
-                      <button>
-                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <rect x="0.5" y="0.5" width="15" height="15" rx="7.5" stroke="#808080" />
-                            <path
-                               d="M7.10369 11.5V6.04545H8.61648V11.5H7.10369ZM7.86364 5.34233C7.63873 5.34233 7.44579 5.26776 7.2848 5.11861C7.12618 4.96709 7.04688 4.78598 7.04688 4.57528C7.04688 4.36695 7.12618 4.18821 7.2848 4.03906C7.44579 3.88755 7.63873 3.81179 7.86364 3.81179C8.08854 3.81179 8.2803 3.88755 8.43892 4.03906C8.59991 4.18821 8.6804 4.36695 8.6804 4.57528C8.6804 4.78598 8.59991 4.96709 8.43892 5.11861C8.2803 5.26776 8.08854 5.34233 7.86364 5.34233Z"
-                               fill="#808080" />
-                         </svg>
-                      </button>
-                   </td> --}}
-                   @php
-                        $commnetconv = ($conversion['comment'] == '') ? '--' : $conversion['comment'];
-                    @endphp
-                   <td
-                      class=" whitespace-normal breakword text-[10px] font-[500] text-[#808080] text-center px-[10px] py-[10px] text-left ">
-                      {{ $commnetconv }}
-                   </td>
-                   <td
-                      class=" whitespace-normal breakword text-[10px] font-[500] text-[#808080] text-center px-[10px] py-[10px] text-left">
-                      {{ $conversion['id'] }}
+                      {{ $conversion['ua'] }}
                    </td>
                 </tr>
                 @endforeach

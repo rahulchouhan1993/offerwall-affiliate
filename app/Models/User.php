@@ -19,6 +19,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'affiseId',
+        'affise_api_key',
+        'affise_postback_key',
         'unique_id',
         'name',
         'last_name',
@@ -26,7 +28,7 @@ class User extends Authenticatable
         'postback_key',
         'email',
         'password',
-        'role',
+        'role'
     ];
 
     /**

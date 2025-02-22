@@ -39,6 +39,26 @@ class AppsController extends Controller
                 if($id>0){
                     return redirect()->route('apps.index')->with('success', 'App updated successfully!!');
                 }else{
+                    $defaultTemplate = Template::find(1);
+                    $templateColor = new Template();
+                    $templateColor->user_id = auth()->user()->id;
+                    $templateColor->app_id = $appData->id;
+                    $templateColor->bodyBg = $defaultTemplate->bodyBg;
+                    $templateColor->headerTextColor = $defaultTemplate->headerTextColor;
+                    $templateColor->headerButtonBg = $defaultTemplate->headerButtonBg;
+                    $templateColor->headerButtonColor = $defaultTemplate->headerButtonColor;
+                    $templateColor->NotificationBg = $defaultTemplate->NotificationBg;
+                    $templateColor->notificationText = $defaultTemplate->notificationText;
+                    $templateColor->offerBg = $defaultTemplate->offerBg;
+                    $templateColor->offerBgInner = $defaultTemplate->offerBgInner;
+                    $templateColor->offerText = $defaultTemplate->offerText;
+                    $templateColor->offerInfoBg = $defaultTemplate->offerInfoBg;
+                    $templateColor->offerInfoText = $defaultTemplate->offerInfoText;
+                    $templateColor->offerInfoBorder = $defaultTemplate->offerInfoBorder;
+                    $templateColor->offerButtonBg = $defaultTemplate->offerButtonBg;
+                    $templateColor->offerButtonText = $defaultTemplate->offerButtonText;
+                    $templateColor->footerText = $defaultTemplate->footerText;
+                    $templateColor->save();
                     return redirect()->route('apps.index')->with('success', 'App added successfully!!');
                 }
             }else{
@@ -68,7 +88,10 @@ class AppsController extends Controller
     }
 
     public function template(Request $request, $id){
-        $appDetail = App::find($id);
+        $appDetail = App::where('affiliateId',auth()->user()->id)->where('id',$id)->first();
+        if(empty($appDetail)){
+            return redirect()->route('dashboard.index')->with('error','Not valid request');
+        }
         $pageTitle = $appDetail->appName.' Template';
         $templateColor = Template::where('app_id',$id)->first();
         if($request->isMethod('post')){

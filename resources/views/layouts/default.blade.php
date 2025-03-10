@@ -98,5 +98,30 @@
                 });
             });
         </script>
+
+        <!-- Tabbing -->
+        <script>
+  const buttons = document.querySelectorAll('.tab-button');
+  const contents = document.querySelectorAll('.tab-content');
+
+  function activateTab(index) {
+    // Hide all contents
+    contents.forEach(content => content.classList.add('hidden'));
+    contents[index].classList.remove('hidden');
+
+    // Remove active styles from all buttons
+    buttons.forEach(btn => btn.classList.remove('border-blue-500', 'text-blue-600', 'font-semibold'));
+
+    // Add active styles to the clicked button
+    buttons[index].classList.add('border-blue-500', 'text-blue-600', 'font-semibold');
+  }
+
+  // Initialize first tab as active
+  activateTab(0);
+
+  buttons.forEach((button, index) => {
+    button.addEventListener('click', () => activateTab(index));
+  });
+</script>
     </body>
 </html>

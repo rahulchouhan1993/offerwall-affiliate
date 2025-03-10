@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
+use App\Models\User;
+use App\Models\Tracking;
 use Illuminate\Http\Request;
 use App\Models\Country;
 use App\Models\App;
@@ -11,206 +13,241 @@ class ReportsController extends Controller
 {
     public function statistics(Request $request){
         $pageTitle = 'Statistics';
-        $allAffiliatesApp = App::where('affiliateId',auth()->user()->id)->get();
-        $completeDate = '';
-        if($request->isMethod('GET') && !empty($request->range)){
-            $completeDate = $request->range;
-            $seperateDate = explode('-',$request->range);
-            $seperateDate[0] = date('Y-m-d',strtotime($seperateDate[0]));
-            $seperateDate[1] = date('Y-m-d',strtotime($seperateDate[1]));
-        }
+        $allAffiliatesApp =  App::where('affiliateId',auth()->user()->id)->get();
+        $trackingStats = Tracking::query();
+        $requestedParams = $request->all();
         
-        $perPage = 500;
-        $allStatistics = [];
-        $recordGroupBy = $request->groupBy ?? 'hour';
-        $filterBy = $request->filterBy ?? 'hour';
-        $filterByCountry = $request['filterIn']['country'][0] ?? '';
-        $filterByDevice = $request['filterIn']['devices'][0] ?? '';
-        $filterByOs = $request['filterIn']['os'][0] ?? '';
-        $filterByOffer = $request['filterIn']['offer'][0] ?? '';
-        $startDate = $seperateDate[0] ?? date('Y-m-d');
-        $endDate = $seperateDate[1] ?? date('Y-m-d');
-        $filterByText =  $request['filterInValue'];
-        $filterByValue =  $request['filterIn'];
-        $filterByAffApp =  $request['appid'];
-        if(!empty($recordGroupBy) && !empty($startDate) && !empty($endDate)){
-            $queryString = http_build_query([
-                'filter[date_from]' => $startDate ?? '2020-01-01',
-                'filter[date_to]' => $endDate ?? date('Y-m-d'),
-                'filter[partner]' => 27,
-                'filter[country]' => $filterByCountry,
-                //'filter[device]' => $filterByDevice,
-                'filter[os]' => $filterByOs,
-                'filter[offer]' => $filterByOffer,
-                'page' => $request->page ?? '1',
-                'limit' => $perPage,
-            ]);
-            $url = env('AFFISE_API_END') . "stats/custom?slice[]={$recordGroupBy}&".$queryString;
-            $response = HTTP::withHeaders([
-                'API-Key' => env('AFFISE_API_KEY'),
-            ])->get($url);
+        $requestedParams['groupBy'] = $requestedParams['groupBy'] ?? 'hour';
+        $requestedParams['range'] = $requestedParams['range'] ?? date('m/d/Y', strtotime('-6 days')).' - '.date('m/d/Y');
+        // Apply date range filter
+        if (!empty($requestedParams['range'])) {
+            $separateDate = explode('-', $requestedParams['range']);
+            $requestedParams['strd'] = trim($separateDate[0]);
+            $requestedParams['endd'] = trim($separateDate[1]);
+            $startDate = date('Y-m-d 00:00:00', strtotime(trim($separateDate[0])));
+            $endDate = date('Y-m-d 23:59:59', strtotime(trim($separateDate[1])));
+            $trackingStats->whereBetween('click_time', [$startDate, $endDate]); 
+        }
+
+        // Apply affiliate filter
+        $trackingStats->where('user_id', auth()->user()->id);
+
+        // Apply app filter
+        if (!empty($requestedParams['appid']) && $requestedParams['appid'] > 0) {
+            $trackingStats->where('app_id', $requestedParams['appid']);
+        }
+    
+        // Apply specific filter conditions
+        if (!empty($requestedParams['filterBy']) && !empty($requestedParams['filterIn'])) {
+            $filterColumnMap = [
+                'os' => 'device_os',
+                'country' => 'country_code',
+                'offer' => 'offer_id'
+            ];
             
-            if ($response->successful()) {
-                $allStatistics = $response->json();
+            foreach($requestedParams['filterIn'] as $filyKey => $filterAsIn){
+                if (isset($filterColumnMap[$filyKey])) {
+                    $trackingStats->where($filterColumnMap[$filyKey], $filterAsIn[0]);
+                }
+            }
+        }
+
+        $trackingStats->selectRaw("
+            COUNT(*) as total_click,
+            COUNT(CASE WHEN conversion_id IS NOT NULL THEN 1 END) as total_conversions,
+            SUM(revenue) as total_revenue,
+            SUM(payout) as total_payout
+        ");
+
+        // Apply conditional GROUP BY
+        if (!empty($requestedParams['groupBy'])) {
+            switch ($requestedParams['groupBy']) {
+                case 'hour':
+                    $trackingStats->selectRaw("HOUR(click_time) as element")->groupByRaw("HOUR(click_time)");
+                    break;
+                case 'day':
+                    $trackingStats->selectRaw("DATE(click_time) as element")->groupByRaw("DATE(click_time)");
+                    break;
+                case 'month':
+                    $trackingStats->selectRaw("DATE_FORMAT(click_time, '%Y-%m') as element")->groupByRaw("DATE_FORMAT(click_time, '%Y-%m')");
+                    break;
+                case 'country':
+                    $trackingStats->selectRaw("country_name as element")->groupBy("country_name");
+                    break;
+                case 'browser':
+                    $trackingStats->selectRaw("browser as element")->groupBy("browser");
+                    break;
+                case 'device':
+                    $trackingStats->selectRaw("device_brand as element")->groupBy("device_brand");
+                    break;
+                case 'device_model':
+                    $trackingStats->selectRaw("device_model as element")->groupBy("device_model");
+                    break;
+                case 'os':
+                    $trackingStats->selectRaw("device_os as element")->groupBy("device_os");
+                    break;
+                case 'offer':
+                    $trackingStats->selectRaw("offer_id as element")->groupBy("offer_id");
+                    break;
+                default:
+                    // Do nothing if groupBy is invalid
+                    break;
+            }
+        }
+        $allStatistics = $trackingStats->get();
+        
+        $graphData = [];
+        if($allStatistics->isNotEmpty()){
+            foreach($allStatistics as $k => $v){
+                if($requestedParams['groupBy']=='offer'){
+                    $url = env('AFFISE_API_END').'offer/'.$v->element;
+                    $response = HTTP::withHeaders([
+                        'API-Key' => env('AFFISE_API_KEY'),
+                    ])->get($url);
+                    
+                    if ($response->successful()) {
+                        $offerDetails = $response->json();
+                        $allStatistics[$k]->element = ucfirst($offerDetails['offer']['title']);
+                    }
+                }
+                $graphData[$v->element]['conversion'] = $v->total_conversions;
+                $graphData[$v->element]['clicks'] = $v->total_click;
             }
         }
         
-        return view('reports.statistics',compact('allAffiliatesApp','filterByAffApp','pageTitle','allStatistics','recordGroupBy','completeDate','filterByCountry','filterByDevice','filterByOs','filterByOffer','filterBy','filterByText','filterByValue'));
+        return view('reports.statistics',compact('pageTitle','allStatistics','allAffiliatesApp','requestedParams','graphData'));
     }
 
     public function conversions(Request $request){
         $pageTitle = 'Conversions';
         $allAffiliatesApp = App::where('affiliateId',auth()->user()->id)->get();
-        $allCountry = Country::get();
-        $filterOptions = [
-            'startDate' => '',
-            'endDate' => '',
-            'completeDate' => $request->range ?? '',
-            'country' => $request->country ?? '',
-            'offer' => $request->offer ?? '',
-            'os' => $request->os ?? '',
-            'goal' => $request->goal ?? '',
-            'smartLink' => $request->smartlink ?? '',
-            'status' => $request->status ?? '',
-            'filterByAffApp' => $request->appid ?? '',
-        ];
-        if($request->isMethod('GET') && !empty($request->range)){
-            $completeDate = $request->range;
-            $seperateDate = explode('-',$request->range);
-            $filterOptions['startDate'] = date('Y-m-d',strtotime($seperateDate[0]));
-            $filterOptions['endDate'] = date('Y-m-d',strtotime($seperateDate[1]));
+        $requestedParams = $request->all();
+        $allCountry = Tracking::where('user_id', auth()->id())->distinct()->pluck('country_code', 'country_name');    
+        $allOffers = [];
+        $allTrackings = Tracking::where('user_id',auth()->user()->id)->groupBy('offer_id')->pluck('offer_id');
+        $allOs = Tracking::where('user_id', auth()->id())->distinct()->pluck('device_os', 'device_os');   
+        if(!empty($allTrackings)){
+            foreach($allTrackings as $tracking){
+                $url = env('AFFISE_API_END').'offer/'.$tracking;
+                $response = HTTP::withHeaders([
+                    'API-Key' => env('AFFISE_API_KEY'),
+                ])->get($url);
+                
+                if ($response->successful()) {
+                    $offerDetails = $response->json();
+                    $allOffers[$tracking] = ucfirst($offerDetails['offer']['title']);
+                }
+            }
         }
-       
-        $perPage = 25;
-        $allConversions = [];
-        $currentPage = NULL;
-        $totalCount = NULL;
-        $prevPage = NULL;
-        $nextPage = NULL;
+        
+        //filter section
+        $trackingStats = Tracking::query();
 
-        $params = [
-            'date_from' => $filterOptions['startDate'],
-            'date_to' => $filterOptions['endDate'],
-            'partner[]' => 27,
-            'offer[]' => $filterOptions['offer'],
-            'os' => $filterOptions['os'],
-            'goal' => $filterOptions['goal'],
-            'smart_id' => $filterOptions['smartLink'],
-            'page' => isset($request->page) ? $request->page : '1',
-            'limit' => $perPage,
-        ];
-        
-        if (!empty($filterOptions['country'])) {
-            $params['country[]'] = $filterOptions['country'];
-        }
-        
-        if (!empty($filterOptions['status'])) {
-            $params['status[]'] = $filterOptions['status'];
-        }
-        
-        // Build the query string
-        $queryString = http_build_query($params);
+        // Apply affiliate filter
+        $trackingStats->whereNotNull('conversion_id');
+        $trackingStats->where('user_id', auth()->user()->id);
 
-        $url = env('AFFISE_API_END') . "stats/conversions?".$queryString;
-        $response = HTTP::withHeaders([
-            'API-Key' => env('AFFISE_API_KEY'),
-        ])->get($url);
-       
-        if ($response->successful()) {
-            $allConversions = $response->json();
-            $pagination = $allConversions['pagination'] ?? []; 
-            $currentPage = $pagination['page'] ?? 1; 
-            $totalCount = $pagination['total_count'] ?? 0;
-            $prevPage = $pagination['prev_page'] ?? null;
-            $nextPage = $pagination['next_page'] ?? null;
+        $requestedParams['range'] = $requestedParams['range'] ?? date('m/d/Y', strtotime('-6 days')).' - '.date('m/d/Y');
+        // Apply date range filter
+        if (!empty($requestedParams['range'])) {
+            $separateDate = explode('-', $requestedParams['range']);
+            $requestedParams['strd'] = trim($separateDate[0]);
+            $requestedParams['endd'] = trim($separateDate[1]);
+            $startDate = date('Y-m-d 00:00:00', strtotime(trim($separateDate[0])));
+            $endDate = date('Y-m-d 23:59:59', strtotime(trim($separateDate[1])));
+            $trackingStats->whereBetween('conversion_time', [$startDate, $endDate]); 
         }
 
-        $url = env('AFFISE_API_END') . "offers";
-        $response = HTTP::withHeaders([
-            'API-Key' => env('AFFISE_API_KEY'),
-        ])->get($url);
-        
-        if ($response->successful()) {
-            $allOffers = $response->json();
+        // Apply app filter
+        if (!empty($requestedParams['appid']) && $requestedParams['appid'] > 0) {
+            $trackingStats->where('app_id', $requestedParams['appid']);
         }
-        $urlForPagination = $request->all();
-        $conversionsStatus = '';
-        return view('reports.conversions',compact('allAffiliatesApp','pageTitle','allConversions','currentPage','totalCount','prevPage','nextPage','perPage','allCountry','allOffers','filterOptions','conversionsStatus','params','urlForPagination'));
+
+        // Apply country filter
+        if (!empty($requestedParams['country'])) {
+            $trackingStats->where('country_code', $requestedParams['country']);
+        }
+
+        // Apply offer filter
+        if (!empty($requestedParams['offer']) && $requestedParams['offer'] > 0) {
+            $trackingStats->where('offer_id', $requestedParams['offer']);
+        }
+
+        // Apply OS filter
+        if (!empty($requestedParams['device_os'])) {
+            $trackingStats->where('device_os', $requestedParams['device_os']);
+        }
+
+        // Apply OS filter
+        if (!empty($requestedParams['goal'])) {
+            $trackingStats->where('goal', $requestedParams['goal']);
+        }
+
+        $allConversions = $trackingStats->paginate(100)->appends(request()->query());
+        return view('reports.conversions',compact('allAffiliatesApp','pageTitle','allConversions','allCountry','allOffers','allOs','requestedParams'));
     }
 
     public function postbacks(Request $request){
         $pageTitle = 'Postbacks';
         $allAffiliatesApp = App::where('affiliateId',auth()->user()->id)->get();
-        $filterOptions = [
-            'startDate' => '',
-            'endDate' => '',
-            'completeDate' => $request->range ?? '',
-            'offer' => $request->offer ?? '',
-            'goal' => $request->goal ?? '',
-            'status' => $request->status ?? '',
-        ];
-        if($request->isMethod('GET') && !empty($request->range)){
-            $completeDate = $request->range;
-            $seperateDate = explode('-',$request->range);
-            $filterOptions['startDate'] = date('Y-m-d',strtotime($seperateDate[0]));
-            $filterOptions['endDate'] = date('Y-m-d',strtotime($seperateDate[1]));
-        }
-       
-        $perPage = 25;
-        $allPostbacks = [];
-        $currentPage = NULL;
-        $totalCount = NULL;
-        $prevPage = NULL;
-        $nextPage = NULL;
-
-        $params = [
-            'date_from' => $filterOptions['startDate'],
-            'date_to' => $filterOptions['endDate'],
-            'partner[]' => 6,
-            'page' => isset($request->page) ? $request->page : '1',
-            'limit' => $perPage,
-        ];
+        $requestedParams = $request->all();
         
-        if (!empty($filterOptions['offer'])) {
-            $params['offer[]'] = $filterOptions['offer'];
-        }
-        
-        if (!empty($filterOptions['goal'])) {
-            $params['goal'] = $filterOptions['goal'];
-        }
-
-        if (!empty($filterOptions['status'])) {
-            $params['status'] = $filterOptions['status'];
-        }
-        
-        // Build the query string
-        $queryString = http_build_query($params);
-
-        $url = env('AFFISE_API_END') . "stats/affiliatepostbacks?".$queryString;
-        $response = HTTP::withHeaders([
-            'API-Key' => env('AFFISE_API_KEY'),
-        ])->get($url);
-        
-        if ($response->successful()) {
-            $allPostbacks = $response->json();
-            $pagination = $allPostbacks['pagination'] ?? []; 
-            $currentPage = $pagination['page'] ?? 1; 
-            $totalCount = $pagination['total_count'] ?? 0;
-            $prevPage = $pagination['prev_page'] ?? null;
-            $nextPage = $pagination['next_page'] ?? null;
-        }
-        $urlForPagination = $request->all();
-
-        $url = env('AFFISE_API_END') . "offers";
-        $response = HTTP::withHeaders([
-            'API-Key' => env('AFFISE_API_KEY'),
-        ])->get($url);
+        $allTrackings = Tracking::where('user_id',auth()->user()->id)->groupBy('offer_id')->pluck('offer_id'); 
         $allOffers = [];
-        if ($response->successful()) {
-            $allOffers = $response->json();
+        if(!empty($allTrackings)){
+            foreach($allTrackings as $tracking){
+                $url = env('AFFISE_API_END').'offer/'.$tracking;
+                $response = HTTP::withHeaders([
+                    'API-Key' => env('AFFISE_API_KEY'),
+                ])->get($url);
+                
+                if ($response->successful()) {
+                    $offerDetails = $response->json();
+                    $allOffers[$tracking] = ucfirst($offerDetails['offer']['title']);
+                }
+            }
         }
-       
-        return view('reports.postbacks',compact('pageTitle','allPostbacks','currentPage','totalCount','prevPage','nextPage','perPage','urlForPagination','allOffers','allAffiliatesApp'));
+
+        //filter section
+        $trackingStats = Tracking::query();
+
+        // Apply affiliate filter
+        $trackingStats->whereNotNull('conversion_id');
+        $trackingStats->where('user_id', auth()->user()->id);
+
+        $requestedParams['range'] = $requestedParams['range'] ?? date('m/d/Y', strtotime('-6 days')).' - '.date('m/d/Y');
+        // Apply date range filter
+        if (!empty($requestedParams['range'])) {
+            $separateDate = explode('-', $requestedParams['range']);
+            $requestedParams['strd'] = trim($separateDate[0]);
+            $requestedParams['endd'] = trim($separateDate[1]);
+            $startDate = date('Y-m-d 00:00:00', strtotime(trim($separateDate[0])));
+            $endDate = date('Y-m-d 23:59:59', strtotime(trim($separateDate[1])));
+            $trackingStats->whereBetween('conversion_time', [$startDate, $endDate]); 
+        }
+
+        // Apply app filter
+        if (!empty($requestedParams['appid']) && $requestedParams['appid'] > 0) {
+            $trackingStats->where('app_id', $requestedParams['appid']);
+        }
+
+        // Apply offer filter
+        if (!empty($requestedParams['offer']) && $requestedParams['offer'] > 0) {
+            $trackingStats->where('offer_id', $requestedParams['offer']);
+        }
+
+        // Apply OS filter
+        if (!empty($requestedParams['goal'])) {
+            $trackingStats->where('goal', $requestedParams['goal']);
+        }
+
+        if (!empty($requestedParams['status'])) {
+            $trackingStats->where('http_code', $requestedParams['status']);
+        }
+
+        $allPostbacks = $trackingStats->paginate(100)->appends(request()->query());
+        
+        return view('reports.postbacks',compact('pageTitle','allPostbacks','allAffiliatesApp','requestedParams','allOffers'));
     }
 
     public function exported(){
@@ -238,21 +275,99 @@ class ReportsController extends Controller
                 }
             }
         }elseif($filterBy=='os'){
-            $returnOptions.='<option value="Windows">Windows</option><option value="macOS">macOS</option><option value="Linux">Linux</option><option value="Android">Android</option><option value="iOS">iOS</option>';
+            $allTrackings = Tracking::groupBy('device_os')->pluck('device_os');
+            if(!empty($allTrackings)){
+                foreach($allTrackings as $tracking){
+                    $returnOptions.='<option value="'.$tracking.'">'.ucfirst($tracking).'</option>';
+                }
+            }
         }elseif($filterBy=='offer'){
-            $url = env('AFFISE_API_END') . "offers";
-            $response = HTTP::withHeaders([
-                'API-Key' => env('AFFISE_API_KEY'),
-            ])->get($url);
-            
-            if ($response->successful()) {
-                $allOffers = $response->json();
-                foreach($allOffers['offers'] as $offer){
-                    $returnOptions.='<option value="'.$offer['offer_id'].'">'.$offer['title'].'</option>';
+            $allTrackings = Tracking::where('user_id',auth()->user()->id)->groupBy('offer_id')->pluck('offer_id');
+            if(!empty($allTrackings)){
+                foreach($allTrackings as $tracking){
+                    $url = env('AFFISE_API_END').'offer/'.$tracking;
+                    $response = HTTP::withHeaders([
+                        'API-Key' => env('AFFISE_API_KEY'),
+                    ])->get($url);
+                    
+                    if ($response->successful()) {
+                        $offerDetails = $response->json();
+                        $returnOptions.='<option value="'.$tracking.'">'.ucfirst($offerDetails['offer']['title']).'</option>';
+                    }
                 }
             }
         }
         
         echo $returnOptions;die;
+    }
+
+    public function exportReport(Request $request){
+        $data = $request->input('exportData');
+        $exportType = $request->input('exportType') ?? '';
+
+        $filename = date('d M Y').' - '.rand()."-report.csv";
+        $headers = [
+            "Content-Type" => "text/csv",
+            "Content-Disposition" => "attachment; filename=$filename",
+        ];
+
+        $callback = function () use ($data, $exportType) {
+            $file = fopen('php://output', 'w');
+
+            // Add CSV Heading
+            fputcsv($file, $data['heading']);
+
+            // Add Data Rows
+            foreach ($data['data'] as $row) {
+                if($exportType=='conversion'){
+                    fputcsv($file, [
+                        $row['click_id'], 
+                        $row['conversion_id'], 
+                        $row['click_time'], 
+                        $row['created_at'], 
+                        $row['status'], 
+                        $row['offer_id'],
+                        $row['goal'],
+                        $row['payout'],
+                        $row['country_name'],
+                        $row['ip'],
+                        $row['device_os'],
+                        $row['device_type'],
+                        $row['isp'],
+                        $row['ua']
+                    ]);
+                }elseif($exportType=='postback'){
+                    fputcsv($file, [
+                        $row['postback'], 
+                        $row['conversion_id'], 
+                        $row['offerName'], 
+                        $row['goal'], 
+                        $row['status'], 
+                        $row['payout'],
+                        $row['goal'],
+                        $row['payout'],
+                        $row['http_code'],
+                        $row['error'],
+                        $row['ceated_at'],
+                        $row['id']
+                    ]);
+                }else{
+                    fputcsv($file, [
+                        $row['element'], 
+                        $row['clicks'], 
+                        $row['conversions'], 
+                        $row['cvr'], 
+                        $row['epc'], 
+                        $row['earnings']
+                    ]);
+                }
+                
+            }
+
+            fclose($file);
+        };
+       
+
+        return response()->stream($callback, 200, $headers);
     }
 }

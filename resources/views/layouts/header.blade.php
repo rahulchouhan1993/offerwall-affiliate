@@ -8,7 +8,8 @@
             <h2 class="text-[#1A1A1A] text-[14px] md:text-[17px]  lg:text-[18px]  font-[600]">{{ $pageTitle }}</h2>
         </div>
         <div class="">
-            <div class="m-1 hs-dropdown relative inline-flex">
+            <div class="m-1 hs-dropdown relative inline-flex gap-[5px]">
+                <div class="flex items-center gap-[5px] mr-[8px]"><div><i class="ri-customer-service-2-line"></i></div> <a href="mailto:info@offerwallxxx.xyz" class="text-[0px] sm:text-[15px] text-[#000]"><span class="hidden md:flex">info@offerwallxxx.xyz</span></a></div>
                 <button id="hs-dropdown-toggle" type="button"
                     class="hs-dropdown-toggle py-[4px] pl-[4px] pr-[15px] md:pr-[34px] 2xl:pl-[6px] 2xl:pr-[40px]  inline-flex items-center gap-x-2 border border-[#E6E6E6] rounded-[60px] bg-[#F6F6F6] text-[13px] lg:text-[13px] 2xl:text-[16px] font-[600] text-[#1A1A1A] shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
                     aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">

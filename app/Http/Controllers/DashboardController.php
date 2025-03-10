@@ -4,14 +4,21 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\App;
+use App\Models\Tracking;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
 {
+
     public function index(){
         $pageTitle = 'Dashboard';
-        return view('dashboard.index',compact('pageTitle'));
+        $activeApps = App::where('affiliateId',auth()->user()->id)->where('status',1)->count();
+        $totalRevenue = Tracking::where('user_id',auth()->user()->id)->sum('revenue');
+        $totalPayouts = Tracking::where('user_id',auth()->user()->id)->sum('payout');
+        $loggesInUser = auth()->user()->id;
+        return view('dashboard.index',compact('pageTitle','activeApps','totalRevenue','totalPayouts','loggesInUser'));
     }
 
     public function setting(Request $request){

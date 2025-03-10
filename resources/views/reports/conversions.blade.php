@@ -7,33 +7,33 @@
        <div class="flex items-center justify-between gap-[25px] w-[100%]  mb-[15px]">
           <h2 class="text-[20px] text-[#1A1A1A] font-[600]">Overview</h2>
           <button
-             class="w-[140px] bg-[#D272D2] px-[20px] py-[10px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center">Export</button>
+             class="w-[140px] bg-[#D272D2] px-[20px] py-[10px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center" id="exportCsvBtn">Export</button>
        </div>
        <div class="flex flex-col items-center justify-center gap-[15px]">
          <form method="get" id="filterConversions">
           <div class="w-full flex flex-col gap-[10px]">
             <div class="w-[100%] flex flex-col lg:flex-row items-start lg:items-center justify-start gap-[10px]">
                <label class="min-w-[160px] w-[100%] md:w-[10%] text-[14px] font-[500] text-[#898989] ">Apps:</label>
-               <select name="appid" class="appendAffiliateApps w-[100%] lg:w-[90%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
+               <select name="appid" class="appendAffiliateApps w-[100%] lg:w-[90%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[400] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
                   <option value="" >Select</option>
                   @if($allAffiliatesApp && $allAffiliatesApp->isNotEmpty())
                      @foreach ($allAffiliatesApp as $affiliateApp)
-                        <option value="{{ $affiliateApp->id }}" @if($filterOptions['filterByAffApp']==$affiliateApp->id) selected @endif>{{ $affiliateApp->appName }}</option>
+                        <option value="{{ $affiliateApp->id }}" @if(isset($requestedParams['appid']) && $requestedParams['appid'] == $affiliateApp->id) selected @endif>{{ $affiliateApp->appName }}</option>
                      @endforeach
                   @endif
                </select>
             </div>
              <div class="w-[100%] flex flex-col lg:flex-row items-start lg:items-center justify-start gap-[10px]">
                 <label class="min-w-[160px] w-[100%] md:w-[10%] text-[14px] font-[500] text-[#898989] ">Range:</label>
-                <input type="text" name="range" class="dateRange w-[100%] lg:w-[90%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none"
-                   placeholder="2024-12-10" value="{{ $filterOptions['completeDate'] }}">
+                <input type="text" name="range" class="dateRange-report w-[100%] bg-[#F6F6F6] px-[9px] py-[12px] text-[11px] font-[500] text-[#808080] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none"
+                   placeholder="2024-12-10" value="{{ $requestedParams['range'] }}">
              </div>
              <div class="w-[100%] flex flex-col lg:flex-row items-start lg:items-center justify-start gap-[10px]">
                 <label class="min-w-[160px] w-[10%] text-[14px] font-[500] text-[#898989] ">Country:</label>
                 <select name="country" class="countryOptions w-[100%] lg:w-[90%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
                   <option value="">Select</option>
-                  @foreach ($allCountry as $country)
-                     <option value="{{ $country->iso }}" @if($filterOptions['country'] == $country->iso) selected @endif>{{ $country->nicename }}</option>
+                  @foreach ($allCountry as $countryName =>$countryCode)
+                     <option value="{{ $countryCode }}" @if(isset($requestedParams['country']) && $requestedParams['country'] == $countryCode) selected @endif>{{ $countryName }}</option>
                   @endforeach
                 </select>
              </div>
@@ -44,28 +44,28 @@
                       <select name="offer"
                          class="offerOption w-[100%] xl:w-[25%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
                          <option value="">Select</option>
-                         @foreach ($allOffers['offers'] as $offer)
-                           <option value="{{ $offer['offer_id'] }}" @if($filterOptions['offer'] == $offer['id']) selected @endif>{{ $offer['title'].' ('.$offer['offer_id'].')' }}</option>
+                         @foreach ($allOffers as $offerKey => $offerName)
+                           <option value="{{ $offerKey }}" @if(isset($requestedParams['offer']) && $requestedParams['offer'] == $offerKey) selected @endif>{{ $offerName }}</option>
                         @endforeach
                       </select>
                       <select name="os"
                          class="osOption w-[100%] xl:w-[25%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
                          <option value="">Select</option>
-                         <option value="Windows" @if($filterOptions['os'] == 'Windows') selected @endif>Windows</option>
-                         <option value="macOS" @if($filterOptions['os'] == 'macOS') selected @endif>macOS</option>
-                         <option value="Linux" @if($filterOptions['os'] == 'Linux') selected @endif>Linux</option>
-                         <option value="Android" @if($filterOptions['os'] == 'Android') selected @endif>Android</option>
-                         <option value="iOS" @if($filterOptions['os'] == 'iOS') selected @endif>iOS</option>
+                         @if($allOs->isNotEmpty())
+                         @foreach($allOs as $osList)
+                         <option value="{{ $osList }}" @if(isset($requestedParams['os']) && $requestedParams['os'] == $osList) selected @endif>{{ $osList }}</option>
+                         @endforeach
+                         @endif
                       </select>
-                      <select name="status"
+                      {{-- <select name="status"
                          class="conversionstatusOption w-[100%] xl:w-[25%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
                          <option value="">Select</option>
-                         <option value="1" @if($filterOptions['status'] == '1') selected @endif>Confirmed</option>
-                         <option value="2" @if($filterOptions['status'] == '2') selected @endif>Pending</option>
-                         <option value="3" @if($filterOptions['status'] == '3') selected @endif>Declined</option>
-                         <option value="5" @if($filterOptions['status'] == '5') selected @endif>Hold</option>
-                      </select>
-                      <input name="goal" class="w-[100%] xl:w-[25%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" placeholder="Goal" value="{{ $filterOptions['goal'] }}">
+                         <option value="1" @if($requestedParams['status'] ?? '' == '1') selected @endif>Confirmed</option>
+                         <option value="2" @if($requestedParams['status'] ?? '' == '2') selected @endif>Pending</option>
+                         <option value="3" @if($requestedParams['status'] ?? '' == '3') selected @endif>Declined</option>
+                         <option value="5" @if($requestedParams['status'] ?? '' == '5') selected @endif>Hold</option>
+                      </select> --}}
+                      <input name="goal" class="w-[100%] xl:w-[25%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" placeholder="Goal" value="{{ $requestedParams['goal'] ?? '' }}">
                       {{-- <input name="smartlink" class="w-[100%] xl:w-[25%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" placeholder="Smart Link" value="{{ $filterOptions['smartLink'] }}"> --}}
                    </div>
                    <div class="w-[100%] xl:w-[20%] flex items-center justify-start xl:justify-between gap-[10px]">
@@ -79,6 +79,27 @@
           </div>
          </form>
        </div>
+      @php
+      $exportedData = [
+            'heading' => [
+               '0' => 'Click Id',
+               '1' => 'Conversion Id',
+               '2' => 'Click Date',
+               '3' => 'Conversion Date',
+               '4' => 'Status',
+               '5' => 'Offer',
+               '6' => 'Goal',
+               '7' => 'Payout',
+               '8' => 'Country',
+               '9' => 'IP',
+               '10' => 'OS',
+               '11' => 'Device',
+               '12' => 'Mobile ISP',
+               '13' => 'User Agent',
+            ],
+            'data' => []
+         ]; 
+       @endphp
        <div class="flex flex-col justify-between items-center gap-[5px] w-[100%] mt-[30px] ">
           <div class="w-[100%] overflow-x-scroll tableScroll">
              <table
@@ -105,15 +126,15 @@
                       Status
                    </th>
                    <th
-                      class="bigcontent whitespace-normal breakword bg-[#F6F6F6] text-[10px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left">
+                      class=" whitespace-normal breakword bg-[#F6F6F6] text-[10px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left">
                       Offer
                    </th>
                    <th
-                      class="bigcontent whitespace-normal breakword bg-[#F6F6F6] text-[10px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left">
+                      class=" whitespace-normal breakword bg-[#F6F6F6] text-[10px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left">
                       Goal
                    </th>
                    <th
-                      class="bigcontent whitespace-normal breakword bg-[#F6F6F6] text-[10px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left">
+                      class=" whitespace-normal breakword bg-[#F6F6F6] text-[10px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left">
                       Payout
                    </th>
                    <th
@@ -141,74 +162,89 @@
                       User Agent
                    </th>
                 </tr>
-                @if(!empty($allConversions['conversions']))
-                @foreach ($allConversions['conversions'] as $conversion)
+                @if($allConversions->isNotEmpty())
+                @foreach ($allConversions as $key => $conversion)
                 <tr>
                    <td
-                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
-                      {{ $conversion['clickid'] }}
+                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap border-b-[1px] border-b-[#E6E6E6]">
+                      {{ $conversion->click_id }}
+                      @php $exportedData['data'][$key]['click_id'] = $conversion->click_id ?? '0'; @endphp
                    </td>
                    <td title="AU - Ipsos iSay (TOI) [Responsive]" 
-                      class="bigcontent  whitespace-normal breakword text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left  ">
-                      {{ $conversion['conversion_id'] }}
+                      class="  whitespace-normal breakword text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left border-b-[1px] border-b-[#E6E6E6] ">
+                      {{ $conversion->conversion_id }}
+                      @php $exportedData['data'][$key]['conversion_id'] = $conversion->conversion_id ?? '0'; @endphp
                    </td>
                    <td
-                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left  ">
-                      {{ $conversion['click_time'] }}
+                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left border-b-[1px] border-b-[#E6E6E6] ">
+                      {{ $conversion->click_time }}
+                      @php $exportedData['data'][$key]['click_time'] = $conversion->click_time ?? '0'; @endphp
                    </td>
                    <td
-                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left  ">
-                      {{ $conversion['created_at'] }}
+                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left  border-b-[1px] border-b-[#E6E6E6]">
+                      {{ $conversion->created_at }}
+                      @php $exportedData['data'][$key]['created_at'] = $conversion->created_at ?? '0'; @endphp
                    </td>
                    <td
-                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
-                      @if($conversion['status']=='confirmed')
-                      <div class="inline-flex bg-[#F3FEE7] border border-[#BCEE89] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#6EBF1A] text-center uppercase">
+                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap border-b-[1px] border-b-[#E6E6E6]">
+                      <div class="inline-flex bg-[#F3FEE7] border border-[#BCEE89] rounded-[5px]  px-[8px] py-[4px] text-[10px] font-[600] text-[#6EBF1A] text-center uppercase">Confirmed</div>
+                      @php $exportedData['data'][$key]['status'] = 'Confirmed'; @endphp
+                      {{-- @if($conversion['status']=='confirmed')
+                      <div class="inline-flex bg-[#F3FEE7] border border-[#BCEE89] rounded-[5px]  px-[8px] py-[4px] text-[10px] font-[600] text-[#6EBF1A] text-center uppercase">
                         {{ $conversion['status'] }} </div>
                       @else
-                      <div class="inline-flex bg-[#fee7e7] border border-[#ee8989] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#bf1a1a] text-center uppercase">
+                      <div class="inline-flex bg-[#fee7e7] border border-[#ee8989] rounded-[5px]  px-[8px] py-[4px] text-[10px] font-[600] text-[#bf1a1a] text-center uppercase">
                         {{ $conversion['status'] }} </div>
-                      @endif
+                      @endif --}}
                       
                    </td>
                    <td
-                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
-                      {{ $conversion['offer']['title'] }}
+                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap border-b-[1px] border-b-[#E6E6E6]">
+                      {{ $conversion->offer_id }}
+                      @php $exportedData['data'][$key]['offer_id'] = $conversion->offer_id ?? '0'; @endphp
                    </td>
                      @php
-                        $goalConv = ($conversion['goal'] == '') ? '--' : $conversion['goal'];
+                        $goalConv = ($conversion->goal == '') ? '--' : $conversion->goal;
                      @endphp
                    <td
-                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
+                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap border-b-[1px] border-b-[#E6E6E6]">
                        {{ $goalConv }}
+                       @php $exportedData['data'][$key]['goal'] = $goalConv ?? '--'; @endphp
                    </td>
                    <td
-                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
-                       $ {{ $conversion['payouts'] }}
+                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap border-b-[1px] border-b-[#E6E6E6]">
+                       $ {{ $conversion->payout }}
+                       @php $exportedData['data'][$key]['payout'] = '$ '.$conversion->payout ?? 'N/A'; @endphp
                    </td>
                    <td
-                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
-                       {{ $conversion['country_name'] }}
+                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap border-b-[1px] border-b-[#E6E6E6] ">
+                       {{ $conversion->country_name }}
+                       @php $exportedData['data'][$key]['country_name'] = $conversion->country_name ?? 'N/A'; @endphp
                    </td>
                    <td
-                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
-                       {{ $conversion['ip'] }}
+                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap border-b-[1px] border-b-[#E6E6E6]">
+                       {{ $conversion->ip }}
+                       @php $exportedData['data'][$key]['ip'] = $conversion->ip ?? 'N/A'; @endphp
                    </td>
                    <td
-                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
-                       {{ $conversion['os'] }}
+                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap border-b-[1px] border-b-[#E6E6E6] ">
+                       {{ $conversion->device_os }}
+                       @php $exportedData['data'][$key]['device_os'] = $conversion->device_os ?? 'N/A'; @endphp
                    </td>
                    <td
-                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
-                       {{ $conversion['device'] }}
+                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap border-b-[1px] border-b-[#E6E6E6]">
+                       {{ $conversion->device_type ?? 'Unknown' }}
+                       @php $exportedData['data'][$key]['device_type'] = $conversion->device_type ?? 'Unknown'; @endphp
                    </td>
                    <td
-                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
-                       {{ $conversion['isp_code'] }}
+                      class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap border-b-[1px] border-b-[#E6E6E6]">
+                      {{ $conversion->isp ?? 'Unknown' }}
+                      @php $exportedData['data'][$key]['isp'] = $conversion->isp ?? 'Unknown'; @endphp
                    </td>
                    <td
-                      class="text-[10px] font-[500] text-[#808080] text-center px-[10px] py-[10px] text-left  ">
-                      {{ $conversion['ua'] }}
+                      class="text-[10px] font-[500] text-[#808080] text-center px-[10px] py-[10px] text-left  border-b-[1px] border-b-[#E6E6E6]">
+                      {{ $conversion->ua }}
+                      @php $exportedData['data'][$key]['ua'] = $conversion->ua ?? 'N/A'; @endphp
                    </td>
                 </tr>
                 @endforeach
@@ -216,75 +252,51 @@
              </table>
           </div>
           
-          <div class="pagination mt-[20px] flex flex-wrap gap-[10px] items-center justify-end">
-            @if($prevPage)
-            @php 
-            $urlForPagination['page'] =$prevPage;
-            @endphp
-                <a href="{{ route('report.conversions', $urlForPagination) }}" class="btn group inline-flex gap-[8px] items-center bg-[#F5EAF5] border border-[#FED5C3] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#D272D2] text-center hover:bg-[#D272D2] hover:text-[#fff]">
-                    <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5 1L1 5L5 9" stroke="#D272D2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-[#fff]" />
-                    </svg> Previous
-                </a>
+         <div class="w-[100%] flex flex-col gap-[10px] md:gap-[0] md:flex-row justify-between mt-[30px]w-[100%] flex flex-col gap-[10px] md:gap-[0] md:flex-row justify-between mt-[30px]">
+            <h2 class="text-[14px] text-[#808080] font-[500]">Showing {{ $allConversions->firstItem() }} to {{ $allConversions->lastItem() }} of {{ $allConversions->total() }} records</h2>
+            @if ($allConversions->lastPage() > 1)
+    <div class="inline-flex gap-[8px]">
+        {{-- Previous Page --}}
+        @if ($allConversions->onFirstPage())
+            <a href="javascript:void(0);" class="group inline-flex gap-[8px] items-center bg-[#F5EAF5] border border-[#FED5C3] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#D272D2] text-center hover:bg-[#D272D2] hover:text-[#fff]"> <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M5 1L1 5L5 9" stroke="#D272D2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-[#fff] "></path>
+           </svg>  Previous</span>
+        @else
+            <a href="{{ $allConversions->previousPageUrl() }}" class="group inline-flex gap-[8px] items-center bg-[#F5EAF5] border border-[#FED5C3] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#D272D2] text-center hover:bg-[#D272D2] hover:text-[#fff]"> <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M5 1L1 5L5 9" stroke="#D272D2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-[#fff] "></path>
+           </svg> Previous</a>
+        @endif
+
+        {{-- Page Numbers --}}
+        @for ($i = 1; $i <= $allConversions->lastPage(); $i++)
+            @if ($i == $allConversions->currentPage())
+                <a href="javascript:void(0);" class="btn-active btn inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#D272D2] hover:text-[#fff]">{{ $i }}</a>
+            @else
+                <a href="{{ $allConversions->url($i) }}" class="btn inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#D272D2] hover:text-[#fff]">{{ $i }}</a>
             @endif
-               
-            @php
-               
-                $totalPages = ceil($totalCount / $perPage);
-                $range = 3; // Number of pages to display before and after the current page
-                $start = max($currentPage - $range, 1);
-                $end = min($currentPage + $range, $totalPages);
-            @endphp
-        
-            @if($start > 1)
-            @php 
-            $urlForPagination['page'] =1;
-            @endphp
-                <a href="{{ route('report.conversions', $urlForPagination) }}" class="btn inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#D272D2] hover:text-[#fff]">
-                    1
-                </a>
-                @if($start > 2)
-                    <span class="text-[#808080] px-[5px]">...</span>
-                @endif
-            @endif
-        
-            @for($i = $start; $i <= $end; $i++)
-            @php 
-            $urlForPagination['page'] =$i;
-            @endphp
-                <a href="{{ route('report.conversions', $urlForPagination) }}" class="{{ $i == $currentPage ? 'btn-active btn inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#D272D2] hover:text-[#fff]' : 'btn inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#D272D2] hover:text-[#fff]' }}">
-                    {{ $i }}
-                </a>
-            @endfor
-        
-            @if($end < $totalPages)
-                @if($end < $totalPages - 1)
-                    <span class="text-[#808080] px-[5px]">...</span>
-                @endif
-                @php 
-               $urlForPagination['page'] =$totalPages;
-               @endphp
-                <a href="{{ route('report.conversions', $urlForPagination) }}" class="btn inline-flex gap-[8px] items-center bg-[#fff] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#808080] text-center hover:bg-[#D272D2] hover:text-[#fff]">
-                    {{ $totalPages }}
-                </a>
-            @endif
-        
-            @if($nextPage)
-            @php 
-            $urlForPagination['page'] =$nextPage;
-            @endphp
-                <a href="{{ route('report.conversions', $urlForPagination) }}" class="btn group inline-flex gap-[5px] items-center bg-[#F5EAF5] border border-[#FED5C3] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#D272D2] text-center hover:bg-[#D272D2] hover:text-[#fff]">
-                    Next
-                    <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1 1L5 5L1 9" stroke="#D272D2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-[#fff]" />
-                    </svg>
-                </a>
-            @endif
-        </div>
-       </div>
+        @endfor
+
+        {{-- Next Page --}}
+        @if ($allConversions->hasMorePages())
+            <a class="group inline-flex gap-[5px] items-center bg-[#F5EAF5] border border-[#FED5C3] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#D272D2] text-center hover:bg-[#D272D2] hover:text-[#fff]" href="{{ $allConversions->nextPageUrl() }}">Next <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M1 1L5 5L1 9" stroke="#D272D2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-[#fff] "></path>
+           </svg></a>
+        @else
+            <a href="#" class="group inline-flex gap-[5px] items-center bg-[#F5EAF5] border border-[#FED5C3] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#D272D2] text-center hover:bg-[#D272D2] hover:text-[#fff]">Next <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M1 1L5 5L1 9" stroke="#D272D2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-[#fff] "></path>
+           </svg></a>
+        @endif
     </div>
+@endif
+
+
+         </div>
+      </div>
+   </div>
  </div>
 <script>
+   var startDate = "{{ $requestedParams['strd'] }}"
+   var endDate = "{{ $requestedParams['endd'] }}"
     $(document).ready(function() {
       $('.offerOption').select2({
          placeholder: "Select an offer",
@@ -305,6 +317,51 @@
       $('.appendAffiliateApps').select2({
          placeholder: "Select an app",
          allowClear: true // Adds a clear (X) button
+      });
+
+      $("#exportCsvBtn").click(function () {
+         let exportData = @json($exportedData); 
+         $.ajax({
+               url: "{{ route('report.export') }}",
+               type: "POST",
+               data: {
+                  exportType: 'conversion',
+                  exportData: exportData,
+                  _token: "{{ csrf_token() }}"
+               },
+               xhrFields: {
+                  responseType: 'blob' 
+               },
+               success: function (data) {
+                  let blob = new Blob([data], { type: "text/csv" });
+                  let link = document.createElement("a");
+                  link.href = window.URL.createObjectURL(blob);
+                  link.download = "report.csv";
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+               },
+               error: function () {
+                  alert("Error exporting data!");
+               }
+         });
+      });
+
+      $('.dateRange-report').daterangepicker({
+         ranges: {
+            'Today': [moment(), moment()],
+            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+            'This Month': [moment().startOf('month'), moment().endOf('month')],
+            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+         },
+         autoUpdateInput: true, 
+         startDate: startDate,  // Default start date (7 days ago)
+         endDate: endDate,
+         opens: 'right'
+      }, function(start, end, label) {
+         console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
       });
    });
    $('#filterConversions').on('submit',function(){

@@ -68,11 +68,6 @@ class AppsController extends Controller
         return view('apps.add',compact('pageTitle','appData','id'));
     }
 
-    public function testPostback(){
-        $pageTitle = 'Test Postbacks';
-        return view('apps.test-postback',compact('pageTitle'));
-    }
-
     public function integration($id){
         $pageTitle = 'Integration';
         $appDetail = App::find($id);
@@ -114,5 +109,15 @@ class AppsController extends Controller
             return redirect()->back()->with('success','Template updated successfully');
         }
         return view('apps.template',compact('pageTitle','templateColor','appDetail'));
+    }
+
+    public function documentations(){
+        $pageTitle = 'Documentations';
+        return view('apps.documentations',compact('pageTitle'));
+    }
+
+    public function testPostback(){
+        $pageTitle = 'Test-Postback';
+        return view('apps.test-postback',compact('pageTitle'));
     }
 }

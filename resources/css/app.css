@@ -80,7 +80,10 @@ form#filterConversions{width:100%;}
     width: auto;
     max-width: 300px; /* Set a max width for readability */
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);}
-
+    button.active-tab {
+        background-color: #f1faff;
+        color: #009ef7;
+    }
 /* Responsvie */
 @media(max-width:1535px){.sidebar{width:230px;}
 .head-w-cal{width:calc(100% - 230px);}

@@ -9,6 +9,8 @@ use App\Http\Controllers\UsersController;
 
 //Users Routes
 Route::match(['post','get'],'/',[UsersController::class,'login'])->name('login');
+Route::get('/documentations', [AppsController::class, 'documentations'])->name('documentations');
+
 // Routes with Auth Middleware
 Route::middleware('auth')->group(function () {
     Route::get('/logout',[UsersController::class,'logout'])->name('users.logout');
@@ -27,7 +29,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/conversions', [ReportsController::class, 'conversions'])->name('report.conversions');
     Route::get('/postbacks', [ReportsController::class, 'postbacks'])->name('report.postbacks');
     Route::get('/exported-reports', [ReportsController::class, 'exported'])->name('report.exported');
-
+    Route::post('/export-report', [ReportsController::class, 'exportReport'])->name('report.export');
+    
     // Apps
     Route::get('/apps', [AppsController::class, 'index'])->name('apps.index');
     Route::match(['get','post'],'/add-app/{id?}', [AppsController::class, 'add'])->name('apps.add');
@@ -35,6 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/integration/{id}', [AppsController::class, 'integration'])->name('apps.integration');
     Route::get('/update-status/{id}', [AppsController::class, 'updateStatus'])->name('apps.status');
     Route::match(['get','post'],'/template/{id}', [AppsController::class, 'template'])->name('apps.template');
+    Route::get('/testPostback', [AppsController::class, 'testPostback'])->name('testPostback');
 
     // Chart Data
     Route::get('/chart-data', [ChartController::class, 'chartData'])->name('chart.data');

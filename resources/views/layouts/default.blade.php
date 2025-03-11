@@ -110,10 +110,10 @@
     contents[index].classList.remove('hidden');
 
     // Remove active styles from all buttons
-    buttons.forEach(btn => btn.classList.remove('border-blue-500', 'text-blue-600', 'font-semibold'));
+    buttons.forEach(btn => btn.classList.remove('border-blue-500', 'bg-[#f1faff]', 'text-[#009ef7]', 'font-semibold'));
 
     // Add active styles to the clicked button
-    buttons[index].classList.add('border-blue-500', 'text-blue-600', 'font-semibold');
+    buttons[index].classList.add('border-blue-500', 'bg-[#f1faff]', 'text-[#009ef7]', 'font-semibold');
   }
 
   // Initialize first tab as active

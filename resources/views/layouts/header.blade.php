@@ -1,3 +1,7 @@
+@php
+    use App\Models\Setting;
+    $settingDetails = Setting::find(1);
+@endphp
 <div class="fixed w-[100%] h-[50px] md:h-[80px] lg:h-[80px] top-[0] z-[9] w-[100%] bg-[#fff]   flex items-center gap-[0]">
     <div class="flex items-center w-[200px] md:w-[230px] 2xl:w-[290px] bg-[#090B13] py-[15px] px-[15px] md:py-[30px] md:px-[30px] lg:py-[30px] lg:px-[30px] head-logo">
         <img src="/images/dashboardlogo.png" alt="img">
@@ -9,7 +13,7 @@
         </div>
         <div class="">
             <div class="m-1 hs-dropdown relative inline-flex gap-[5px]">
-                <div class="flex items-center gap-[5px] mr-[8px]"><div><i class="ri-customer-service-2-line"></i></div> <a href="mailto:info@offerwallxxx.xyz" class="text-[0px] sm:text-[15px] text-[#000]"><span class="hidden md:flex">info@offerwallxxx.xyz</span></a></div>
+                <div class="flex items-center gap-[5px] mr-[8px]"><div><i class="ri-customer-service-2-line"></i></div> <a href="mailto:{{ $settingDetails->support_email }}" class="text-[0px] sm:text-[15px] text-[#000]"><span class="hidden md:flex">{{ $settingDetails->support_email }}</span></a></div>
                 <button id="hs-dropdown-toggle" type="button"
                     class="hs-dropdown-toggle py-[4px] pl-[4px] pr-[15px] md:pr-[34px] 2xl:pl-[6px] 2xl:pr-[40px]  inline-flex items-center gap-x-2 border border-[#E6E6E6] rounded-[60px] bg-[#F6F6F6] text-[13px] lg:text-[13px] 2xl:text-[16px] font-[600] text-[#1A1A1A] shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
                     aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">

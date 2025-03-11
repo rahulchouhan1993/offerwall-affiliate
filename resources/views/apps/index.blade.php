@@ -16,7 +16,8 @@
              <table class="w-[100%] border-collapse border-spacing-0 rounded-[10px] border-separate border border-[#E6E6E6]">
                 <tr>
                    <th class="bg-[#F6F6F6] rounded-tl-[10px] text-[14px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap ">Name</th>
-                   <th class="bg-[#F6F6F6] text-[14px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap">Status</th>
+                   <th class="bg-[#F6F6F6] text-[14px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap">Approval Status</th>
+                   <th class="bg-[#F6F6F6] text-[14px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap">App Status</th>
                    <th class="bg-[#F6F6F6] text-[14px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap">Created</th>
                    <th class="w-[130px] bg-[#F6F6F6] text-[14px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-right whitespace-nowrap">Actions</th>
                 </tr>
@@ -29,11 +30,21 @@
                     </td>
                     @if( $apps->status==1)
                     <td class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
-                        <a href="{{ route('apps.status',['id'=>$apps->id]) }}" class="inline-flex bg-[#F3FEE7] border border-[#BCEE89] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#6EBF1A] text-center uppercase">Aprroved</a>
+                        <a href="javascript:void(0);" class="inline-flex bg-[#F3FEE7] border border-[#BCEE89] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#6EBF1A] text-center uppercase">Aprroved</a>
                      </td>
                     @else
                     <td class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
-                        <a href="{{ route('apps.status',['id'=>$apps->id]) }}" class="inline-flex bg-[#fee7e7] border border-[#ee8989] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#bf1a1a] text-center uppercase">Not Approved</a>
+                        <a href="javascript:void(0);" class="inline-flex bg-[#fee7e7] border border-[#ee8989] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#bf1a1a] text-center uppercase">Not Approved</a>
+                     </td>
+                    @endif
+
+                    @if( $apps->affiliate_status==1)
+                    <td class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
+                        <a href="{{ route('apps.status',['id'=>$apps->id]) }}" class="inline-flex bg-[#F3FEE7] border border-[#BCEE89] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#6EBF1A] text-center uppercase">Active</a>
+                     </td>
+                    @else
+                    <td class="text-[14px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap ">
+                        <a href="{{ route('apps.status',['id'=>$apps->id]) }}" class="inline-flex bg-[#fee7e7] border border-[#ee8989] rounded-[5px] px-[10px] py-[4px] text-[12px] font-[600] text-[#bf1a1a] text-center uppercase">Archived</a>
                      </td>
                     @endif
                     
@@ -41,15 +52,18 @@
                     <td class="w-[130px] text-[14px] font-[500] text-[#5E72E4] px-[10px] py-[10px] text-left whitespace-nowrap ">
                        <div class="flex items-center justify-center gap-[10px]">
                           <a title="Edit" href="{{ route('apps.add',['id'=>$apps->id]) }}" class="flex items-center justify-center w-[35px] bg-[#FFF3ED] py-[10px] w-[100px] border border-[#FED5C3] rounded-[4px] text-[14px] font-[500] text-[#D272D2] text-center">
-                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M13.7436 11.5797C13.8252 11.661 13.8899 11.7576 13.9341 11.864C13.9783 11.9704 14.001 12.0844 14.001 12.1996C14.001 12.3147 13.9783 12.4288 13.9341 12.5351C13.8899 12.6415 13.8252 12.7381 13.7436 12.8194L12.8182 13.7426C12.7369 13.8242 12.6403 13.8889 12.534 13.9331C12.4276 13.9773 12.3135 14 12.1984 14C12.0832 14 11.9692 13.9773 11.8628 13.9331C11.7564 13.8889 11.6598 13.8242 11.5785 13.7426L7.45399 9.61736L6.05094 13.2759C6.05094 13.2832 6.04511 13.2912 6.04146 13.2992C5.95218 13.5074 5.80363 13.6847 5.61431 13.8091C5.425 13.9334 5.20328 13.9993 4.97678 13.9986H4.91917C4.68295 13.9886 4.4555 13.9063 4.26756 13.7628C4.07963 13.6194 3.94028 13.4217 3.86835 13.1964L0.0566518 1.52288C-0.00878299 1.31872 -0.0167032 1.10048 0.0337606 0.892115C0.0842245 0.683751 0.191121 0.493319 0.342716 0.341725C0.494311 0.19013 0.684743 0.0832327 0.893107 0.0327688C1.10147 -0.017695 1.31971 -0.00977481 1.52387 0.05566L13.1974 3.86736C13.4205 3.94199 13.6159 4.08233 13.7578 4.26995C13.8997 4.45757 13.9816 4.68372 13.9927 4.91872C14.0039 5.15371 13.9437 5.38658 13.8201 5.58677C13.6965 5.78695 13.5153 5.94511 13.3002 6.04047L13.2769 6.04995L9.61835 7.45518L13.7436 11.5797Z" fill="#D272D2"/>
-                             </svg>
+                           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 16 16" fill="none">
+                              <path d="M8.29289 3.70711L1 11V15H5L12.2929 7.70711L8.29289 3.70711Z" fill="#D272D2"/>
+                              <path d="M9.70711 2.29289L13.7071 6.29289L15.1716 4.82843C15.702 4.29799 16 3.57857 16 2.82843C16 1.26633 14.7337 0 13.1716 0C12.4214 0 11.702 0.297995 11.1716 0.828428L9.70711 2.29289Z" fill="#D272D2"/>
+                           </svg> 
                            </a>
-                           @if( $apps->status==1)
+                           @if( $apps->status==1 && $apps->affiliate_status==1)
                            <a title="Integration" href="{{ route('apps.integration',['id'=>$apps->id]) }}" class="flex items-center justify-center w-[35px] bg-[#FFF3ED] py-[10px] w-[100px] border border-[#FED5C3] rounded-[4px] text-[14px] font-[500] text-[#D272D2] text-center">
-                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M0.000976562 14V10.6944L10.2677 0.447208C10.4232 0.304615 10.5951 0.19443 10.7833 0.116652C10.9715 0.0388738 11.1691 -1.52588e-05 11.376 -1.52588e-05C11.5829 -1.52588e-05 11.7838 0.0388738 11.9788 0.116652C12.1737 0.19443 12.3423 0.311096 12.4843 0.466652L13.5538 1.55554C13.7093 1.69814 13.8229 1.86665 13.8944 2.0611C13.966 2.25554 14.0015 2.44999 14.001 2.64443C14.001 2.85184 13.9655 3.04966 13.8944 3.23788C13.8234 3.4261 13.7098 3.59773 13.5538 3.75277L3.30654 14H0.000976562ZM11.3565 3.73332L12.4454 2.64443L11.3565 1.55554L10.2677 2.64443L11.3565 3.73332Z" fill="#D272D2"/>
-                             </svg>
+                           <svg xmlns="http://www.w3.org/2000/svg"  width="14" height="14" viewBox="0 0 16 16" fill="none">
+                              <path d="M8.01005 0.858582L6.01005 14.8586L7.98995 15.1414L9.98995 1.14142L8.01005 0.858582Z" fill="#D272D2"/>
+                              <path d="M12.5 11.5L11.0858 10.0858L13.1716 8L11.0858 5.91422L12.5 4.5L16 8L12.5 11.5Z" fill="#D272D2"/>
+                              <path d="M2.82843 8L4.91421 10.0858L3.5 11.5L0 8L3.5 4.5L4.91421 5.91422L2.82843 8Z" fill="#D272D2"/>
+                              </svg>
                            </a>
                            <a title="Template" href="{{ route('apps.template',['id'=>$apps->id]) }}" class="flex items-center justify-center w-[35px] bg-[#FFF3ED] py-[10px] w-[100px] border border-[#FED5C3] rounded-[4px] text-[14px] font-[500] text-[#D272D2] text-center">
                              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" >

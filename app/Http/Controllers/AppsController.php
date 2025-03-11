@@ -27,6 +27,11 @@ class AppsController extends Controller
                 $appData->appId = rand();
                 $appData->affiliateId = auth()->user()->id;
                 $appData->status = 0;
+                $appData->affiliate_status = 1;
+            }else{
+                if($request->appurl!=$appData->appUrl){
+                    $appData->status = 0;
+                }
             }
             $appData->appName = $request->appname;
             $appData->appUrl = $request->appurl;
@@ -76,7 +81,7 @@ class AppsController extends Controller
 
     public function updateStatus($id){
         $appDetail = App::find($id);
-        $appDetail->status = ($appDetail->status==1) ? '0' : '1';
+        $appDetail->affiliate_status = ($appDetail->affiliate_status==1) ? '0' : '1';
         $appDetail->save();
 
         return redirect()->back()->with('success','Status updated');

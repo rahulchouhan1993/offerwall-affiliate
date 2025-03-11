@@ -47,7 +47,7 @@
                       <select name="filterBy" class="filterByDrop w-[100%] bg-[#F6F6F6] px-[15px] py-[12px] text-[14px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none">
                         <option value="">Select</option>
                         <option value="country">Country</option>
-                        {{-- <option value="devices">Device</option> --}}
+                        <option value="devices">Device</option>
                         <option value="os" >Operating System</option>
                         <option value="offer" >Offer</option>
                       </select>
@@ -269,6 +269,15 @@
 
    $(document).on('change','.filterByDrop',function(){
       $('.loader-fcustm').show();
+      if($(this).val()=='country'){
+         var selectplace = 'Select country';
+      }else if($(this).val()=='devices'){
+         var selectplace = 'Select device';
+      }else if($(this).val()=='os'){
+         var selectplace = 'Select an operating system';
+      }else if($(this).val()=='offer'){
+         var selectplace = 'Select an offer';
+      }
       $.ajax({
          headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -277,7 +286,10 @@
          type: 'GET', // HTTP method
          success: function (response) {
             $('.loader-fcustm').hide();
-            $('.search-input-filter').html(response).select2();
+            $('.search-input-filter').html(response).select2({
+               placeholder: selectplace,
+               allowClear: true
+            });
          },
          error: function (xhr) {
             $('#response').html('<p>An error occurred. Please try again.</p>');

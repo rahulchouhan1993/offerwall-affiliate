@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\App;
 use App\Models\Template;
+use App\Models\TestPostback;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class AppsController extends Controller
 {
@@ -121,8 +123,63 @@ class AppsController extends Controller
         return view('apps.documentations',compact('pageTitle'));
     }
 
-    public function testPostback(){
+    public function testPostback(Request $request){
         $pageTitle = 'Test-Postback';
-        return view('apps.test-postback',compact('pageTitle'));
+        $allApps = App::where('affiliateId',auth()->user()->id)->get();
+        $allPostbacks = TestPostback::where('user_id',auth()->user()->id)->with('apps')->get();
+
+        if($request->isMethod('post')){
+            $appDetails = App::find($request->app_id);
+            $postBackStatus = $this->sendPostback($appDetails->postback);
+            $newPostback = new TestPostback();
+            $newPostback->user_id = auth()->user()->id;
+            $newPostback->app_id = $request->app_id;
+            $newPostback->payout = $request->payout;
+            $newPostback->ip = request()->ip();
+            $newPostback->status = $postBackStatus['http_code'] ?? '500';
+            $newPostback->error_detail = $postBackStatus['error'] ?? NULL;
+            $newPostback->postback_url = $appDetails->postback;
+            $newPostback->save();
+
+            return redirect()->back()->with('success','Postback fired successfully');
+        }
+        
+        return view('apps.test-postback',compact('pageTitle','allApps','allPostbacks'));
+    }
+
+    public function sendPostback($url){
+        try {
+            $response = Http::timeout(10)->get($url);
+
+            if ($response->successful()) {
+                return [
+                    'success' => true,
+                    'error' => null,
+                    'http_code' => $response->status(),
+                    'response' => $response->body(),
+                ];
+            }
+
+            return [
+                'success' => false,
+                'error' => "HTTP Error: " . $response->status(),
+                'http_code' => $response->status(),
+                'response' => $response->body(),
+            ];
+        } catch (\Illuminate\Http\Client\RequestException $e) {
+            return [
+                'success' => false,
+                'error' => $e->getMessage(),
+                'http_code' => $e->response ? $e->response->status() : 500,
+                'response' => $e->response ? $e->response->body() : null,
+            ];
+        } catch (\Exception $e) {
+            return [
+                'success' => false,
+                'error' => $e->getMessage(),
+                'http_code' => 500,
+                'response' => null,
+            ];
+        }
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\UsersController;
+use App\Models\TestPostback;
 
 //Users Routes
 Route::match(['post','get'],'/',[UsersController::class,'login'])->name('login');
@@ -38,8 +39,23 @@ Route::middleware('auth')->group(function () {
     Route::get('/integration/{id}', [AppsController::class, 'integration'])->name('apps.integration');
     Route::get('/update-status/{id}', [AppsController::class, 'updateStatus'])->name('apps.status');
     Route::match(['get','post'],'/template/{id}', [AppsController::class, 'template'])->name('apps.template');
-    Route::get('/testPostback', [AppsController::class, 'testPostback'])->name('testPostback');
-
+    Route::match(['get','post'],'/testPostback', [AppsController::class, 'testPostback'])->name('testPostback');
+    Route::get('/get-postback-error/{id}', function ($id) {
+        $postback = TestPostback::find($id);
+        if (!$postback) {
+            return response()->json([
+                'postback_url' => 'N/A',
+                'http_code' => 'N/A',
+                'error_message' => 'Postback not found'
+            ], 404);
+        }
+    
+        return response()->json([
+            'postback_url' => $postback->postback_url ?? 'N/A',
+            'http_code' => $postback->status ?? 'N/A',
+            'error_message' => $postback->error_detail ?? 'No error details available'
+        ]);
+    })->name('postbackerror');
     // Chart Data
     Route::get('/chart-data', [ChartController::class, 'chartData'])->name('chart.data');
 

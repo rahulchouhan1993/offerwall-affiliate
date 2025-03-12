@@ -19,4 +19,8 @@ class App extends Model
         'status',
         'affiliate_status',
     ];
+    
+    public function testpostbakcs(){
+        return $this->hasMany(TestPostback::class,'id','app_id');
+    }
 }

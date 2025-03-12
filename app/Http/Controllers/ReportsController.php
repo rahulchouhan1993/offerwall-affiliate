@@ -6,13 +6,14 @@ use Illuminate\Support\Facades\Http;
 use App\Models\User;
 use App\Models\Tracking;
 use Illuminate\Http\Request;
-use App\Models\Country;
+use App\Models\Setting;
 use App\Models\App;
 
 class ReportsController extends Controller
 {
     public function statistics(Request $request){
         $pageTitle = 'Statistics';
+        $advertiserDetails = Setting::find(1);
         $allAffiliatesApp =  App::where('affiliateId',auth()->user()->id)->get();
         $trackingStats = Tracking::query();
         $requestedParams = $request->all();
@@ -101,9 +102,9 @@ class ReportsController extends Controller
         if($allStatistics->isNotEmpty()){
             foreach($allStatistics as $k => $v){
                 if($requestedParams['groupBy']=='offer'){
-                    $url = env('AFFISE_API_END').'offer/'.$v->element;
+                    $url = $advertiserDetails->affise_endpoint.'offer/'.$v->element;
                     $response = HTTP::withHeaders([
-                        'API-Key' => env('AFFISE_API_KEY'),
+                        'API-Key' => $advertiserDetails->affise_endpoint,
                     ])->get($url);
                     
                     if ($response->successful()) {
@@ -121,6 +122,7 @@ class ReportsController extends Controller
 
     public function conversions(Request $request){
         $pageTitle = 'Conversions';
+        $advertiserDetails = Setting::find(1);
         $allAffiliatesApp = App::where('affiliateId',auth()->user()->id)->get();
         $requestedParams = $request->all();
         $allCountry = Tracking::where('user_id', auth()->id())->distinct()->pluck('country_code', 'country_name');    
@@ -129,9 +131,9 @@ class ReportsController extends Controller
         $allOs = Tracking::where('user_id', auth()->id())->distinct()->pluck('device_os', 'device_os');   
         if(!empty($allTrackings)){
             foreach($allTrackings as $tracking){
-                $url = env('AFFISE_API_END').'offer/'.$tracking;
+                $url = $advertiserDetails->affise_endpoint.'offer/'.$tracking;
                 $response = HTTP::withHeaders([
-                    'API-Key' => env('AFFISE_API_KEY'),
+                    'API-Key' => $advertiserDetails->affise_endpoint,
                 ])->get($url);
                 
                 if ($response->successful()) {
@@ -190,6 +192,7 @@ class ReportsController extends Controller
 
     public function postbacks(Request $request){
         $pageTitle = 'Postbacks';
+        $advertiserDetails = Setting::find(1);
         $allAffiliatesApp = App::where('affiliateId',auth()->user()->id)->get();
         $requestedParams = $request->all();
         
@@ -197,9 +200,9 @@ class ReportsController extends Controller
         $allOffers = [];
         if(!empty($allTrackings)){
             foreach($allTrackings as $tracking){
-                $url = env('AFFISE_API_END').'offer/'.$tracking;
+                $url = $advertiserDetails->affise_endpoint.'offer/'.$tracking;
                 $response = HTTP::withHeaders([
-                    'API-Key' => env('AFFISE_API_KEY'),
+                    'API-Key' => $advertiserDetails->affise_endpoint,
                 ])->get($url);
                 
                 if ($response->successful()) {
@@ -257,6 +260,7 @@ class ReportsController extends Controller
     }
 
     public function filterGroup($filterBy = null){
+        $advertiserDetails = Setting::find(1);
         $returnOptions = '<option value="">Select</option>';
         if($filterBy=='country'){
             $allTrackings = Tracking::select('country_code', 'country_name')
@@ -283,9 +287,9 @@ class ReportsController extends Controller
             $allTrackings = Tracking::groupBy('offer_id')->pluck('offer_id');
             if(!empty($allTrackings)){
                 foreach($allTrackings as $tracking){
-                    $url = env('AFFISE_API_END').'offer/'.$tracking;
+                    $url = $advertiserDetails->affise_endpoint.'offer/'.$tracking;
                     $response = HTTP::withHeaders([
-                        'API-Key' => env('AFFISE_API_KEY'),
+                        'API-Key' => $advertiserDetails->affise_api_key,
                     ])->get($url);
                     
                     if ($response->successful()) {

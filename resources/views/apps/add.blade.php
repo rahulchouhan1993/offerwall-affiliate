@@ -55,7 +55,7 @@
                 <div class="flex flex-col gap-[10px] w-[100%] ">
                     <label for="" class="flex items-center gap-[5px] text-[14] text-[#898989]">Postback URL <div class="text-[#F23765] mt-[-2px]">*</div></label>
                     <input type="text" name="postback" required class="flex px-[15px] py-[15px] rounded-[5px] bg-[#F6F6F6] text-[14px] text-[#4D4D4D] font-[600] hover:outline-none focus:outline-none" value="{{ $appData->postback }}">
-                    <div class="text-[12px] text-[#A1A1A1] leading-[15px]">Whenever a user completes an offer, we will make a call to this URL by sending all the information needed to help you to give the virtual currency to your users. Check the postback documentation in order to create your postback url. </div>
+                    <div class="text-[12px] text-[#A1A1A1] leading-[15px]">Whenever a user completes an offer, we will make a call to this URL by sending all the information needed to help you to give the virtual currency to your users. Check the <a class="text-[#D272D2] font-semibold" target="_blank" href="{{ route('documentations') }}">postback documentation</a> in order to create your postback url. </div>
                 </div>
             </div>
             <div class="flex gap-[10px] md:gap-[20px] mt-[15px]">

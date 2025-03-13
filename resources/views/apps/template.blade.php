@@ -1,9 +1,55 @@
 @extends('layouts.default')
 @section('content')
+
+
 <div class='flex flex-wrap lg:flex-nowrap gap-[20px] w-[100%] items-start px-[15px] py-[15px]  md:px-[20px] md:py-[20px] lg:px-[30px] lg:py-[30px] bg-[#F6F6F6]'>
     <div class='w-[100%] lg:w-[60%] bg-[#fff] p-[20px] rounded-[10px]'>
         <form method="post">
             @csrf
+        <div class='flex flex-col gap-[15px] mb-[25px]'>
+            <h2 class='mb-[15px] text-[20px] text-[#1A1A1A] font-[600] '>Header Settings</h2>
+            <div class='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4'>
+                <div class="relative flex flex-col gap-[5px]">
+                    <label class='text-[14] text-[#898989] mb-[2px]'>BG</label>
+                    <div class='flex gap-[10px] bg-[#fff] p-[6px] rounded-[8px] border-[1px] border-[#e5e7eb] rounded-[4px]' cltype='bg'>
+                        <input class='min-w-[30px] h-[30px] commonColourPicker' type="color" name="headerBg" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->headerBg }}" /> 
+                        <input class='w-[100%] commonColourNumber' type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->headerBg }}"  />
+                    </div>
+                </div>
+                <div class="relative flex flex-col gap-[5px]">
+                    <label class='text-[14] text-[#898989] mb-[2px]'>Menu BG</label>
+                    <div class='flex gap-[10px] bg-[#fff] p-[6px] rounded-[8px] border-[1px] border-[#e5e7eb] rounded-[4px]' cltype='bg'>
+                        <input class='min-w-[30px] h-[30px] commonColourPicker' type="color" name="headerMenuBg" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->headerMenuBg }}" /> 
+                        <input class='w-[100%] commonColourNumber' type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->headerMenuBg }}"  />
+                    </div>
+                </div>
+
+                <div class="relative flex flex-col gap-[5px]">
+                    <label class='text-[14] text-[#898989] mb-[2px]'>Active Menu BG</label>
+                    <div class='flex gap-[10px] bg-[#fff] p-[6px] rounded-[8px] border-[1px] border-[#e5e7eb] rounded-[4px]' cltype='bg'>
+                        <input class='min-w-[30px] h-[30px] commonColourPicker' type="color" name="headerActiveBg" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->headerActiveBg }}" /> 
+                        <input class='w-[100%] commonColourNumber' type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->headerActiveBg }}"  />
+                    </div>
+                </div>
+
+                <div class="relative flex flex-col gap-[5px]">
+                    <label class='text-[14] text-[#898989] mb-[2px]'>Active Text Color</label>
+                    <div class='flex gap-[10px] bg-[#fff] p-[6px] rounded-[8px] border-[1px] border-[#e5e7eb] rounded-[4px]' cltype='text'>
+                        <input class='min-w-[30px] h-[30px] commonColourPicker' type="color" name="headerActiveTextColor" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->headerActiveTextColor }}" /> 
+                        <input class='w-[100%] commonColourNumber' type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->headerActiveTextColor }}"  />
+                    </div>
+                </div>
+
+                <div class="relative flex flex-col gap-[5px]">
+                    <label class='text-[14] text-[#898989] mb-[2px]'>Non-Active Text Color</label>
+                    <div class='flex gap-[10px] bg-[#fff] p-[6px] rounded-[8px] border-[1px] border-[#e5e7eb] rounded-[4px]' cltype='text'>
+                        <input class='min-w-[30px] h-[30px] commonColourPicker' type="color" name="headerNonActiveTextColor" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->headerNonActiveTextColor }}" /> 
+                        <input class='w-[100%] commonColourNumber' type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->headerNonActiveTextColor }}"  />
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class='flex flex-col gap-[15px] mb-[25px]'>
             <h2 class='mb-[15px] text-[20px] text-[#1A1A1A] font-[600] '>Body Settings</h2>
             <div class="relative flex flex-col gap-[5px]">
@@ -14,78 +60,20 @@
                 </div>
             </div>
         </div>
-        <div class='flex flex-col gap-[15px] mb-[25px]'>
-            <h2 class='mb-[15px] text-[20px] text-[#1A1A1A] font-[600] '>Header Settings</h2>
-            <div class='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4'>
-                <div class="relative flex flex-col gap-[5px]">
-                    <label class='text-[14] text-[#898989] mb-[2px]'>Header Text Color</label>
-                    <div class='flex gap-[10px] bg-[#fff] p-[6px] rounded-[8px] border-[1px] border-[#e5e7eb] rounded-[4px]' cltype='text'>
-                        <input class='min-w-[30px] h-[30px] commonColourPicker' type="color" name="headerTextColor" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->headerTextColor }}" /> 
-                        <input class='w-[100%] commonColourNumber' type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->headerTextColor }}"  />
-                    </div>
-                </div>
-
-                <div class="relative flex flex-col gap-[5px]">
-                    <label class='text-[14] text-[#898989] mb-[2px]'>Header Button BG</label>
-                    <div class='flex gap-[10px] bg-[#fff] p-[6px] rounded-[8px] border-[1px] border-[#e5e7eb] rounded-[4px]' cltype='bg'>
-                        <input class='min-w-[30px] h-[30px] commonColourPicker' type="color" name="headerButtonBg" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->headerButtonBg }}" /> 
-                        <input class='w-[100%] commonColourNumber' type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->headerButtonBg }}"  />
-                    </div>
-                </div>
-
-                <div class="relative flex flex-col gap-[5px]">
-                    <label class='text-[14] text-[#898989] mb-[2px]'>Header Button Text Color</label>
-                    <div class='flex gap-[10px] bg-[#fff] p-[6px] rounded-[8px] border-[1px] border-[#e5e7eb] rounded-[4px]' cltype='text'>
-                        <input class='min-w-[30px] h-[30px] commonColourPicker' type="color" name="headerButtonColor" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->headerButtonColor }}" /> 
-                        <input class='w-[100%] commonColourNumber' type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->headerButtonColor }}"  />
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class='flex flex-col gap-[15px] mb-[25px]'>
-            <h2 class='mb-[15px] text-[20px] text-[#1A1A1A] font-[600] '>Notification Settings</h2>
-            <div class='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4'>
-                <div class="relative flex flex-col gap-[5px]">
-                    <label class='text-[14] text-[#898989] mb-[2px]'>Notification BG</label>
-                    <div class='flex gap-[10px] bg-[#fff] p-[6px] rounded-[8px] border-[1px] border-[#e5e7eb] rounded-[4px]' cltype='bg'>
-                        <input class='min-w-[30px] h-[30px] commonColourPicker' type="color" name="NotificationBg" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->NotificationBg }}" /> 
-                        <input class='w-[100%] commonColourNumber' type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->NotificationBg }}"  />
-                    </div>
-                </div>
-                <div class="relative flex flex-col gap-[5px]">
-                    <label class='text-[14] text-[#898989] mb-[2px]'>Notification Text Color</label>
-                    <div class='flex gap-[10px] bg-[#fff] p-[6px] rounded-[8px] border-[1px] border-[#e5e7eb] rounded-[4px]' cltype='text'>
-                        <input class='min-w-[30px] h-[30px] commonColourPicker' type="color" name="notificationText" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->notificationText }}" /> 
-                        <input class='w-[100%] commonColourNumber' type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->notificationText }}"  />
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class='flex flex-col gap-[15px] mb-[25px]'>
             <h2 class='mb-[15px] text-[20px] text-[#1A1A1A] font-[600] '>Offer Settings</h2>
             <div class='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4'>
                 <div class="relative flex flex-col gap-[5px]">
-                    <label class='text-[14] text-[#898989] mb-[2px]'>Offer BG</label>
+                    <label class='text-[14] text-[#898989] mb-[2px]'>BG</label>
                     <div class='flex gap-[10px] bg-[#fff] p-[6px] rounded-[8px] border-[1px] border-[#e5e7eb] rounded-[4px]' cltype='bg'>
                         <input class='min-w-[30px] h-[30px] commonColourPicker' type="color" name="offerBg" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->offerBg }}" /> 
                         <input class='w-[100%] commonColourNumber' type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->offerBg }}"  />
                     </div>
-                </div>
+                </div>              
 
                 <div class="relative flex flex-col gap-[5px]">
-                    <label class='text-[14] text-[#898989] mb-[2px]'>Offer BG Inner</label>
-                    <div class='flex gap-[10px] bg-[#fff] p-[6px] rounded-[8px] border-[1px] border-[#e5e7eb] rounded-[4px]' cltype='bg'>
-                        <input class='min-w-[30px] h-[30px] commonColourPicker' type="color" name="offerBgInner" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->offerBgInner }}" /> 
-                        <input class='w-[100%] commonColourNumber' type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->offerBgInner }}"  />
-                    </div>
-                </div>
-
-               
-
-                <div class="relative flex flex-col gap-[5px]">
-                    <label class='text-[14] text-[#898989] mb-[2px]'>Offer Text Color</label>
+                    <label class='text-[14] text-[#898989] mb-[2px]'>Text Color</label>
                     <div class='flex gap-[10px] bg-[#fff] p-[6px] rounded-[8px] border-[1px] border-[#e5e7eb] rounded-[4px]' cltype='text'>
                         <input class='min-w-[30px] h-[30px] commonColourPicker' type="color" name="offerText" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->offerText }}" /> 
                         <input class='w-[100%] commonColourNumber' type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->offerText }}"  />
@@ -93,32 +81,7 @@
                 </div>
 
                 <div class="relative flex flex-col gap-[5px]">
-                    <label class='text-[14] text-[#898989] mb-[2px]'>Offer Info BG Color</label>
-                    <div class='flex gap-[10px] bg-[#fff] p-[6px] rounded-[8px] border-[1px] border-[#e5e7eb] rounded-[4px]' cltype='bg'>
-                        <input class='min-w-[30px] h-[30px] commonColourPicker' type="color" name="offerInfoBg" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->offerInfoBg }}" /> 
-                        <input class='w-[100%] commonColourNumber' type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->offerInfoBg }}"  />
-                    </div>
-                </div>
-
-                <div class="relative flex flex-col gap-[5px]">
-                    <label class='text-[14] text-[#898989] mb-[2px]'>Offer Info Text Color</label>
-                    <div class='flex gap-[10px] bg-[#fff] p-[6px] rounded-[8px] border-[1px] border-[#e5e7eb] rounded-[4px]' cltype='text'>
-                        <input class='min-w-[30px] h-[30px] commonColourPicker' type="color" name="offerInfoText" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->offerInfoText }}" /> 
-                        <input class='w-[100%] commonColourNumber' type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->offerInfoText }}"  />
-                    </div>
-                </div>
-
-                <div class="relative flex flex-col gap-[5px]">
-                    <label class='text-[14] text-[#898989] mb-[2px]'>Offer Info Left Border Color</label>
-                    <div class='flex gap-[10px] bg-[#fff] p-[6px] rounded-[8px] border-[1px] border-[#e5e7eb] rounded-[4px]' cltype='leftborder'>
-                        <input class='min-w-[30px] h-[30px] commonColourPicker' type="color" name="offerInfoBorder" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->offerInfoBorder }}" /> 
-                        <input class='w-[100%] commonColourNumber' type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->offerInfoBorder }}"  />
-                    </div>
-                </div>
-
-
-                <div class="relative flex flex-col gap-[5px]">
-                    <label class='text-[14] text-[#898989] mb-[2px]'>Offer Button BG Color</label>
+                    <label class='text-[14] text-[#898989] mb-[2px]'>Button BG Color</label>
                     <div class='flex gap-[10px] bg-[#fff] p-[6px] rounded-[8px] border-[1px] border-[#e5e7eb] rounded-[4px]' cltype='bg'>
                         <input class='min-w-[30px] h-[30px] commonColourPicker' type="color" name="offerButtonBg" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->offerButtonBg }}" /> 
                         <input class='w-[100%] commonColourNumber' type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->offerButtonBg }}"  />
@@ -126,7 +89,7 @@
                 </div>
 
                 <div class="relative flex flex-col gap-[5px]">
-                    <label class='text-[14] text-[#898989] mb-[2px]'>Offer Button Text Color</label>
+                    <label class='text-[14] text-[#898989] mb-[2px]'>Button Text Color</label>
                     <div class='flex gap-[10px] bg-[#fff] p-[6px] rounded-[8px] border-[1px] border-[#e5e7eb] rounded-[4px]' cltype='text'>
                         <input class='min-w-[30px] h-[30px] commonColourPicker' type="color" name="offerButtonText" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->offerButtonText }}" /> 
                         <input class='w-[100%] commonColourNumber' type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->offerButtonText }}"  />
@@ -139,7 +102,14 @@
             <h2 class='mb-[15px] text-[20px] text-[#1A1A1A] font-[600] '>Footer Settings</h2>
             <div class='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4'>
                 <div class="relative flex flex-col gap-[5px]">
-                    <label class='text-[14] text-[#898989] mb-[2px]'>Footer Text Color</label>
+                    <label class='text-[14] text-[#898989] mb-[2px]'>BG</label>
+                    <div class='flex gap-[10px] bg-[#fff] p-[6px] rounded-[8px] border-[1px] border-[#e5e7eb] rounded-[4px]' cltype='bg'>
+                        <input class='min-w-[30px] h-[30px] commonColourPicker' type="color" name="footerBg" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->footerBg }}" /> 
+                        <input class='w-[100%] commonColourNumber' type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->footerBg }}"  />
+                    </div>
+                </div>
+                <div class="relative flex flex-col gap-[5px]">
+                    <label class='text-[14] text-[#898989] mb-[2px]'>Text Color</label>
                     <div class='flex gap-[10px] bg-[#fff] p-[6px] rounded-[8px] border-[1px] border-[#e5e7eb] rounded-[4px]' cltype='text'>
                         <input class='min-w-[30px] h-[30px] commonColourPicker' type="color" name="footerText" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->footerText }}" /> 
                         <input class='w-[100%] commonColourNumber' type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{ $templateColor->footerText }}"  />
@@ -147,6 +117,7 @@
                 </div>
             </div>
         </div>
+
 
         <div class='mt-[8px]'>
             <button class='px-[10px] py-[10px] w-[160px] flex justify-center text-center text-[15px] text-[#fff] bg-[#D272D2] rounded-[8px]'>Save Template</button>
@@ -197,7 +168,7 @@
         
 
         <div style="padding: 20px 15px; display: flex ; justify-content: space-between; align-items: center; width: 100%;">
-            <h2 style="margin: 0;font-size: 11px; font-weight: 600; color: #ce68ce;"><img style="max-width:150px" src="/images/logo.png" /> </h2>
+            <h2 style="margin: 0;font-size: 11px; font-weight: 600; color: #ce68ce;"><img style="max-width:150px" src="/images/logo-offerwall.png" /> </h2>
             <p class="footerText-colordy" style="margin: 0; font-size: 11px; color: #2f2f2fcc;">Privacy policy</p>
         </div>
     </div>

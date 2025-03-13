@@ -251,7 +251,7 @@ class ReportsController extends Controller
 
         $allPostbacks = $trackingStats->paginate(100)->appends(request()->query());
         
-        return view('reports.postbacks',compact('pageTitle','allPostbacks','allAffiliatesApp','requestedParams','allOffers'));
+        return view('reports.postbacks',compact('pageTitle','allPostbacks','allAffiliatesApp','requestedParams','allOffers','advertiserDetails'));
     }
 
     public function exported(){

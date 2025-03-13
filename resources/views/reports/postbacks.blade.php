@@ -108,12 +108,12 @@
                    <th class="bg-[#F6F6F6] rounded-tl-[10px] text-[10px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap ">Date</th>
                    <th class="bg-[#F6F6F6] rounded-tl-[10px] text-[10px] font-[500] text-[#1A1A1A] px-[10px] py-[13px] text-left whitespace-nowrap ">ID</th>
                 </tr>
-                @if($allPostbacks->isNotEmpty())
+                @if($allPostbacks->isNotEmpty()) 
                 @foreach ($allPostbacks as $key => $postBacks)
                 @php
-                  $url = env('AFFISE_API_END') . "offer/".$postBacks->offer_id;
+                  $url = $advertiserDetails->affise_endpoint . "offer/".$postBacks->offer_id;
                   $response = HTTP::withHeaders([
-                        'API-Key' => env('AFFISE_API_KEY'),
+                        'API-Key' => $advertiserDetails->affise_endpoint,
                   ])->get($url);
                   if ($response->successful()) {
                      $offerDetail = $response->json();

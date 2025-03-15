@@ -86,10 +86,10 @@
     });
 </script>
 <div id="errorDetailsModal" class="hidden fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-    <div class="bg-white p-5 rounded-lg shadow-lg w-[400px]">
+    <div class="bg-white p-5 rounded-lg shadow-lg w-[90%] max-w-[700px]">
         <h2 class="text-lg font-semibold mb-4">Postback Details</h2>
-        <div id="errorDetailsContent"></div>
-        <button onclick="$('#errorDetailsModal').addClass('hidden');" class="mt-4 bg-red-500 text-white px-4 py-2 rounded">Close</button>
+        <div id="errorDetailsContent" class="overflow-x-auto" ></div>
+        <button onclick="$('#errorDetailsModal').addClass('hidden');" class="mt-4 bg-[#D272D2] text-white px-4 py-2 rounded">Close</button>
     </div>
 </div>
 
@@ -112,16 +112,16 @@
                 let tableContent = `
                     <table class="w-full border border-collapse">
                         <tr>
-                            <th class="border px-4 py-2">Postback URL</th>
-                            <td class="border px-4 py-2">${response.postback_url}</td>
+                            <th class="min-w-[130px] border px-4 py-2 text-right text-[14px] font-[600]  text-[#000]">Postback URL</th>
+                            <td class="border px-4 py-2 text-[13px] font-[400] text-[#000]">${response.postback_url}</td>
                         </tr>
                         <tr>
-                            <th class="border px-4 py-2">HTTP Code</th>
-                            <td class="border px-4 py-2">${response.http_code}</td>
+                            <th class="min-w-[130px] border px-4 py-2 text-right text-[14px] font-[600]  text-[#000]">HTTP Code</th>
+                            <td class="border px-4 py-2 text-[13px] font-[400] text-[#000]">${response.http_code}</td>
                         </tr>
                         <tr>
-                            <th class="border px-4 py-2">Error Message</th>
-                            <td class="border px-4 py-2">${response.error_message}</td>
+                            <th class="min-w-[130px] border px-4 py-2 text-right text-[14px] font-[600]  text-[#000]">Error Message</th>
+                            <td class="border px-4 py-2 text-[13px] font-[400] text-[#000]">${response.error_message}</td>
                         </tr>
                     </table>`;
 
@@ -132,16 +132,16 @@
                 let tableContent = `
                     <table class="w-full border border-collapse">
                         <tr>
-                            <th class="border px-4 py-2">Postback URL</th>
-                            <td class="border px-4 py-2">N/A</td>
+                            <th class="min-w-[130px] border px-4 py-2 text-right text-[14px] font-[600]  text-[#000]">Postback URL</th>
+                            <td class="border px-4 py-2 text-[13px] font-[400] text-[#000]">N/A</td>
                         </tr>
                         <tr>
-                            <th class="border px-4 py-2">HTTP Code</th>
-                            <td class="border px-4 py-2">N/A</td>
+                            <th class="min-w-[130px] border px-4 py-2 text-right text-[14px] font-[600]  text-[#000]">HTTP Code</th>
+                            <td class="border px-4 py-2 text-[13px] font-[400] text-[#000]">N/A</td>
                         </tr>
                         <tr>
-                            <th class="border px-4 py-2">Error Message</th>
-                            <td class="border px-4 py-2">${xhr.responseJSON?.error_message || "Failed to load details."}</td>
+                            <th class="min-w-[130px] border px-4 py-2 text-right text-[14px] font-[600]  text-[#000]">Error Message</th>
+                            <td class="border px-4 py-2 text-[13px] font-[400] text-[#000]">${xhr.responseJSON?.error_message || "Failed to load details."}</td>
                         </tr>
                     </table>`;
 

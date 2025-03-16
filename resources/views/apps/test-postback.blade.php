@@ -8,8 +8,8 @@
             </div>
             <form method="POST"> @csrf
             <div class="flex gap-[25px] flex-wrap md:flex-nowrap justify-between">
-                <div class="w-full md-w-[30%]">
-                    <div class="flex items-start flex-wrap gap-[10px] w-full">
+                <div class="w-full md-w-[30%] flex flex-col gap-[15px]">
+                    <div class="w-full flex items-start flex-wrap gap-[6px] w-full">
                         <label class=" w-[100%] text-[14px] font-[500] text-[#898989] ">App</label>
                         <div class="w-[100%] flex flex-wrap xl:flex-nowrap  items-center gap-[5px] md:gap-[8px] lg:gap-[10px] xl:gap-[15px]">
                             <div class="relative w-[100%] flex flex-wrap xl:flex-nowrap items-center gap-[10px]">
@@ -26,18 +26,18 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex items-start justify-between gap-[10px] mb-[15px]">
-                        <div class="w-[48%]">
+                    <div class="w-full flex items-start flex-wrap gap-[6px] w-full">
+                        
                             <label class=" w-[100%] text-[14px] font-[500] text-[#898989] ">Payout</label>
                             <input type="text" name="payout" class="goal-postback-filter w-[100%] bg-[#F6F6F6] px-[15px] py-[12px] text-[12px] font-[500] text-[#808080] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" placeholder="0.00" value="">
-                        </div>
+                       
                     </div>
-                    <div class="flex gap-[10px] md:gap-[20px] mt-[15px]">
-                        <button type="submit" class="w-[120px] bg-[#D272D2] px-[10px] py-[11px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center">Save</button>
+                    <div class="flex gap-[10px] md:gap-[20px]">
+                        <button type="submit" class="w-[100px] md:w-[110px] lg:w-[140px] bg-[#D272D2] px-[20px] py-[10px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center">Save</button>
                     </div>
                 </div>
                 </form>
-                <div class="w-full md-w-[70%] mt-[20px]">
+                <div class="w-full md-w-[70%] mt-[25px]">
                     <div class=" overflow-x-scroll tableScroll">
                         <table class="w-[100%] border-collapse border-spacing-0 rounded-[10px] border-separate border border-[#E6E6E6]">
                             <tbody>

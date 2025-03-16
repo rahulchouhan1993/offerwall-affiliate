@@ -9,13 +9,13 @@
                 <ul class="flex flex-wrap md:flex-col w-auto lg:w-full">
                     <li class="">
                         <button
-                            class="w-full block p-[8px] tab-button px-4 py-2 rounded-[5px] border-b-2 border-transparent text-[16px] font-[400] text-left">Post
+                            class="w-full block p-[8px] tab-button px-4 py-2 rounded-[5px] border-b-2 border-transparent text-[16px] font-[400] text-center">Post
                             Back</button>
                     </li>
 
                     {{-- <li class="">
                         <button
-                            class="w-full block p-[8px] tab-button px-4 py-2 rounded-[5px] border-b-2 border-transparent text-[16px] font-[400] text-left text-[#5e6278]">Global
+                            class="w-full block p-[8px] tab-button px-4 py-2 rounded-[5px] border-b-2 border-transparent text-[16px] font-[400] text-center text-[#5e6278]">Global
                             Post</button>
                     </li> --}}
                 </ul>

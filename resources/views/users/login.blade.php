@@ -4,7 +4,7 @@
 <div class="flex flex-wrap lg:flex-nowrap justify-center w-[100%] max-[1920px] items-stretch gap-[0]">
     <div class="flex flex-wrap md:flex-nowrap justify-center w-[100%] lg:w-[45%] max-w-[854px]  px-[20px] py-[50px] md:px-[30px] md:py-[60px]  lg:px-[20px] lg:py-[65px]   ">
         <div class="max-w-[450px] w-[100%]">
-            <div class="mb-[40px] md:mb-[50px] lg:mb-[80px] xl:mb-[100px]">
+            <div class="flex items-center justify-center mb-[40px] bg-[#090B13] px-[15px] py-[25px] md:mb-[50px] lg:mb-[80px] xl:mb-[100px]">
                 <a href="#">
                     <img src="images/logo.png" alt="">
                 </a>

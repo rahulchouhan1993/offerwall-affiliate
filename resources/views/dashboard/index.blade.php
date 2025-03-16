@@ -20,11 +20,11 @@
     </div>
 
     <div class="bg-[#fff] px-[15px] py-[15px] lg:px-[30px] lg:py-[30px] rounded-[8px] lg:rounded-[10px]">
-        <div class="flex justify-between gap-[10px] items-center flex-wrap md-flex-nowrap mb-[25px]">
+        <div class="flex justify-between flex-wrap sm:flex-nowrap gap-[10px] items-center flex-wrap md-flex-nowrap mb-[25px]">
             <h2 class="text-[20px] text-[#1A1A1A] font-[600]">Conversion Matrix</h2>
-            <div x-data="select" class="flex flex-wrap md-flex-nowrap items-start gap-[15px] justify-end " @click.outside="open = false">
+            <div x-data="select" class="flex flex-wrap w-[100%] sm:w-[190px] md-flex-nowrap items-start gap-[15px] justify-end " @click.outside="open = false">
                 <div class="relative w-[100%] ">
-                    <input name="range" class="dateRange w-[280px] bg-[#F6F6F6] px-[12px] py-[12px] text-[13px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" type="text" value="">
+                    <input name="range" class="dateRange w-[100%] bg-[#F6F6F6] px-[12px] py-[12px] text-[13px] font-[600] text-[#4D4D4D] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none" type="text" value="">
                 </div>
             </div>
         </div>

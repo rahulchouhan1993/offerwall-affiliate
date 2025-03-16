@@ -243,7 +243,10 @@
                         <h2 style="margin: 0; font-size: 11px; font-weight: 600; color: #ce68ce;">
                             <img style="max-width: 100px;" src="/images/logo.png">
                         </h2>
+                        @if ($settingsData->privacy_policy==1)
                         <p class="footerText-colordy" style="margin: 0px; font-size: 12px; color: #9514eb;">Privacy policy</p>
+                        @endif
+                        
                     </div>
                 </div>
 

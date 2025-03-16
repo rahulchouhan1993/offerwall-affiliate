@@ -101,15 +101,16 @@ class ReportsController extends Controller
         $graphData = [];
         if($allStatistics->isNotEmpty()){
             foreach($allStatistics as $k => $v){
+                //special condition for offer grouped by
                 if($requestedParams['groupBy']=='offer'){
                     $url = $advertiserDetails->affise_endpoint.'offer/'.$v->element;
                     $response = HTTP::withHeaders([
-                        'API-Key' => $advertiserDetails->affise_endpoint,
+                        'API-Key' => $advertiserDetails->affise_api_key,
                     ])->get($url);
                     
                     if ($response->successful()) {
                         $offerDetails = $response->json();
-                        $allStatistics[$k]->element = ucfirst($offerDetails['offer']['title']);
+                        $v->element = ucfirst($offerDetails['offer']['title']);
                     }
                 }
                 $graphData[$v->element]['conversion'] = $v->total_conversions;
@@ -127,22 +128,21 @@ class ReportsController extends Controller
         $requestedParams = $request->all();
         $allCountry = Tracking::where('user_id', auth()->id())->distinct()->pluck('country_code', 'country_name');    
         $allOffers = [];
-        $allTrackings = Tracking::where('user_id',auth()->user()->id)->groupBy('offer_id')->pluck('offer_id');
+        $allTrackings = Tracking::where('user_id',auth()->user()->id)->where('postback_sent',1)->groupBy('offer_id')->pluck('offer_id');
+       
         $allOs = Tracking::where('user_id', auth()->id())->distinct()->pluck('device_os', 'device_os');   
         if(!empty($allTrackings)){
             foreach($allTrackings as $tracking){
                 $url = $advertiserDetails->affise_endpoint.'offer/'.$tracking;
                 $response = HTTP::withHeaders([
-                    'API-Key' => $advertiserDetails->affise_endpoint,
+                    'API-Key' => $advertiserDetails->affise_api_key,
                 ])->get($url);
-                
                 if ($response->successful()) {
                     $offerDetails = $response->json();
                     $allOffers[$tracking] = ucfirst($offerDetails['offer']['title']);
                 }
             }
         }
-        
         //filter section
         $trackingStats = Tracking::query();
 
@@ -187,7 +187,7 @@ class ReportsController extends Controller
         }
 
         $allConversions = $trackingStats->paginate(100)->appends(request()->query());
-        return view('reports.conversions',compact('allAffiliatesApp','pageTitle','allConversions','allCountry','allOffers','allOs','requestedParams'));
+        return view('reports.conversions',compact('allAffiliatesApp','pageTitle','allConversions','allCountry','allOffers','allOs','requestedParams','advertiserDetails'));
     }
 
     public function postbacks(Request $request){
@@ -196,13 +196,13 @@ class ReportsController extends Controller
         $allAffiliatesApp = App::where('affiliateId',auth()->user()->id)->get();
         $requestedParams = $request->all();
         
-        $allTrackings = Tracking::where('user_id',auth()->user()->id)->groupBy('offer_id')->pluck('offer_id'); 
+        $allTrackings = Tracking::where('user_id',auth()->user()->id)->where('postback_sent',1)->groupBy('offer_id')->pluck('offer_id'); 
         $allOffers = [];
         if(!empty($allTrackings)){
             foreach($allTrackings as $tracking){
                 $url = $advertiserDetails->affise_endpoint.'offer/'.$tracking;
                 $response = HTTP::withHeaders([
-                    'API-Key' => $advertiserDetails->affise_endpoint,
+                    'API-Key' => $advertiserDetails->affise_api_key,
                 ])->get($url);
                 
                 if ($response->successful()) {

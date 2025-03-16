@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\App;
 use App\Models\Template;
 use App\Models\TestPostback;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -87,6 +88,7 @@ class AppsController extends Controller
     }
 
     public function template(Request $request, $id){
+        $settingsData = Setting::find(1);
         $appDetail = App::where('affiliateId',auth()->user()->id)->where('id',$id)->first();
         if(empty($appDetail)){
             return redirect()->route('dashboard.index')->with('error','Not valid request');
@@ -109,7 +111,7 @@ class AppsController extends Controller
             $templateColor->save();
             return redirect()->back()->with('success','Template updated successfully');
         }
-        return view('apps.template',compact('pageTitle','templateColor','appDetail'));
+        return view('apps.template',compact('pageTitle','templateColor','appDetail','settingsData'));
     }
 
     public function documentations(){

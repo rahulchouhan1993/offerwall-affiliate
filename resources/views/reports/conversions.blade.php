@@ -1,6 +1,8 @@
 @extends('layouts.default')
 @section('content')
-
+@php
+   use Illuminate\Support\Facades\Http;
+@endphp
 
 <div class="bg-[#f2f2f2] p-[15px] md:p-[35px]">
     <div class="bg-[#fff] p-[15px] md:p-[20px] rounded-[10px] mb-[20px]">
@@ -38,7 +40,7 @@
                 </select>
              </div>
              <div class="w-[100%] flex items-center flex-wrap justify-start lg:flex-nowrap gap-[10px]">
-                <label class="min-w-[160px] w-[10%] text-[14px] font-[500] text-[#898989] ">Filter by:</label>
+                <label class="min-w-[160px] w-[10%] text-[14px] font-[500] text-[#898989] ">Filter by:</label> 
                 <div class="w-[100%] xl:w-[90%] flex flex-wrap xl:flex-nowrap  items-center gap-[5px] md:gap-[8px] lg:gap-[10px] xl:gap-[15px]">
                    <div class="relative w-[100%] xl:w-[80%] flex flex-wrap xl:flex-nowrap items-center gap-[10px]">
                       <select name="offer"
@@ -198,6 +200,16 @@
                       @endif --}}
                       
                    </td>
+                   @php
+                        $url = $advertiserDetails->affise_endpoint.'offer/'.$conversion->offer_id;
+                        $response = HTTP::withHeaders([
+                           'API-Key' => $advertiserDetails->affise_api_key,
+                        ])->get($url);
+                        if ($response->successful()) {
+                           $offerDetails = $response->json();
+                           $conversion->offer_id = ucfirst($offerDetails['offer']['title']);
+                        }
+                   @endphp
                    <td
                       class="text-[10px] font-[500] text-[#808080] px-[10px] py-[10px] text-left whitespace-nowrap border-b-[1px] border-b-[#E6E6E6]">
                       {{ $conversion->offer_id }}

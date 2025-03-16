@@ -13,20 +13,18 @@
                             Back</button>
                     </li>
 
-                    <li class="">
+                    {{-- <li class="">
                         <button
                             class="w-full block p-[8px] tab-button px-4 py-2 rounded-[5px] border-b-2 border-transparent text-[16px] font-[400] text-left text-[#5e6278]">Global
                             Post</button>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
 
             <div class="w-[100%] lg:w-[75%]">
                 <div class="tab-content">
                     <h2 class="text-[1.2rem] md:text-[1.6rem] text-[#3f4254] mb-[15px] font-[800]">Post Back</h2>
-                    <p class="text-[1.10rem] font-[400] text-[#7e8299] mb-[20px]">Efficiently syndicate flexible content
-                        via cost effective initiatives completely leverage vertical quality.
-                        Turn your mobile visitors into your best customers.</p>
+                    <p class="text-[1.10rem] font-[400] text-[#7e8299] mb-[20px]">Whenever a user completes an offer, we will make a call to the Postback URL that you indicated in your app attaching all the information that you will need to credit your users. Our server will make a HTTP GET request to your server including the parameters that you have added. Here is the list of available macros.</p>
                     <div class="mt-[20px] mb-[30px]">
                         <ul class="w-full flex items-start flex-wrap">
                             <li
@@ -41,18 +39,87 @@
 
                             <li
                                 class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
-                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{user_id}</label>
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{visitor_id}</label>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">ID of the user who have completed the offer.</p>
+                            </li>
+                            <li
+                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{ip}</label>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">IP of the user.</p>
+                            </li>
+                            <li
+                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{user_agent}</label>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">All details related to user agent, like browserm operating system etc. etc.</p>
+                            </li>
+                            <li
+                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{device_type}</label>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Possible option from, Mobile, Desktop or Tablet</p>
+                            </li>
+                            <li
+                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{sub1}</label>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Click ID</p>
+                            </li>
+                            <li
+                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{sub2}</label>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Type of offer (in our case it will always be offerwall)</p>
+                            </li>
+                            <li
+                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{sub3}</label>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">App Id from the offerwall portal</p>
+                            </li>
+                            <li
+                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{sub4}</label>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Tracking Id</p>
+                            </li>
+                            <li
+                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{offer_id}</label>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Offer Id</p>
+                            </li>
+                            <li
+                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{offer_name}</label>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Offer Name</p>
+                            </li>
+                            <li
+                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{status}</label>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Conversion status (pending or confirmed)</p>
+                            </li>
+                            <li
+                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{sum}</label>
                                 <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Efficiently syndicate flexible content
                                     via cost effective initiatives completely leverage vertical quality.
                                     Turn your mobile visitors into your best customers.</p>
                             </li>
                             <li
                                 class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
-                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{user_id}</label>
-                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Efficiently syndicate flexible content
-                                    via cost effective initiatives completely leverage vertical quality.
-                                    Turn your mobile visitors into your best customers.</p>
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{geo}</label>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]"> Country iSO code</p>
                             </li>
+                            <li
+                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{goal}</label>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Goal of the conversion</p>
+                            </li>
+                            <li
+                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{currency}</label>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Payout currency type</p>
+                            </li>
+                            <li
+                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{os}</label>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Operating System</p>
+                            </li>
+                            
                         </ul>
                     </div>
 
@@ -64,6 +131,8 @@
                         <br><br>
                         In the following example, we have decided to receive the value in our currency "points" in the
                         parameter "pointsToReward" and the ID of the user on our website in the parameter "user".
+                    </p>
+                    <p class="text-[1.10rem] font-[400] text-[#7e8299] mb-[20px]">Our system IP is, 135.125.206.95 you should accept only postbacks coming from this IP address. If you want to secure the postback to ensure that the received call comes from our system, you will need to validate the signature we send. Below you can see how you should validate the signature. Signature parameter should match MD5 of {user_id} {transaction_id} {reward} SECRET
                     </p>
                     <div class="overflow-auto mb-[40px]  w-full p-4 bg-[#181c32] rounded mt-3">
 

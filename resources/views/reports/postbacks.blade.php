@@ -113,7 +113,7 @@
                 @php
                   $url = $advertiserDetails->affise_endpoint . "offer/".$postBacks->offer_id;
                   $response = HTTP::withHeaders([
-                        'API-Key' => $advertiserDetails->affise_endpoint,
+                        'API-Key' => $advertiserDetails->affise_api_key,
                   ])->get($url);
                   if ($response->successful()) {
                      $offerDetail = $response->json();

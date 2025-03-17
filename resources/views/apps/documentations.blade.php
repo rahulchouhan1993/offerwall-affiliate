@@ -94,10 +94,8 @@
                             </li>
                             <li
                                 class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
-                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{sum}</label>
-                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Efficiently syndicate flexible content
-                                    via cost effective initiatives completely leverage vertical quality.
-                                    Turn your mobile visitors into your best customers.</p>
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{payout}</label>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Payout which Affiliate receives for completing the conversion. </p>
                             </li>
                             <li
                                 class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">

@@ -10,7 +10,7 @@ use App\Models\TestPostback;
 
 //Users Routes
 Route::match(['post','get'],'/',[UsersController::class,'login'])->name('login');
-Route::get('/documentations', [AppsController::class, 'documentations'])->name('documentations');
+Route::get('/documentation', [AppsController::class, 'documentations'])->name('documentations');
 
 // Routes with Auth Middleware
 Route::middleware('auth')->group(function () {

@@ -7,14 +7,8 @@
             <h3 class="text-[38px] font-[700] text-[#fff]">{{ $activeApps ?? 0 }}</h3>
         </div>
 
-        <div
-            class="bluebg flex flex-col justify-center items-start gap-[5px]  w-[100%] sm:w-[150px] md:w-[180px] lg:w-[200px] xl:w-[300px] 2xl:w-[365px] h-[130px]  rounded-[7px] lg:rounded-[10px] px-[30px] py-[30px] activeApps">
-            <h2 class="text-[18px] font-[500] text-[#fff]">Revenue</h2>
-            <h3 class="text-[38px] font-[700] text-[#fff]">$ {{ $totalRevenue ?? 0 }}</h3>
-        </div>
-
         <div class="orangebg flex flex-col justify-center bg-[#EF7947] items-start gap-[5px]  w-[100%] sm:w-[200px] md:w-[265px] lg:w-[365px] h-[130px]  rounded-[7px] lg:rounded-[10px] px-[30px] py-[30px] activeApps">
-            <h2 class="text-[18px] font-[500] text-[#fff]">Payouts</h2>
+            <h2 class="text-[18px] font-[500] text-[#fff]">Revenue</h2>
             <h3 class="text-[38px] font-[700] text-[#fff]">$ {{ $totalPayouts ?? 0 }}</h3>
         </div>
     </div>

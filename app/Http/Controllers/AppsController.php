@@ -115,7 +115,7 @@ class AppsController extends Controller
     }
 
     public function documentations(){
-        $pageTitle = 'Documentations';
+        $pageTitle = 'Documentation';
         return view('apps.documentations',compact('pageTitle'));
     }
 

@@ -4,7 +4,7 @@
 <div class="bg-[#f2f2f2] p-[15px] lg:p-[35px]">
     <div class="bg-[#fff] p-[15px] md:p-[20px] rounded-[10px] mb-[20px]">
         <div class="flex flex-wrap md:flex-nowrap gap-[20px] xl:gap-[40px] items-start justify-start">
-            <div class="w-[100%] md:w-[15%] min-w-[180px] md:min-w-[200px] xl:min-w-[275px]">
+            {{-- <div class="w-[100%] md:w-[15%] min-w-[180px] md:min-w-[200px] xl:min-w-[275px]">
                 <h2 class="text-[1.1rem] md:text-[1.25rem] font-[600] text-[#000] mb-[25px]">Postback</h2>
                 <ul class="flex flex-wrap md:flex-col w-auto lg:w-full">
                     <li class="">
@@ -13,18 +13,19 @@
                             Back</button>
                     </li>
 
-                    {{-- <li class="">
+                    <li class="">
                         <button
                             class="w-full block p-[8px] tab-button px-4 py-2 rounded-[5px] border-b-2 border-transparent text-[16px] font-[400] text-center text-[#5e6278]">Global
                             Post</button>
-                    </li> --}}
+                    </li>
                 </ul>
-            </div>
+            </div> --}}
 
-            <div class="w-[100%] lg:w-[75%]">
+            <div class="w-[100%] lg:w-[100%]">
                 <div class="tab-content">
                     <h2 class="text-[1.2rem] md:text-[1.6rem] text-[#3f4254] mb-[15px] font-[800]">Post Back</h2>
-                    <p class="text-[1.10rem] font-[400] text-[#7e8299] mb-[20px]">Whenever a user completes an offer, we will make a call to the Postback URL that you indicated in your app attaching all the information that you will need to credit your users. Our server will make a HTTP GET request to your server including the parameters that you have added. Here is the list of available macros.</p>
+                    <p class="text-[1.10rem] font-[400] text-[#7e8299] mb-[20px]">Whenever a user completes an offer, we will send a request to the Postback URL specified in your app, including all the necessary data to credit your users.</p> 
+                    <p class="text-[1.10rem] font-[400] text-[#7e8299] mb-[20px]">Our server will make a HTTP GET request to your server, incorporating the parameters you have defined.</p> <p class="text-[1.10rem] font-[400] text-[#7e8299] mb-[20px]">Below is the list of available macros.</p>
                     <div class="mt-[20px] mb-[30px]">
                         <ul class="w-full flex items-start flex-wrap">
                             <li
@@ -39,85 +40,85 @@
 
                             <li
                                 class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
-                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{visitor_id}</label>
-                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">ID of the user who have completed the offer.</p>
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{user_id}</label>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Unique identifier of the user who completed an action in your platform.</p>
                             </li>
                             <li
                                 class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
-                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{ip}</label>
-                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">IP of the user.</p>
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{reward}</label>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Amount of virtual currency to be credited to your user.</p>
                             </li>
                             <li
                                 class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
-                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{user_agent}</label>
-                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">All details related to user agent, like browserm operating system etc. etc.</p>
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{status}</label>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Status of the conversion (Approved or Rejected)</p>
+                            </li>
+                            <li
+                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{payout}</label>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Payout of the offer in USD. </p>
+                            </li>
+                            <li
+                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{offer_id}</label>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">ID of the completed offer.</p>
+                            </li>
+                            <li
+                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{offer_name}</label>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Name of the completed offer.</p>
+                            </li>
+                            <li
+                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{goal}</label>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Goal Id of the conversion for the multi-reward offers.</p>
                             </li>
                             <li
                                 class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
                                 <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{device_type}</label>
-                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Possible option from, Mobile, Desktop or Tablet</p>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">User device type: Mobile, Desktop or Tablet.</p>
+                            </li>
+                            <li
+                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{geo}</label>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Country ISO code.</p>
+                            </li>
+                            <li
+                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{ip}</label>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">IP of the user who completed the offer.</p>
+                            </li>
+                            <li
+                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{os}</label>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Operating system of the user.</p>
+                            </li>
+                            <li
+                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{user_agent}</label>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">All details related to user agent, including browser, operating system, and other relevant information.</p>
                             </li>
                             <li
                                 class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
                                 <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{sub1}</label>
                                 <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Click ID</p>
                             </li>
+                
                             <li
                                 class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
                                 <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{sub2}</label>
-                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Type of offer (in our case it will always be offerwall)</p>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Type of offer (in our case it will always be offerwall.)</p>
                             </li>
                             <li
                                 class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
                                 <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{sub3}</label>
-                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">App Id from the offerwall portal</p>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">App Id from the offerwall portal.</p>
                             </li>
                             <li
                                 class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
                                 <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{sub4}</label>
                                 <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Tracking Id</p>
                             </li>
-                            <li
-                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
-                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{offer_id}</label>
-                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Offer Id</p>
-                            </li>
-                            <li
-                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
-                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{offer_name}</label>
-                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Offer Name</p>
-                            </li>
-                            <li
-                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
-                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{status}</label>
-                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Conversion status (pending or confirmed)</p>
-                            </li>
-                            <li
-                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
-                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{payout}</label>
-                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Payout which Affiliate receives for completing the conversion. </p>
-                            </li>
-                            <li
-                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
-                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{geo}</label>
-                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]"> Country iSO code</p>
-                            </li>
-                            <li
-                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
-                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{goal}</label>
-                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Goal of the conversion</p>
-                            </li>
-                            <li
-                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
-                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{currency}</label>
-                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Payout currency type</p>
-                            </li>
-                            <li
-                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
-                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{os}</label>
-                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Operating System</p>
-                            </li>
-                            
                         </ul>
                     </div>
 

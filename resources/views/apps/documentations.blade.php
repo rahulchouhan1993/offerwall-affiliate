@@ -100,24 +100,14 @@
                             </li>
                             <li
                                 class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
-                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{sub1}</label>
-                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Click ID</p>
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{click_id}</label>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Unique clickid of your platform.</p>
                             </li>
                 
                             <li
                                 class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
-                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{sub2}</label>
-                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Type of offer (in our case it will always be offerwall.)</p>
-                            </li>
-                            <li
-                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
-                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{sub3}</label>
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{app_id}</label>
                                 <p class="w-[85%] text-[15px] text-[#000] mb-[0]">App Id from the offerwall portal.</p>
-                            </li>
-                            <li
-                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
-                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{sub4}</label>
-                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Tracking Id</p>
                             </li>
                         </ul>
                     </div>

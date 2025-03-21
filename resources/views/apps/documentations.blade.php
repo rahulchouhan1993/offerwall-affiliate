@@ -109,6 +109,12 @@
                                 <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{app_id}</label>
                                 <p class="w-[85%] text-[15px] text-[#000] mb-[0]">App Id from the offerwall portal.</p>
                             </li>
+
+                            <li
+                                class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
+                                <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">{tracking_id}</label>
+                                <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Tracking Id from the offerwall portal.</p>
+                            </li>
                         </ul>
                     </div>
 
@@ -117,34 +123,35 @@
                         URL, it's as simple as incorporating each macro in the place corresponding to the parameter
                         value you want in the URL to which you want us to call. This way, you can use parameter names of
                         your choice.
-                        <br><br>
-                        In the following example, we have decided to receive the value in our currency "points" in the
-                        parameter "pointsToReward" and the ID of the user on our website in the parameter "user".
+                        <br>
                     </p>
-                    <p class="text-[1.10rem] font-[400] text-[#7e8299] mb-[20px]">Our system IP is, 135.125.206.95 you should accept only postbacks coming from this IP address. If you want to secure the postback to ensure that the received call comes from our system, you will need to validate the signature we send. Below you can see how you should validate the signature. Signature parameter should match MD5 of {user_id} {transaction_id} {reward} SECRET
+                    <p class="text-[1.10rem] font-[400] text-[#7e8299] mb-[20px]">Our system IP is, 135.125.206.95 you should accept only postbacks coming from this IP address. If you want to secure the postback to ensure that the received call comes from our system, you will need to validate the signature we send. Below you can see how you should validate the signature. Signature parameter should match MD5 of {user_id} {click_id} {tracking_id} {app_id} {secret_key}
                     </p>
-                    <div class="overflow-auto mb-[40px]  w-full p-4 bg-[#181c32] rounded mt-3">
+                    <div class="overflow-auto mb-[40px] w-full p-4 bg-[#181c32] rounded mt-3">
+                        <pre class="w-full text-[#fff] mb-0 text-[.875em] whitespace-pre ">
+                            <code>
+&lt;?php
 
-                        <code class="flex w-full ">
-                            <pre class="w-full flex text-[#fff] mb-0 text-[.875em] whitespace-normal">&lt;?php
+    $secret = ""; // check your app integration method and use the SECRET KEY
+    
+    $user_id = isset($_GET['user_id']) ? $_GET['user_id'] : null;
+    $click_id = isset($_GET['click_id']) ? $_GET['click_id'] : null;
+    $tracking_id = isset($_GET['tracking_id']) ? $_GET['tracking_id'] : null;
+    $app_id = isset($_GET['app_id']) ? $_GET['app_id'] : null;
+    $signature = isset($_GET['signature']) ? $_GET['signature'] : null;
 
-                            $secret = ""; // check your app info, use the SECRET not the API SECRET
-
-                            $user_id = isset($_GET['user_id']) ? $_GET['user_id'] : null;
-                            $transaction_id = isset($_GET['transaction_id']) ? $_GET['transaction_id'] : null;
-                            $reward = isset($_GET['reward']) ? $_GET['reward'] : null;
-                            $signature = isset($_GET['signature']) ? $_GET['signature'] : null;
-
-                            // validate signature
-                            if(md5($user_id.$transaction_id.$reward.$secret) != $signature)
-                            {
-                                echo "ERROR: Signature doesn't match";
-                                return;
-                            }
-
-                            ?&gt;</pre>
-                                                            </code>
+    // validate signature
+    if(md5($user_id.$click_id.$tracking_id.$app_id.$secret) != $signature)
+    {
+        echo "ERROR: Signature doesn't match";
+        return;
+    }
+                    
+?&gt;
+                            </code>
+                        </pre>
                     </div>
+                    
 
                     <h2 class="text-[1.2rem] md:text-[1.6rem] text-[#3f4254] mb-[15px] font-[800]">Responding to the Postback</h2>
                     <p class="text-[1.10rem] font-[400] text-[#7e8299] mb-[20px]">Our server will expect the following

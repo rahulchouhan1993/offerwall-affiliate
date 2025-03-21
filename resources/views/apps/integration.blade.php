@@ -29,11 +29,11 @@
                                 <path d="M7 14C6.45 14 5.97933 13.8043 5.588 13.413C5.19667 13.0217 5.00067 12.5507 5 12C4.99933 11.4493 5.19533 10.9787 5.588 10.588C5.98067 10.1973 6.45133 10.0013 7 10C7.54867 9.99867 8.01967 10.1947 8.413 10.588C8.80633 10.9813 9.002 11.452 9 12C8.998 12.548 8.80233 13.019 8.413 13.413C8.02367 13.807 7.55267 14.0027 7 14ZM7 18C5.33333 18 3.91667 17.4167 2.75 16.25C1.58333 15.0833 1 13.6667 1 12C1 10.3333 1.58333 8.91667 2.75 7.75C3.91667 6.58333 5.33333 6 7 6C8.11667 6 9.12933 6.275 10.038 6.825C10.9467 7.375 11.6673 8.1 12.2 9H21L24 12L19.5 16.5L17.5 15L15.5 16.5L13.375 15H12.2C11.6667 15.9 10.946 16.625 10.038 17.175C9.13 17.725 8.11733 18 7 18ZM7 16C7.93333 16 8.75433 15.7167 9.463 15.15C10.1717 14.5833 10.6423 13.8667 10.875 13H14L15.45 14.025L17.5 12.5L19.275 13.875L21.15 12L20.15 11H10.875C10.6417 10.1333 10.171 9.41667 9.463 8.85C8.755 8.28333 7.934 8 7 8C5.9 8 4.95833 8.39167 4.175 9.175C3.39167 9.95833 3 10.9 3 12C3 13.1 3.39167 14.0417 4.175 14.825C4.95833 15.6083 5.9 16 7 16Z" fill="currentColor"/>
                                 </svg>
                             </div>
-                            <h2 class="text-[#898989] text-[14px] font-[500]">Secret ID</h2>
+                            <h2 class="text-[#898989] text-[14px] font-[500]">Secret Key</h2>
                         </div>
-                        <h3 class="text-[14px] text-[#4D4D4D] font-[500]">{{ base64_encode(auth()->user()->unique_id) }}</h3>
+                        <h3 class="text-[14px] text-[#4D4D4D] font-[500]">{{ $appDetail->secrect_key }}</h3>
                     </div>
-                    <div class="flex items-center justify-between py-[20px] gap-[15px] border-b-[1px] border-b-[#E6E6E6]">
+                    {{-- <div class="flex items-center justify-between py-[20px] gap-[15px] border-b-[1px] border-b-[#E6E6E6]">
                         <div class="flex items-center justify-between gap-[10px]">
                             <div class="flex items-center justify-between w-[46px] h-[46px] bg-[#F5EAF5] px-[2px] py-[1px] rounded-[4px] text-[14px] font-[500] text-[#D272D2] text-center"><svg class="m-auto" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7 14C6.45 14 5.97933 13.8043 5.588 13.413C5.19667 13.0217 5.00067 12.5507 5 12C4.99933 11.4493 5.19533 10.9787 5.588 10.588C5.98067 10.1973 6.45133 10.0013 7 10C7.54867 9.99867 8.01967 10.1947 8.413 10.588C8.80633 10.9813 9.002 11.452 9 12C8.998 12.548 8.80233 13.019 8.413 13.413C8.02367 13.807 7.55267 14.0027 7 14ZM7 18C5.33333 18 3.91667 17.4167 2.75 16.25C1.58333 15.0833 1 13.6667 1 12C1 10.3333 1.58333 8.91667 2.75 7.75C3.91667 6.58333 5.33333 6 7 6C8.11667 6 9.12933 6.275 10.038 6.825C10.9467 7.375 11.6673 8.1 12.2 9H21L24 12L19.5 16.5L17.5 15L15.5 16.5L13.375 15H12.2C11.6667 15.9 10.946 16.625 10.038 17.175C9.13 17.725 8.11733 18 7 18ZM7 16C7.93333 16 8.75433 15.7167 9.463 15.15C10.1717 14.5833 10.6423 13.8667 10.875 13H14L15.45 14.025L17.5 12.5L19.275 13.875L21.15 12L20.15 11H10.875C10.6417 10.1333 10.171 9.41667 9.463 8.85C8.755 8.28333 7.934 8 7 8C5.9 8 4.95833 8.39167 4.175 9.175C3.39167 9.95833 3 10.9 3 12C3 13.1 3.39167 14.0417 4.175 14.825C4.95833 15.6083 5.9 16 7 16Z" fill="currentColor"/>
@@ -53,7 +53,7 @@
                             <h2 class="text-[#898989] text-[14px] font-[500]">Postback Secure Key</h2>
                         </div>
                         <h3 class="text-[14px] text-[#4D4D4D] font-[500]">{{ auth()->user()->postback_key }}</h3>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
 
@@ -73,14 +73,14 @@
                     
                     <code class="flex items-center justify-center bg-[#1E233B] h-[100%] xl:h-[125px] rounded-[8px] px-[15px] py-[15px] text-[14px] text-[#FFFFFF]"  data-lang="html">
                         
-                            &lt;iframe style="width:100%; height:800px; border:0; padding:0; margin:0;" scrolling="yes" frameborder="0" src="{{ env('OFFRWALL_URL') }}/wall?apiKey={{ auth()->user()->api_key }}&wallId={{ base64_encode($appDetail->appId) }}">&gt;&lt;/iframe&gt;
+                            &lt;iframe style="width:100%; height:800px; border:0; padding:0; margin:0;" scrolling="yes" frameborder="0" src="{{ env('OFFRWALL_URL') }}/wall?apiKey={{ auth()->user()->api_key }}&wallId={{ $appDetail->appId }}">&gt;&lt;/iframe&gt;
                    
                     </code>
                 </div>
 
                 
 
-                <p class="text-[14px] text-[#808080]">This is the simplest integration method, if you would like to use our API or other integration options, please, check our documentation.</p>
+                <p class="text-[14px] text-[#808080]">This is the simplest integration method.</p>
             </div>
         </div>
     </div>

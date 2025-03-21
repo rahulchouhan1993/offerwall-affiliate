@@ -27,7 +27,8 @@ class AppsController extends Controller
         
         if($request->isMethod('POST')){
             if($id==null){
-                $appData->appId = rand();
+                $appData->appId = md5(rand());
+                $appData->secrect_key = md5(rand());
                 $appData->affiliateId = auth()->user()->id;
                 $appData->status = 0;
                 $appData->affiliate_status = 1;

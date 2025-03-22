@@ -41,7 +41,7 @@ input:checked + .slider:before{-webkit-transform:translateX(23px);-ms-transform:
 /* .logo { background: url(../../public/images/loginbanner.jpg);} */
 /* Rounded sliders */
 
-.loginBx { height: 100vh; background: url(../../public/images/loginbanner.jpeg) 0 0 no-repeat; background-size: cover;}
+.loginBx { height: 100vh; background: url(../../public/images/loginbannernew.png) 0 0 no-repeat; background-size: cover;}
 
 
 

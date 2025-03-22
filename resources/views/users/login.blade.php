@@ -4,9 +4,9 @@
 <div class="flex flex-wrap lg:flex-nowrap justify-center w-[100%] max-[1920px] items-stretch gap-[0]">
     <div class="loginBx flex items-center flex-wrap md:flex-nowrap justify-center w-[100%] px-[20px] py-[50px] md:px-[30px] md:py-[60px]  lg:px-[20px] lg:py-[65px]   ">
         <div class="max-w-[450px] w-[100%] px-[20px] py-[35px] md:px-[40px] md:py-[65px] bg-[#fff] rounded-[10px] md:rounded-[15px]">
-        <div class="logo flex items-center justify-center mb-[20px] md:mb-[50px]">
+        <div class="logo1 flex items-center justify-center mb-[20px] md:mb-[50px]">
                 <a href="#">
-                    <img src="images/logo-login.jpeg" alt="">
+                    <img src="images/logo-offerwall-login.png" alt="logo">
                 </a>
             </div>
             <script>
@@ -18,7 +18,7 @@
                     toastr.error("{{ session('error') }}");
                 @endif
             </script>
-            <h2 class="text-[22px] text-center leading-[30px] md:text-[28px] md:leading-[30px] lg:text-[30px] lg:leading-[32px] font-[700] text-[#1A1A1A]"> Log in to get started!!</h2>
+            <h2 class="text-[22px] text-center leading-[30px] md:text-[28px] md:leading-[30px] lg:text-[30px] lg:leading-[32px] font-[700] text-[#090B13]"> Log in to get started!!</h2>
             <div class="mt-[30px] md:mt-[45px] lg:mt-[55px]">
                 <form method="post">
                     @csrf

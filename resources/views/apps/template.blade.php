@@ -218,7 +218,7 @@
                         <div class="cntbxsize"
                             style="width: calc(100% - 90px); display: flex; align-items: center; justify-content: space-between;">
                             <div style="width: calc(100% - 90px);">
-                                <h2 class="offerText-colordy" style="margin: 0 0 10px; font-weight: 600; font-size: 12px; color: #212121;">IN - Desktop</h2>
+                                <h2 class="offerText-colordy" style="margin: 0 0 10px; font-weight: 600; font-size: 12px; color: #212121;">Name Of The Offer</h2>
                                 <!-- <p style="margin: 0; font-size: 13px; font-weight: 400; line-height: 21px; color: #212121;">Download and install IN&nbsp;- Desktop</p> -->
                                 <!-- <div style="margin: 10px 0 0; padding: 11px; background: #d0bbe2; border-left: 2px solid #d59dfb;">
                             <p style="margin: 0; font-size: 13px; color: #2f2d2d;">IN - Desktop</p>
@@ -248,7 +248,7 @@
                 
 
                 <div class="offerBg-colordy" style="margin-top:30px; padding:10px; border-radius:8px; display: flex ; flex-wrap:wrap; width:100%; align-items: center; justify-content: flex-start; gap: 10px;box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);">
-                <h3 style="width:100%; font-size:18px; text-align:center; margin-bottom:5px;    border-bottom: 1px solid #ececec;">Offer detail design on popup</h3>
+                <h3 style="width:100%; font-size:18px; text-align:center; margin-bottom:5px;    border-bottom: 1px solid #ececec;">Offer Details</h3>
                 <div style="display:flex; width:100%; gap:10px">
                <div style="display: flex ; align-items: center; width: 25%;">
                   <img id="offer-image-pop" src="/images/default_offer.png" alt="img" style="width: 100%; max-width: 100%; object-fit: cover;">
@@ -256,13 +256,13 @@
                <div style="display: flex ;  align-items: center; justify-content: space-between; width: 100%;">
                    
                   <div style="margin: 0 0 5px;  font-weight: 600; font-size: 12px; color: #212121;">
-                     <h2 style="margin: 0 0 5px;  font-weight: 600; font-size: 16px; color: #212121;" class="offerText-colordy">WW - Test</h2>
-                     <h3 style="margin: 0 0 10px;  font-weight: 400; font-size: 14px; color: #212121;" class="offerText-colordy">Offer Requirments</h3>
+                     <h2 style="margin: 0 0 5px;  font-weight: 600; font-size: 16px; color: #212121;" class="offerText-colordy">Name Of The Offer</h2>
+                     <h3 style="margin: 0 0 10px;  font-weight: 400; font-size: 14px; color: #212121;" class="offerText-colordy">Offer Requirements</h3>
                      
                      <div style="width:100%; margin-bottom:10px" class="cntbx">
-                        <p style="margin: 0;  font-size: 12px; color: #212121;" id="offer-description-pop" class="offerText-colordy">Conversion event: Answer 1&nbsp;question&nbsp;with 100% score</p>
+                        <p style="margin: 0;  font-size: 12px; color: #212121;" id="offer-description-pop" class="offerText-colordy">Description of the conversion flow.</p>
                      </div>
-                     <a class="offerButtonBg-colordy offerButtonText-colordy" href="#" target="_blank" style="display: inline-block; padding: 4px 15px; border-radius: 60px; background: #e788dd;   font-size: 12px; color: #fff; text-decoration: none;" id="offer-price-pop">+ 2.5 Points</a>
+                     <a class="offerButtonBg-colordy offerButtonText-colordy" href="#" target="_blank" style="display: inline-block; padding: 4px 15px; background: #e788dd; font-size: 12px; color: #fff; text-decoration: none;" id="offer-price-pop">+ 2.5 Points</a>
                   </div>
                </div>
                </div>

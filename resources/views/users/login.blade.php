@@ -1,6 +1,5 @@
 @extends('layouts.login')
 @section('content')
-<!-- <p>You will find this file in resources/views/users/login.blade.php</p> -->
 <div class="flex flex-wrap lg:flex-nowrap justify-center w-[100%] max-[1920px] items-stretch gap-[0]">
     <div class="loginBx flex items-center flex-wrap md:flex-nowrap justify-center w-[100%] px-[20px] py-[50px] md:px-[30px] md:py-[60px]  lg:px-[20px] lg:py-[65px]   ">
         <div class="max-w-[450px] w-[100%] px-[20px] py-[35px] md:px-[40px] md:py-[65px] bg-[#fff] rounded-[10px] md:rounded-[15px]">
@@ -49,23 +48,9 @@
                             </div>
                         </div>
                     </div>
-                <!-- Reset Password -->
-                {{-- <div id="resetpassword" class="flex flex-col gap-[25px] hide  ">
-                    <div class="">
-                        <div class="text-[16px] font-[600] text-[#1A1A1A] mb-[8px]">Email</div>
-                        <div class="relative">
-                            <input type="email" placeholder="Email"
-                                class="block w-[100%] border-[1px] border-[#00000021] rounded-[7px] px-[15px] pr-[55px] py-[15px] bg-[#F6F6F6] hover:outline-none focus:outline-none">
-                            <div class="absolute top-[16px] right-[22px]">
-                            <i class="ri-mail-fill text-[#BFBFBF]"></i>
-
-                            </div>
-                        </div>
-                    </div>
-                </div> 
                 <div class="text-right mt-[8px]">
-                    <a id="resetPass" href="#" class="text-[14px] text-[#D272D2] font-[500]" onclick="resetPass()">Reset password</a>
-                </div>--}}
+                    <a id="resetPass" href="/reset-password" class="text-[14px] text-[#D272D2] font-[500]">Reset password</a>
+                </div>
                     <div class="mt-[30px]">
                         <button type="submit" class="w-[100%] bg-[#D272D2] px-[10px] py-[15px] text-[18px] text-[#fff] font-[500] text-center rounded-[8px] hover:bg-[#000]">
                         Login
@@ -79,24 +64,13 @@
                 </div>
                 <div class="mt-[50px] text-[14px] font-[500] text-[#898989] text-center">
                 Don’t have an account? 
-                    <a href="#" class="text-[#D272D2] underline hover:text-[#000] hover:no-underline ">
+                    <a href="https://offerwallxxx.com/" class="text-[#D272D2] underline hover:text-[#000] hover:no-underline ">
                     Sign Up
                     </a>
                 </div>
             </div>
         </div>
     </div>
-    <!-- <div class="w-[100%]  lg:w-[55%] max-w-[1070px]">
-        <img class="w-[100%] max-w-[100%] h-[100%] " src="images/loginbanner.jpg" alt="">
-    </div> -->
 </div>
-<script>
-    function resetPass() {
-    var element = document.getElementById("loginForm");
-    element.classList.add("hide");
 
-    var element = document.getElementById("resetpassword");
-    element.classList.remove("hide");
-    }
-</script> 
 @stop

@@ -80,7 +80,7 @@
 
                 
 
-                <p class="text-[14px] text-[#808080]">This is the simplest integration method.</p>
+                <p class="text-[14px] text-[#808080] font-[600]">You do not need to manually pass the user ID. It is automatically captured in the background by matching the provided API Key and Wall Id.</p>
             </div>
         </div>
     </div>

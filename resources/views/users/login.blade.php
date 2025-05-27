@@ -64,7 +64,7 @@
                 </div>
                 <div class="mt-[50px] text-[14px] font-[500] text-[#898989] text-center">
                 Don’t have an account? 
-                    <a href="https://offerwallxxx.com/" class="text-[#D272D2] underline hover:text-[#000] hover:no-underline ">
+                    <a href="https://makamobile.affise.com/v2/sign/in" class="text-[#D272D2] underline hover:text-[#000] hover:no-underline ">
                     Sign Up
                     </a>
                 </div>
@@ -72,5 +72,15 @@
         </div>
     </div>
 </div>
-
+<script>
+    $(document).ready(function() {
+        setInterval(() => {
+            fetch('/refresh-csrf')
+                .then(response => response.json())
+                .then(data => {
+                    document.querySelector('input[name="_token"]').value = data.csrf;
+                });
+        }, 5 * 60 * 1000); // every 5 minutes
+    });
+</script>
 @stop

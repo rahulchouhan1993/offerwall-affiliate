@@ -81,5 +81,43 @@
                 <p class="text-[14px] text-[#808080] font-[600]">Replace <span class="text-[#808080]">[USER_ID]</span> in the iframe URL above with the User ID from your platform.</p>
             </div>
         </div>
+        <br>
+    <div class="flex flex-col lg:flex-row justify-between items-start gap-[15px] w-[100%] ">
+        <div class="w-[100%] lg:w-[100%] bg-[#fff] p-[15px] md:p-[20px] rounded-[10px]">
+            <h2 class="text-[1.2rem] md:text-[1.6rem] text-[#3f4254] mb-[15px] font-[800]">Additional and custom parameters</h2>
+            <p class="text-[1.10rem] font-[400] text-[#7e8299] mb-[20px]">You can use below parameters in the iframe URL as adiional parameters..</p>
+            <div class="mt-[20px] mb-[30px]">
+                <ul class="w-full flex items-start flex-wrap">
+                    <li class="w-full flex items-start gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
+                        <label class="w-[15%] min-w-[100px] text-[1.075rem] font-[600] text-[#3f4254] mb-[0]">Parameter</label>
+                        <label class="w-[85%] text-[1.075rem] font-[600] text-[#3f4254] mb-[0]">Description</label>
+
+
+                    </li>
+                    
+                    <li class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
+                        <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">userId (Integer)</label>
+                        <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Unique identifier of the webmaster.</p>
+                    </li>
+                    <li class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
+                        <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">apiKey</label>
+                        <p class="w-[85%] text-[15px] text-[#000] mb-[0]">Unique API key of the app, this is auto placed by the portal.</p>
+                    </li>
+                    <li class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
+                        <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">sub4 (Varchar 255)</label>
+                        <p class="w-[85%] text-[15px] text-[#000] mb-[0]">If you need extra parameter then you can use this and while sending response to your postback URL we will send the value of parameter.</p>
+                    </li>
+                   <li class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
+                        <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">sub5 (Varchar 255)</label>
+                        <p class="w-[85%] text-[15px] text-[#000] mb-[0]">If you need extra parameter then you can use this and while sending response to your postback URL we will send the value of parameter.</p>
+                    </li>
+                    <li class="w-full flex items-center gap-[15px] border-dashed border-b-[1px] border-b-[#e4e6ef] py-[14px]">
+                        <label class="w-[15%] min-w-[100px] text-[15px] text-[#000] mb-[0]">sub6 (Varchar 255)</label>
+                        <p class="w-[85%] text-[15px] text-[#000] mb-[0]">If you need extra parameter then you can use this and while sending response to your postback URL we will send the value of parameter.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
     </div>
 @stop

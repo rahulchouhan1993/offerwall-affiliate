@@ -10,4 +10,9 @@ class PaymentsController extends Controller
         $pageTitle = 'Invoices';
         return view('payments.index',compact('pageTitle'));
     }
+
+    public function paymentMethods(){
+        $pageTitle = 'Payment Methods';
+        return view('payments.methods',compact('pageTitle'));
+    }
 }

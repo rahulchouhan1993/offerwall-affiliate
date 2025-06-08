@@ -2,8 +2,8 @@
 @section('content')
 
 
-<div class="p-[15px] md:p-[35px]">
-    <div class="bg-[#fff] p-[10px] md:p-[15px] md:p-[20px] rounded-[5px] md:rounded-[10px] mb-[20px]">
+<div class="p-[15px] md:p-[35px]"> 
+    {{-- <div class="bg-[#fff] p-[10px] md:p-[15px] md:p-[20px] rounded-[5px] md:rounded-[10px] mb-[20px]">
         <div class="flex gap-[10px] md:gap-[25px] w-[100%] ">
             <input type="text" name="" id=""
                 class="w-[100%] bg-[#F6F6F6] px-[15px] py-[12px] text-[12px] font-[500] text-[#808080] border-[1px] border-[#E6E6E6] rounded-[4px] hover:outline-none focus:outline-none"
@@ -11,7 +11,7 @@
             <button
                 class="bg-[#D272D2] px-[20px] py-[12px] w-[100px] rounded-[4px] text-[14px] font-[500] text-[#fff] text-center">Search</button>
         </div>
-    </div>
+    </div> --}}
 
 
     <div class="flex items-stretch justify-between flex-wrap md:flex-nowrap gap-[20px]">
@@ -79,10 +79,24 @@
 
     <div class="flex items-center justify-between gap-[20px] mt-[20px]">
         <div class="flex flex-col justify-between items-start gap-[5px] w-[100%] bg-[#fff] rounded-[5px] md:rounded-[10px] p-[15px]">
-            <div class="flex flex-col items-start gap-[5px]">
-                <h2 class="mb-[2px] text-[20px] text-[#1A1A1A] font-[600] ">
+            <div class="flex flex-row items-center justify-between w-full gap-[5px] mb-[10px]">
+                <h2 class="text-[20px] text-[#1A1A1A] font-[600] ">
                     Bills/Invoices
                 </h2>
+                <!-- Filters -->
+                <div class="flex flex-wrap items-center gap-[10px]">
+                    <!-- Date Range -->
+                    <input type="date" class="h-[37px] text-[14px] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[6px] text-[#1A1A1A] !outline-none focus:!outline-none">
+                    <span class="text-[#808080] text-[14px]">to</span>
+                    <input type="date" class="h-[37px] text-[14px] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[6px] text-[#1A1A1A] !outline-none focus:!outline-none">
+
+                    <!-- Status Dropdown -->
+                    <select class="h-[37px] text-[14px] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[6px] text-[#1A1A1A] !outline-none focus:!outline-none">
+                        <option value="">Status</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
             </div>
             <div class="w-[100%] overflow-x-auto tableScroll">
                 <table class="w-[100%] border-collapse border-spacing-0 rounded-[10px] border-separate border border-[#E6E6E6]">

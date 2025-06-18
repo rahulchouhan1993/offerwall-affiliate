@@ -32,7 +32,7 @@
                 </div>
                 <div class="flex flex-col gap-[1px]">
                     <h2 class="text-[14px] font-[500] text-[#898989] mb-[0]">USD</h2>
-                    <h3 class="text-[16px] font-[700] text-[#1A1A1A]">30</h3>
+                    <h3 class="text-[16px] font-[700] text-[#1A1A1A]">$ 30</h3>
                 </div>
             </div>
         </div>
@@ -44,13 +44,13 @@
             <div
                 class="flex items-center justify-between gap-[20px] p-[10px] bg-[#F5EAF5] border-[1px] border-[#FED5C3] rounded-[8px]">
                 <h2 class="text-[14px] font-[500] text-[#898989] mb-[0]">Balance</h2>
-                <h3 class="text-[16px] font-[700] text-[#1A1A1A]">30</h3>
+                <h3 class="text-[16px] font-[700] text-[#1A1A1A]">$ 30</h3>
             </div>
 
             <div
                 class="flex items-center justify-between gap-[20px] p-[10px] bg-[#F5EAF5] border-[1px] border-[#FED5C3] rounded-[8px] ">
                 <h2 class="text-[14px] font-[500] text-[#898989] mb-[0]">Total Paid</h2>
-                <h3 class="text-[16px] font-[700] text-[#1A1A1A]">$350</h3>
+                <h3 class="text-[16px] font-[700] text-[#1A1A1A]">$ 350</h3>
             </div>
         </div>
     </div>
@@ -84,19 +84,19 @@
                     Bills/Invoices
                 </h2>
                 <!-- Filters -->
-                <div class="flex flex-wrap items-center gap-[10px]">
-                    <!-- Date Range -->
+                {{-- <div class="flex flex-wrap items-center gap-[10px]">
+                    
                     <input type="date" class="h-[37px] text-[14px] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[6px] text-[#1A1A1A] !outline-none focus:!outline-none">
                     <span class="text-[#808080] text-[14px]">to</span>
                     <input type="date" class="h-[37px] text-[14px] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[6px] text-[#1A1A1A] !outline-none focus:!outline-none">
 
-                    <!-- Status Dropdown -->
+                    
                     <select class="h-[37px] text-[14px] border border-[#E6E6E6] rounded-[5px] px-[10px] py-[6px] text-[#1A1A1A] !outline-none focus:!outline-none">
                         <option value="">Status</option>
                         <option value="active">Active</option>
                         <option value="inactive">Inactive</option>
                     </select>
-                </div>
+                </div> --}}
             </div>
             <div class="w-[100%] overflow-x-auto tableScroll">
                 <table class="w-[100%] border-collapse border-spacing-0 rounded-[10px] border-separate border border-[#E6E6E6]">
@@ -149,7 +149,7 @@
                     @endif
                 </table>
             </div>
-            <div class="w-[100%] flex items-center justify-between flex-col gap-[15px] md:flex-row mt-[30px]">
+            {{-- <div class="w-[100%] flex items-center justify-between flex-col gap-[15px] md:flex-row mt-[30px]">
                 <h2 class="text-[14px] text-[#808080] font-[500]">Showing 1 to 4 of 4 entries</h2>
                 <div class="inline-flex gap-[8px]">
                     <a href="#"
@@ -179,7 +179,7 @@
 
 
                 </div>
-            </div>
+            </div> --}}
         </div>
 
     </div>

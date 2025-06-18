@@ -93,7 +93,7 @@
     </div>
 
      <div class="mb-[20px] 2xl:mb-[50px]">
-        <h2 class="text-[12px] font-[600] text-[#918191] uppercase mb-[5px] px-[10px]">Financials</h2>
+        <h2 class="text-[12px] font-[600] text-[#918191] uppercase mb-[5px] px-[10px]">Finance</h2>
         <a href="{{ route('payment.methods') }}"
             class="group flex items-center gap-[10px] px-[10px] py-[10px] text-[16px] font-[400] text-[#918191] hover:text-[#ce68ce] @if(Route::currentRouteName()=='payment.methods') active @endif">
             
@@ -105,7 +105,7 @@
                 
 
 
-            Payment Methods
+            Payment Settings
         </a>
 
         <a href="{{ route('payment.index') }}"
